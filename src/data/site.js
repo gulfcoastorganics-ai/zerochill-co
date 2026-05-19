@@ -119,6 +119,47 @@ export const docsNotes = [
   'React Router keeps the pages readable and the SPA routes direct.',
 ];
 
+export const docsGatewayEntries = [
+  {
+    title: 'Zero-State Architecture',
+    href: '/docs#zero-state-architecture',
+    summary: 'Architecture notes for local nodes, relay paths, and operator-owned inference boundaries.',
+    excerpt: '> local node / offline inference / relay topology / operator control',
+  },
+  {
+    title: 'Offline Inference Doctrine',
+    href: '/docs#offline-inference-doctrine',
+    summary: 'Operating doctrine for disconnected inference, data containment, and continuity under degraded networks.',
+    excerpt: '> disconnected by default / deterministic behavior / reduced transport dependency',
+  },
+  {
+    title: 'Edge Sovereignty Model',
+    href: '/docs#edge-sovereignty-model',
+    summary: 'A practical model for placing compute near the mission point while preserving local authority.',
+    excerpt: '> edge nodes / local governance / autonomous compute layers',
+  },
+  {
+    title: 'Deployment Topology',
+    href: '/docs#deployment-topology',
+    summary: 'A topology view of workstation, relay, node, and secure edge placements.',
+    excerpt: '> tactical workstation / relay systems / secure edge compute',
+  },
+];
+
+export const docsStatusPanel = [
+  { label: 'STATUS', value: 'STRUCTURE LOCKED' },
+  { label: 'SCOPE', value: 'STATIC CONTENT ONLY' },
+  { label: 'DEPTH', value: 'GROWING / REVIEW READY' },
+  { label: 'NEXT', value: 'BACKEND + API DOCS' },
+];
+
+export const docsRoadmap = [
+  'Add backend integration notes once preorder infrastructure is finalized.',
+  'Expand deployment topology with operational diagrams and host targets.',
+  'Add API reference pages when the first internal services are stable.',
+  'Create versioned release notes tied to changelog entries and deployment milestones.',
+];
+
 export const hardwareConcepts = [
   {
     name: 'Sovereign Zero Lite',
