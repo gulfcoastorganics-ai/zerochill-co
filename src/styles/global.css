@@ -61,17 +61,118 @@ textarea::placeholder {
   color: var(--text-faint);
 }
 
-.scanline::before {
+.crt-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.crt-shell::before {
   content: '';
   position: absolute;
   inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.03)),
+    linear-gradient(90deg, rgba(177, 18, 38, 0.12), transparent 18%, transparent 82%, rgba(177, 18, 38, 0.08));
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.crt-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  pointer-events: none;
+  opacity: 0.22;
+  z-index: 0;
+}
+
+.tactical-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.telemetry-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.telemetry-scan::after {
+  content: '';
+  position: absolute;
+  inset: -20% 0;
   background: linear-gradient(
     to bottom,
-    transparent,
-    rgba(255, 255, 255, 0.035),
-    transparent
+    transparent 0%,
+    rgba(241, 75, 95, 0.18) 48%,
+    transparent 52%
   );
-  background-size: 100% 6px;
+  animation: scan-sweep 8s linear infinite;
   pointer-events: none;
-  opacity: 0.35;
+}
+
+.blink-cursor::after {
+  content: '▍';
+  display: inline-block;
+  margin-left: 0.08em;
+  color: var(--accent-strong);
+  animation: cursor-blink 1s steps(1, end) infinite;
+}
+
+.boot-line {
+  animation: boot-pulse 2.6s ease-in-out infinite;
+}
+
+.boot-line:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.boot-line:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.boot-line:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.shadow-telemetry {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes scan-sweep {
+  0% { transform: translateY(-24%); opacity: 0; }
+  10% { opacity: 0.85; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(120%); opacity: 0; }
+}
+
+@keyframes boot-pulse {
+  0%, 100% { opacity: 0.78; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telemetry-scan::after,
+  .blink-cursor::after,
+  .boot-line {
+    animation: none;
+  }
 }

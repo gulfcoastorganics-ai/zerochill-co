@@ -1,5 +1,8 @@
 import Seo from '../components/Seo';
-import LaunchBroadcast from '../components/sections/LaunchBroadcast';
+import CinematicIntro from '../components/sections/CinematicIntro';
+import HardwareConceptPanels from '../components/sections/HardwareConceptPanels';
+import DeploymentArchitecture from '../components/sections/DeploymentArchitecture';
+import WhyLocalAI from '../components/sections/WhyLocalAI';
 import Blueprint from '../components/sections/Blueprint';
 import TierGrid from '../components/sections/TierGrid';
 import DocsPreview from '../components/sections/DocsPreview';
@@ -14,7 +17,10 @@ export default function Home() {
         title="YOUR AI. UNPLUGGED."
         description="ZeroChill Co builds sovereign local AI infrastructure, hardened product tiers, and terminal-first operator tooling."
       />
-      <LaunchBroadcast />
+      <CinematicIntro />
+      <HardwareConceptPanels />
+      <DeploymentArchitecture />
+      <WhyLocalAI />
       <Blueprint />
       <TierGrid />
       <DocsPreview />
@@ -22,7 +28,7 @@ export default function Home() {
         <SectionHeader
           eyebrow="Launch stance"
           title="Built for the first production wave."
-          copy="The site is intentionally stripped down. It should feel like a system under command, not a campaign landing page."
+          copy="The site now reads more like an infrastructure presentation: heavier visual depth, clearer signal, and more believable systems language."
         />
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           <TerminalCard
@@ -31,11 +37,11 @@ export default function Home() {
           />
           <TerminalCard
             label="Industrial grid"
-            body="Panels, edges, and command-line framing replace generic SaaS scaffolding."
+            body="Panels, separators, and command-line framing replace generic SaaS scaffolding."
           />
           <TerminalCard
             label="Launch-ready"
-            body="The preorder path is live in-browser and the routes are direct, stable, and readable."
+            body="The site stays fast, mobile responsive, and readable under low-resource conditions."
           />
         </div>
       </section>

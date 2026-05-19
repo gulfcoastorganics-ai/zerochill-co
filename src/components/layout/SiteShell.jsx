@@ -19,7 +19,7 @@ function NavItem({ to, children }) {
 
 export default function SiteShell() {
   return (
-    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
+    <div className="crt-shell min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
       <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_18%),radial-gradient(circle_at_top,rgba(177,18,38,0.18),transparent_36%),linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100%_100%,100%_100%,100%_28px,28px_100%] opacity-80" />
       <div className="pointer-events-none fixed inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(241,75,95,0.9),transparent)]" />
       <div className="pointer-events-none fixed inset-0 opacity-[0.04] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:4px_4px]" />

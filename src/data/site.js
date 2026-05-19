@@ -118,3 +118,117 @@ export const docsNotes = [
   'Tailwind v4 handles the visual system with a single CSS entrypoint.',
   'React Router keeps the pages readable and the SPA routes direct.',
 ];
+
+export const hardwareConcepts = [
+  {
+    name: 'Sovereign Zero Lite',
+    badge: 'EDGE ENTRY',
+    summary: 'Compact local inference for field operators and small teams.',
+    specs: [
+      'Processor: low-power local inference runtime',
+      'Memory: tuned for lean workstation deployments',
+      'Storage: encrypted local project cache',
+      'Network: optional / default disconnected',
+      'Positioning: starter node for sovereign compute',
+    ],
+  },
+  {
+    name: 'Sovereign Zero Core',
+    badge: 'PRODUCTION',
+    summary: 'Balanced deployment chassis for private AI workloads and command orchestration.',
+    specs: [
+      'Processor: multi-task inference and policy engine',
+      'Memory: production-grade local model workspace',
+      'Storage: mirrored local project vaults',
+      'Network: filtered relay lanes only',
+      'Positioning: standard infrastructure tier',
+    ],
+  },
+  {
+    name: 'Sovereign Zero Blacksite',
+    badge: 'RESTRICTED',
+    summary: 'Isolated configuration for controlled labs, secure rooms, and sensitive work.',
+    specs: [
+      'Processor: hardened edge compute stack',
+      'Memory: segmented local state partitions',
+      'Storage: offline encrypted volumes',
+      'Network: air-gap ready with relay controls',
+      'Positioning: highest-trust deployment lane',
+    ],
+  },
+  {
+    name: 'Zero-State Matrix DevKit',
+    badge: 'DEVKIT',
+    summary: 'Developer console bundle for building and testing sovereign AI workflows.',
+    specs: [
+      'Processor: diagnostics-first control surface',
+      'Memory: scratch space for local workflow testing',
+      'Storage: reusable development snapshots',
+      'Network: simulator and relay-aware tooling',
+      'Positioning: build system and operator sandbox',
+    ],
+  },
+];
+
+export const deploymentNodes = [
+  {
+    title: 'Local Node',
+    detail: 'Primary compute and model execution inside the operator perimeter.',
+  },
+  {
+    title: 'Offline Inference',
+    detail: 'Direct model response path with no required cloud handshake.',
+  },
+  {
+    title: 'Relay Systems',
+    detail: 'Controlled synchronization lanes for updates, review, and package movement.',
+  },
+  {
+    title: 'Tactical Workstation',
+    detail: 'Operator console, diagnostics surface, and command interface.',
+  },
+  {
+    title: 'Secure Edge Compute',
+    detail: 'Distributed placement for hardened local workloads near the mission point.',
+  },
+];
+
+export const localAiComparison = [
+  {
+    label: 'Cloud dependency',
+    local: 'No hard dependency on external tenancy or vendor uptime.',
+    cloud: 'Core behavior can be coupled to remote service availability.',
+  },
+  {
+    label: 'Surveillance risk',
+    local: 'Reduced exposure by keeping data and inference inside the perimeter.',
+    cloud: 'Traffic, prompts, and logs can extend beyond operator control.',
+  },
+  {
+    label: 'Uptime dependence',
+    local: 'Works in disconnected, degraded, or restricted environments.',
+    cloud: 'Service failure can become system failure.',
+  },
+  {
+    label: 'Ownership',
+    local: 'Operator owns the stack, policy, and runtime boundary.',
+    cloud: 'Critical layers may belong to a third party.',
+  },
+  {
+    label: 'Latency',
+    local: 'Edge-close execution reduces response time and transport overhead.',
+    cloud: 'Network distance and relay hops add delay.',
+  },
+  {
+    label: 'Infrastructure control',
+    local: 'Every moving part stays visible and tunable.',
+    cloud: 'Control is shared with a platform that can change underneath you.',
+  },
+];
+
+export const footerSignals = [
+  { label: 'STATUS', value: 'DEPLOYMENT READY' },
+  { label: 'UPTIME', value: 'LOCAL / STABLE / OBSIDIAN' },
+  { label: 'NODE', value: 'ZC-01 // EDGE-PRIMARY' },
+  { label: 'SIGNATURE', value: 'ZEROCHILL CO / NO CLOUD' },
+];
