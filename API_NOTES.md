@@ -3,12 +3,14 @@
 ## Current Endpoint
 
 - `POST /api/preorder`
+- `GET /api/preorder-export?token=...`
 
 ## Purpose
 
 - Accept preorder interest submissions without requiring a database.
 - Validate basic form fields.
 - Return structured JSON success or error responses.
+- Provide a token-gated export placeholder for admin review workflows.
 
 ## Current Behavior
 
@@ -20,6 +22,10 @@
 - Rejects malformed submissions with `400`
 - Applies a lightweight per-IP request limit
 - Returns a sanitized submission payload on success
+- Accepts preorder submissions, but does not yet persist them to a database or email provider.
+- Serverless memory is not persistent, so function state must not be treated as storage.
+- The export endpoint requires `ADMIN_EXPORT_TOKEN` and a matching `?token=` query parameter.
+- The export endpoint returns JSON in a placeholder format until durable storage is added.
 
 ## Frontend Fallback
 
@@ -43,4 +49,4 @@
 - The API route is compatible with Vercel Functions.
 - No additional backend framework is required.
 - Keep the function stateless and maintain the local fallback for resilience.
-
+- Add `ADMIN_EXPORT_TOKEN` in the Vercel environment settings before using the export route.
