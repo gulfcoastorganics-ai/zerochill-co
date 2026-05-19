@@ -26,3 +26,8 @@ The included `vercel.json` and `public/_redirects` are there to reduce that risk
 - When the preorder backend exists, store keys and endpoints in `.env.local` during development.
 - Keep secrets out of the frontend bundle and inject only public values that are safe for browser use.
 - Add only the variables the form submission API actually needs, such as a public endpoint or feature flag.
+
+
+## Live Deployment
+
+Production: https://zerochill-mogelckj2-gulfcoastorganics-ais-projects.vercel.app

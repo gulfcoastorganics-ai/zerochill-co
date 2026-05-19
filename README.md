@@ -76,3 +76,8 @@ zerochill/
 ├── vercel.json
 └── vite.config.js
 ```
+
+
+## Live Deployment
+
+Production: https://zerochill-mogelckj2-gulfcoastorganics-ais-projects.vercel.app
