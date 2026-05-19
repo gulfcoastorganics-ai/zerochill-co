@@ -12,6 +12,11 @@ const initialForm = {
   preferredTier: productTiers[1].name,
 };
 
+const initialStatus = {
+  phase: 'idle',
+  message: '',
+};
+
 function readSubmissions() {
   if (typeof window === 'undefined') return [];
 
@@ -23,10 +28,26 @@ function readSubmissions() {
   }
 }
 
+function sanitizeForm(form) {
+  return {
+    name: String(form.name ?? '').replace(/\s+/g, ' ').trim(),
+    email: String(form.email ?? '').replace(/\s+/g, ' ').trim(),
+    intendedUse: String(form.intendedUse ?? '').replace(/\s+/g, ' ').trim(),
+    preferredTier: String(form.preferredTier ?? '').trim(),
+  };
+}
+
+function storeSubmission(entry) {
+  const next = [...readSubmissions(), entry];
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  return next;
+}
+
 export default function PreorderForm() {
   const [form, setForm] = useState(initialForm);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState(initialStatus);
   const [submissions, setSubmissions] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setSubmissions(readSubmissions());
@@ -39,33 +60,105 @@ export default function PreorderForm() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setIsSubmitting(true);
+    setStatus(initialStatus);
 
-    const entry = {
-      ...form,
-      id: `${Date.now()}`,
-      createdAt: new Date().toISOString(),
-    };
+    const payload = sanitizeForm(form);
 
-    const next = [...readSubmissions(), entry];
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    setSubmissions(next);
-    setSubmitted(true);
-    setForm(initialForm);
+    try {
+      const response = await fetch('/api/preorder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        if (response.status >= 500 || response.status === 429) {
+          const fallbackEntry = {
+            ...payload,
+            id: `${Date.now()}`,
+            createdAt: new Date().toISOString(),
+            transport: 'localStorage-fallback',
+          };
+          const next = storeSubmission(fallbackEntry);
+          setSubmissions(next);
+          setStatus({
+            phase: 'fallback',
+            message:
+              data?.error === 'too many requests'
+                ? 'Backend rate limit reached. Your submission was saved locally.'
+                : 'Backend unavailable. Your submission was saved locally.',
+          });
+          setForm(initialForm);
+          return;
+        }
+
+        setStatus({
+          phase: 'error',
+          message: data?.error
+            ? `${data.error}${Array.isArray(data.details) && data.details.length ? `: ${data.details.join('; ')}` : ''}`
+            : 'Submission was rejected by the API.',
+        });
+        return;
+      }
+
+      const successEntry = {
+        ...data.submission,
+        transport: 'api',
+      };
+      const next = storeSubmission(successEntry);
+      setSubmissions(next);
+      setStatus({
+        phase: 'success',
+        message: 'Preorder interest accepted by the API and stored locally for review.',
+      });
+      setForm(initialForm);
+    } catch {
+      const fallbackEntry = {
+        ...payload,
+        id: `${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        transport: 'localStorage-fallback',
+      };
+      const next = storeSubmission(fallbackEntry);
+      setSubmissions(next);
+      setStatus({
+        phase: 'fallback',
+        message: 'Network request failed. Your submission was saved locally.',
+      });
+      setForm(initialForm);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
       <Panel className="p-6 sm:p-8">
-        {submitted ? (
-          <div className="border border-[color:var(--accent)] bg-[rgba(177,18,38,0.08)] p-5">
+        {status.phase !== 'idle' ? (
+          <div
+            className={[
+              'border p-5',
+              status.phase === 'success'
+                ? 'border-[color:var(--accent)] bg-[rgba(177,18,38,0.08)]'
+                : 'border-[color:var(--line)] bg-black/25',
+            ].join(' ')}
+          >
             <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--accent-strong)]">
-              Submission received
+              {status.phase === 'success'
+                ? 'Submission received'
+                : status.phase === 'fallback'
+                  ? 'Local fallback active'
+                  : 'Submission blocked'}
             </div>
             <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-              Your preorder interest has been stored locally. We&apos;ll use the selected tier and
-              intended use to shape the next contact step.
+              {status.message}
             </p>
           </div>
         ) : null}
@@ -134,9 +227,10 @@ export default function PreorderForm() {
 
           <button
             type="submit"
-            className="mt-2 border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black"
+            disabled={isSubmitting}
+            className="mt-2 border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Store Interest
+            {isSubmitting ? 'Submitting...' : 'Store Interest'}
           </button>
         </form>
       </Panel>
@@ -145,7 +239,7 @@ export default function PreorderForm() {
         <TerminalCard
           label="local storage"
           title="Submission state"
-          body="Entries are preserved in the browser until you clear site data. No backend exists yet, by design."
+          body="Entries are preserved in the browser when the network path fails or a client-side fallback is required."
         >
           <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
             saved records: {submissions.length}
