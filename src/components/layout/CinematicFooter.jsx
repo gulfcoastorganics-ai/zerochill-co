@@ -40,15 +40,18 @@ export default function CinematicFooter() {
             </div>
 
             <div className="grid gap-2 text-sm uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
-              <Link to="/manifest" className="hover:text-[color:var(--text)]">
+              <Link to="/manifest" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
                 Manifest
               </Link>
-              <Link to="/docs" className="hover:text-[color:var(--text)]">
+              <Link to="/docs" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
                 Docs
               </Link>
-              <Link to="/preorder" className="hover:text-[color:var(--text)]">
+              <Link to="/preorder" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
                 Preorder
               </Link>
+              <a href="#top" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
+                Back to top
+              </a>
               <div className="mt-3 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs leading-7 text-[color:var(--accent-strong)]">
                 &gt; zerochill.co / edge-primary / local runtime
                 <br />

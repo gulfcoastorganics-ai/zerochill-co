@@ -15,6 +15,8 @@ const initialForm = {
 const initialStatus = {
   phase: 'idle',
   message: '',
+  detail: '',
+  notification: '',
 };
 
 function readSubmissions() {
@@ -37,6 +39,69 @@ function sanitizeForm(form) {
   };
 }
 
+function validateForm(form) {
+  const payload = sanitizeForm(form);
+  const errors = {};
+
+  if (!payload.name) {
+    errors.name = 'Enter the contact name for this preorder review.';
+  } else if (payload.name.length < 2 || payload.name.length > 80) {
+    errors.name = 'Use 2 to 80 characters for the name field.';
+  }
+
+  if (!payload.email) {
+    errors.email = 'Enter the email address for preorder updates.';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+    errors.email = 'Enter a valid email address, such as name@domain.com.';
+  }
+
+  if (!payload.intendedUse) {
+    errors.intendedUse = 'Describe where the system will be used and by whom.';
+  } else if (payload.intendedUse.length < 10 || payload.intendedUse.length > 500) {
+    errors.intendedUse = 'Use 10 to 500 characters for the intended use field.';
+  }
+
+  if (!payload.preferredTier) {
+    errors.preferredTier = 'Choose the closest product tier.';
+  }
+
+  return { payload, errors };
+}
+
+function formatNotification(data) {
+  if (data?.emailConfigured === false) {
+    return 'No notification email is configured yet, so the submission was stored locally only.';
+  }
+
+  if (data?.emailConfigured && data?.emailSent) {
+    return 'A notification email was sent to the preorder inbox and the submission was stored locally.';
+  }
+
+  if (data?.emailConfigured && data?.emailSent === false) {
+    return 'The submission was accepted, but the notification email could not be delivered.';
+  }
+
+  return 'The submission was accepted and stored locally.';
+}
+
+function mapServerErrors(details = []) {
+  const next = {};
+  for (const detail of details) {
+    const message = String(detail || '');
+    if (message.startsWith('name ')) {
+      next.name = message;
+    } else if (message.startsWith('email ')) {
+      next.email = message;
+    } else if (message.startsWith('intended use ')) {
+      next.intendedUse = message;
+    } else if (message.startsWith('preferred product tier ')) {
+      next.preferredTier = message;
+    }
+  }
+
+  return next;
+}
+
 function storeSubmission(entry) {
   const next = [...readSubmissions(), entry];
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
@@ -48,6 +113,8 @@ export default function PreorderForm() {
   const [status, setStatus] = useState(initialStatus);
   const [submissions, setSubmissions] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [submitAttempted, setSubmitAttempted] = useState(false);
 
   useEffect(() => {
     setSubmissions(readSubmissions());
@@ -58,14 +125,33 @@ export default function PreorderForm() {
   function handleChange(event) {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    if (submitAttempted) {
+      setFieldErrors((current) => {
+        const next = { ...current };
+        delete next[name];
+        return next;
+      });
+    }
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
     setIsSubmitting(true);
     setStatus(initialStatus);
+    setSubmitAttempted(true);
 
-    const payload = sanitizeForm(form);
+    const { payload, errors } = validateForm(form);
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      setStatus({
+        phase: 'error',
+        message: 'Fix the highlighted fields before submitting again.',
+        detail: 'The browser can catch basic validation before the request is sent.',
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch('/api/preorder', {
@@ -94,6 +180,8 @@ export default function PreorderForm() {
               data?.error === 'too many requests'
                 ? 'Backend rate limit reached. Your submission was saved locally.'
                 : 'Backend unavailable. Your submission was saved locally.',
+            detail: 'You can refresh later; the local record stays in this browser.',
+            notification: 'No email notification was sent because the API could not complete the request.',
           });
           setForm(initialForm);
           return;
@@ -104,7 +192,11 @@ export default function PreorderForm() {
           message: data?.error
             ? `${data.error}${Array.isArray(data.details) && data.details.length ? `: ${data.details.join('; ')}` : ''}`
             : 'Submission was rejected by the API.',
+          detail: 'Check the field values and try again.',
         });
+        if (Array.isArray(data?.details)) {
+          setFieldErrors(mapServerErrors(data.details));
+        }
         return;
       }
 
@@ -116,9 +208,12 @@ export default function PreorderForm() {
       setSubmissions(next);
       setStatus({
         phase: 'success',
-        message: 'Preorder interest accepted by the API and stored locally for review.',
+        message: 'Preorder interest accepted and stored locally for review.',
+        detail: data?.message || 'The API confirmed the submission and returned the created preorder record.',
+        notification: formatNotification(data),
       });
       setForm(initialForm);
+      setFieldErrors({});
     } catch {
       const fallbackEntry = {
         ...payload,
@@ -131,6 +226,8 @@ export default function PreorderForm() {
       setStatus({
         phase: 'fallback',
         message: 'Network request failed. Your submission was saved locally.',
+        detail: 'This browser copy is enough for review until the network path returns.',
+        notification: 'No email notification was sent because the request never reached the API.',
       });
       setForm(initialForm);
     } finally {
@@ -143,11 +240,15 @@ export default function PreorderForm() {
       <Panel className="p-6 sm:p-8">
         {status.phase !== 'idle' ? (
           <div
+            role="status"
+            aria-live="polite"
             className={[
               'border p-5',
               status.phase === 'success'
                 ? 'border-[color:var(--accent)] bg-[rgba(177,18,38,0.08)]'
-                : 'border-[color:var(--line)] bg-black/25',
+                : status.phase === 'fallback'
+                  ? 'border-[color:var(--line)] bg-black/25'
+                  : 'border-[color:var(--accent-strong)] bg-[rgba(241,75,95,0.08)]',
             ].join(' ')}
           >
             <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--accent-strong)]">
@@ -160,27 +261,45 @@ export default function PreorderForm() {
             <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
               {status.message}
             </p>
+            {status.detail ? (
+              <p className="mt-2 text-sm leading-7 text-[color:var(--text-dim)]">{status.detail}</p>
+            ) : null}
+            {status.notification ? (
+              <div className="mt-4 border-t border-[color:var(--line-soft)] pt-4 text-xs uppercase tracking-[0.26em] text-[color:var(--text-dim)]">
+                Email status: <span className="text-[color:var(--text)]">{status.notification}</span>
+              </div>
+            ) : null}
           </div>
         ) : null}
 
-        <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
+        <form className="mt-6 grid gap-4" onSubmit={handleSubmit} noValidate>
           <label className="grid gap-2">
             <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Name
+              Full name
             </span>
             <input
               name="name"
               required
               value={form.name}
               onChange={handleChange}
-              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none focus:border-[color:var(--accent)]"
-              placeholder="Your name"
+              aria-invalid={Boolean(fieldErrors.name)}
+              aria-describedby="preorder-name-help preorder-name-error"
+              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)] focus:border-[color:var(--accent)]"
+              placeholder="Name for the preorder record"
             />
+            <span id="preorder-name-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
+              Use the contact name that should appear in review notes.
+            </span>
+            {fieldErrors.name ? (
+              <span id="preorder-name-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
+                {fieldErrors.name}
+              </span>
+            ) : null}
           </label>
 
           <label className="grid gap-2">
             <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Email
+              Email address
             </span>
             <input
               name="email"
@@ -188,33 +307,55 @@ export default function PreorderForm() {
               required
               value={form.email}
               onChange={handleChange}
-              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none focus:border-[color:var(--accent)]"
+              aria-invalid={Boolean(fieldErrors.email)}
+              aria-describedby="preorder-email-help preorder-email-error"
+              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)] focus:border-[color:var(--accent)]"
               placeholder="name@domain.com"
             />
+            <span id="preorder-email-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
+              This is used for updates if the preorder inbox is configured.
+            </span>
+            {fieldErrors.email ? (
+              <span id="preorder-email-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
+                {fieldErrors.email}
+              </span>
+            ) : null}
           </label>
 
           <label className="grid gap-2">
             <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Intended use
+              Intended deployment
             </span>
             <textarea
               name="intendedUse"
               required
               value={form.intendedUse}
               onChange={handleChange}
-              className="min-h-32 border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none focus:border-[color:var(--accent)]"
-              placeholder="Private lab, field ops, internal model work, or other sovereign deployment"
+              aria-invalid={Boolean(fieldErrors.intendedUse)}
+              aria-describedby="preorder-use-help preorder-use-error"
+              className="min-h-32 border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)] focus:border-[color:var(--accent)]"
+              placeholder="Describe the environment, team size, and whether the node needs offline operation."
             />
+            <span id="preorder-use-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
+              Give enough detail to match the preorder to the right tier.
+            </span>
+            {fieldErrors.intendedUse ? (
+              <span id="preorder-use-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
+                {fieldErrors.intendedUse}
+              </span>
+            ) : null}
           </label>
 
           <label className="grid gap-2">
             <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Preferred product tier
+              Preferred tier
             </span>
             <select
               name="preferredTier"
               value={form.preferredTier}
               onChange={handleChange}
+              aria-invalid={Boolean(fieldErrors.preferredTier)}
+              aria-describedby="preorder-tier-help preorder-tier-error"
               className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none focus:border-[color:var(--accent)]"
             >
               {productTiers.map((tier) => (
@@ -223,12 +364,20 @@ export default function PreorderForm() {
                 </option>
               ))}
             </select>
+            <span id="preorder-tier-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
+              Pick the closest fit. The preorder review can refine the exact deployment later.
+            </span>
+            {fieldErrors.preferredTier ? (
+              <span id="preorder-tier-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
+                {fieldErrors.preferredTier}
+              </span>
+            ) : null}
           </label>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-2 border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black disabled:cursor-not-allowed disabled:opacity-60"
+            className="zc-button-primary mt-2 border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? 'Submitting...' : 'Store Interest'}
           </button>
@@ -254,7 +403,18 @@ export default function PreorderForm() {
               ? `${latestSubmission.email} // ${latestSubmission.preferredTier}`
               : 'Use the form to stage the first preorder interest packet.'
           }
-        />
+        >
+          {latestSubmission ? (
+            <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 text-sm leading-7 text-[color:var(--text-muted)]">
+              <div>
+                <span className="text-[color:var(--text-dim)]">Intent:</span> {latestSubmission.intendedUse}
+              </div>
+              <div className="mt-3 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+                Transport: {latestSubmission.transport || 'api'}
+              </div>
+            </div>
+          ) : null}
+        </TerminalCard>
       </div>
     </div>
   );

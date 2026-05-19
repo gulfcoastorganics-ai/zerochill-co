@@ -11,6 +11,8 @@
   --text-faint: #5e5952;
   --accent: #b11226;
   --accent-strong: #f14b5f;
+  --surface-glow: rgba(241, 75, 95, 0.08);
+  --focus-ring: rgba(241, 75, 95, 0.55);
 }
 
 @theme {
@@ -21,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -34,6 +37,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
 }
 
 * {
@@ -51,14 +55,114 @@ a {
 }
 
 button,
+a,
+input,
+textarea,
+select {
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+button,
 input,
 textarea {
   font: inherit;
 }
 
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(177, 18, 38, 0.18);
+}
+
+::placeholder {
+  color: var(--text-faint);
+}
+
 input::placeholder,
 textarea::placeholder {
   color: var(--text-faint);
+}
+
+.zc-page {
+  animation: page-enter 320ms ease both;
+  transform-origin: top center;
+}
+
+.zc-reveal {
+  animation: reveal-up 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.zc-interactive {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.zc-interactive:hover,
+.zc-interactive:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(241, 75, 95, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(241, 75, 95, 0.1);
+}
+
+.zc-nav-link {
+  position: relative;
+  padding-bottom: 0.35rem;
+}
+
+.zc-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(241, 75, 95, 0.95), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 180ms ease;
+}
+
+.zc-nav-link:hover::after,
+.zc-nav-link:focus-visible::after,
+.zc-nav-link[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+.zc-nav-link[aria-current='page'] {
+  color: var(--text);
+}
+
+.zc-button-primary {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.zc-button-primary:hover,
+.zc-button-primary:focus-visible {
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(241, 75, 95, 0.18);
+}
+
+.zc-button-secondary {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.zc-button-secondary:hover,
+.zc-button-secondary:focus-visible {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(241, 75, 95, 0.34);
 }
 
 .crt-shell {
@@ -152,6 +256,30 @@ textarea::placeholder {
     0 24px 60px rgba(0, 0, 0, 0.55);
 }
 
+@keyframes page-enter {
+  from {
+    opacity: 0.82;
+    transform: translateY(8px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes cursor-blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -170,9 +298,23 @@ textarea::placeholder {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .zc-page,
+  .zc-reveal,
+  .zc-interactive,
+  .zc-nav-link::after,
+  button,
+  a,
+  input,
+  textarea,
+  select,
   .telemetry-scan::after,
   .blink-cursor::after,
   .boot-line {
     animation: none;
+    transition: none;
   }
 }

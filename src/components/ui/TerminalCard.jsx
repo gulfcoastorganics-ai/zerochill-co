@@ -2,7 +2,7 @@ import Panel from './Panel';
 
 export default function TerminalCard({ label, title, command, body, children, className = '' }) {
   return (
-    <Panel className={`p-6 ${className}`}>
+    <Panel className={`zc-interactive zc-reveal p-6 ${className}`}>
       {label ? (
         <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--accent-strong)]">
           {label}

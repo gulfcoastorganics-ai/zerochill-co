@@ -56,14 +56,20 @@ export default function Docs() {
         description="ZeroChill Co documentation gateway for architecture, inference doctrine, edge sovereignty, and deployment topology."
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
         <SectionHeader
           eyebrow="Documentation"
           title="Docs Gateway"
           copy="ZeroChill Co technical references for operators, implementers, and deployment owners."
         />
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+          <a href="#docs-gateway" className="zc-nav-link">Gateway</a>
+          <a href="#docs-status" className="zc-nav-link">Status</a>
+          <a href="#docs-reference" className="zc-nav-link">Reference</a>
+        </div>
+
+        <div id="docs-gateway" className="mt-10 grid gap-5 lg:grid-cols-2 scroll-mt-28">
           {docsGatewayEntries.map((entry) => (
             <TerminalCard
               key={entry.title}
@@ -87,7 +93,7 @@ export default function Docs() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="docs-status" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <SectionHeader
           eyebrow="Documentation status"
           title="Current state"
@@ -131,7 +137,7 @@ export default function Docs() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="docs-reference" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <SectionHeader
           eyebrow="Reference docs"
           title="Readable by operators."

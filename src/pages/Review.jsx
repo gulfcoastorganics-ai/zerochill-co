@@ -25,32 +25,62 @@ export default function Review() {
         description="Client-facing project status overview for Danny Ford and ZeroChill Co."
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
         <SectionHeader
           eyebrow="Client review"
           title="Project status overview"
           copy="A concise review page for Danny Ford with no repo deep-dive required."
         />
+
+        <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+          <a href="#review-status" className="zc-nav-link">Status</a>
+          <a href="#review-work" className="zc-nav-link">Completed work</a>
+          <a href="#review-checklist" className="zc-nav-link">Checklist</a>
+          <a href="#review-handoff" className="zc-nav-link">Handoff</a>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8 lg:pb-16">
+      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-18">
         <div className="grid gap-5 lg:grid-cols-4">
-          {reviewSnapshot.map((item) => (
-            <TerminalCard key={item.label} label={item.label} body={item.value} />
+          {reviewSnapshot.map((item, index) => (
+            <TerminalCard
+              key={item.label}
+              label={item.label}
+              body={item.value}
+              className="border border-[color:var(--line-soft)]"
+            >
+              <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+                0{index + 1}
+              </div>
+            </TerminalCard>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="review-status" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <TerminalCard
             label="Live deployment"
             title="Deployment reference"
             body="The public site is built and ready for a production URL to be confirmed."
           >
-            <div className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs leading-7 text-[color:var(--accent-strong)]">
-              <div>Live URL: {liveDeployment}</div>
-              <div>GitHub repo: {repoReference}</div>
+            <div className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
+              <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                <div className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
+                  Live URL
+                </div>
+                <div className="mt-2 font-mono text-xs leading-6 text-[color:var(--accent-strong)]">
+                  {liveDeployment}
+                </div>
+              </div>
+              <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                <div className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
+                  GitHub repo
+                </div>
+                <div className="mt-2 font-mono text-xs leading-6 text-[color:var(--accent-strong)]">
+                  {repoReference}
+                </div>
+              </div>
             </div>
           </TerminalCard>
 
@@ -61,8 +91,9 @@ export default function Review() {
           >
             <ul className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
               {reviewBrandInventory.map((item) => (
-                <li key={item} className="text-sm leading-7 text-[color:var(--text-muted)]">
-                  {item}
+                <li key={item} className="flex gap-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                  <span className="mt-2 h-2 w-2 shrink-0 bg-[color:var(--accent-strong)]" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -70,7 +101,7 @@ export default function Review() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="review-work" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <SectionHeader
           eyebrow="Completed work"
           title="Built and ready for review."
@@ -84,7 +115,7 @@ export default function Review() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18">
         <SectionHeader
           eyebrow="Current website routes"
           title="Route map"
@@ -102,17 +133,18 @@ export default function Review() {
         </Panel>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="review-checklist" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
           <TerminalCard
             label="Approval checklist"
             title="What needs sign-off"
             body="These are the items Danny should review before the next milestone starts."
           >
-            <ul className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
+            <ul className="mt-5 grid gap-3 border-t border-[color:var(--line-soft)] pt-4">
               {reviewChecklist.map((item) => (
-                <li key={item} className="text-sm leading-7 text-[color:var(--text-muted)]">
-                  {item}
+                <li key={item} className="flex gap-3 border border-[color:var(--line-soft)] bg-black/25 p-4 text-sm leading-7 text-[color:var(--text-muted)]">
+                  <span className="mt-2 h-2 w-2 shrink-0 bg-[color:var(--accent-strong)]" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -134,7 +166,7 @@ export default function Review() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
           <TerminalCard
             label="Known limitations"
@@ -157,8 +189,9 @@ export default function Review() {
           >
             <ul className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
               {reviewHandoff.map((item) => (
-                <li key={item} className="text-sm leading-7 text-[color:var(--text-muted)]">
-                  {item}
+                <li key={item} className="flex gap-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                  <span className="mt-2 h-2 w-2 shrink-0 bg-[color:var(--accent-strong)]" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -166,13 +199,13 @@ export default function Review() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="review-handoff" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <Panel className="shadow-telemetry border-[color:var(--line)] bg-black/35 p-6">
           <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
             Footer note
           </div>
           <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">
-            This review page is intended to help Danny Ford review the project quickly without reading the repository documentation.
+            This review page is intended to help Danny Ford review the project quickly without reading the repository documentation. The next handoff only needs the live URL, repo URL, and sign-off on the checklist above.
           </p>
         </Panel>
       </section>

@@ -18,15 +18,24 @@ export default function Products() {
         description="ZeroChill Co product comparison page for comparing Lite, Core, Blacksite, and DevKit deployment tiers."
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
         <SectionHeader
           eyebrow="Products"
           title="Product ladder"
           copy="A concise comparison layer for buyers and reviewers who need the operational differences in one place."
         />
+
+        <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+          <a href="#product-summary" className="zc-nav-link">Summary</a>
+          <a href="#product-comparison" className="zc-nav-link">Comparison</a>
+          <a href="#product-fit" className="zc-nav-link">Fit</a>
+          <Link to="/preorder" className="zc-nav-link text-[color:var(--accent-strong)]">
+            Preorder
+          </Link>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8 lg:pb-16">
+      <section id="product-summary" className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-18 scroll-mt-28">
         <div className="grid gap-5 lg:grid-cols-4">
           {productSummaryCards.map((card) => (
             <TerminalCard key={card.title} label="SUMMARY" title={card.title} body={card.body} />
@@ -34,7 +43,7 @@ export default function Products() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="product-comparison" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <SectionHeader
           eyebrow="Comparison matrix"
           title="How the tiers differ."
@@ -49,7 +58,56 @@ export default function Products() {
             ))}
           </div>
 
-          <div className="divide-y divide-[color:var(--line-soft)]">
+          <div className="divide-y divide-[color:var(--line-soft)] md:hidden">
+            {productComparison.map((product) => (
+              <div key={product.name} className="space-y-4 px-4 py-5">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="text-sm uppercase tracking-[0.26em] text-[color:var(--text)]">
+                    {product.name}
+                  </div>
+                  <span className="border border-[color:var(--line-soft)] px-2 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+                    {product.fit}
+                  </span>
+                </div>
+                <div className="grid gap-3">
+                  <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                    <div className="text-[0.66rem] uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
+                      Recommended use
+                    </div>
+                    <p className="mt-2 text-sm leading-7 text-[color:var(--text-muted)]">
+                      {product.audience}
+                    </p>
+                  </div>
+                  <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                    <div className="text-[0.66rem] uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
+                      Deployment fit
+                    </div>
+                    <p className="mt-2 text-sm leading-7 text-[color:var(--text-muted)]">
+                      {product.environment}
+                    </p>
+                  </div>
+                  <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                    <div className="text-[0.66rem] uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
+                      Offline posture
+                    </div>
+                    <p className="mt-2 text-sm leading-7 text-[color:var(--text-muted)]">
+                      {product.offline}
+                    </p>
+                  </div>
+                  <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                    <div className="text-[0.66rem] uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
+                      Compute profile
+                    </div>
+                    <p className="mt-2 text-sm leading-7 text-[color:var(--text-muted)]">
+                      {product.compute}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden divide-y divide-[color:var(--line-soft)] md:block">
             {productComparison.map((product) => (
               <div key={product.name} className="grid gap-3 px-4 py-5 md:grid-cols-5 md:gap-4 md:px-4">
                 <div className="text-sm uppercase tracking-[0.26em] text-[color:var(--text)]">
@@ -73,7 +131,7 @@ export default function Products() {
         </Panel>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="product-fit" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
           <TerminalCard
             label="Deployment fit"
@@ -115,7 +173,7 @@ export default function Products() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18">
         <SectionHeader
           eyebrow="Terminal summaries"
           title="Quick read cards."
@@ -146,7 +204,7 @@ export default function Products() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18">
         <Panel className="shadow-telemetry border-[color:var(--line)] bg-black/35 p-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
@@ -159,7 +217,7 @@ export default function Products() {
             </div>
             <Link
               to="/preorder"
-              className="border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black"
+              className="zc-button-primary border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black"
             >
               Choose Your Node
             </Link>

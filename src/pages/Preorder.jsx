@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import Footer from '../components/layout/Footer';
 import SectionHeader from '../components/ui/SectionHeader';
@@ -12,19 +13,27 @@ export default function Preorder() {
         title="Preorder"
         description="Store preorder interest locally and choose a ZeroChill Co product tier for the first production wave."
       />
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
         <SectionHeader
           eyebrow="Access"
           title="Preorder"
           copy="No backend yet. Interest is staged locally in the browser so the first wave can be shaped without a cloud dependency."
         />
+
+        <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+          <a href="#preorder-form" className="zc-nav-link">Form</a>
+          <a href="#preorder-tiers" className="zc-nav-link">Tier map</a>
+          <Link to="/products" className="zc-nav-link text-[color:var(--accent-strong)]">
+            Compare products
+          </Link>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-20">
+      <section id="preorder-form" className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8 lg:pb-24 scroll-mt-28">
         <PreorderForm />
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <section id="preorder-tiers" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20 scroll-mt-28">
         <SectionHeader
           eyebrow="Tier map"
           title="Choose the right level of exposure."
