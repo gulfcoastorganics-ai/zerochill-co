@@ -273,3 +273,63 @@ export const footerSignals = [
   { label: 'NODE', value: 'ZC-01 // EDGE-PRIMARY' },
   { label: 'SIGNATURE', value: 'ZEROCHILL CO / NO CLOUD' },
 ];
+
+export const reviewSnapshot = [
+  { label: 'Client', value: 'Danny Ford' },
+  { label: 'Builder / Operator', value: 'gulfcoastorganics-ai' },
+  { label: 'Brand', value: 'ZeroChill Co.' },
+  { label: 'Status', value: 'Frontend launch layer complete' },
+];
+
+export const reviewCompletedWork = [
+  'Built the public site shell and routed pages.',
+  'Added cinematic terminal presentation layers and CSS-only motion.',
+  'Created SVG logo, banner, and social asset systems.',
+  'Added docs, brand, deployment, and handoff documentation.',
+  'Implemented preorder interest capture with localStorage fallback.',
+];
+
+export const reviewBrandInventory = [
+  'Obsidian / charcoal / crimson palette',
+  'Terminal-inspired typography and UI language',
+  'SVG logo family and icon set',
+  'Social banner and wallpaper assets',
+  'Cinematic footer and boot-sequence presentation',
+];
+
+export const reviewRoutes = [
+  '/',
+  '/sovereign-zero',
+  '/zero-state-matrix',
+  '/manifest',
+  '/docs',
+  '/preorder',
+  '/review',
+];
+
+export const reviewChecklist = [
+  'Approve homepage direction and hero language.',
+  'Approve product tier names and concept positioning.',
+  'Approve preorder language and fallback behavior.',
+  'Approve brand system and visual identity.',
+  'Approve deployment ownership and next milestone direction.',
+];
+
+export const reviewMilestones = [
+  'Connect preorder to a backend or CRM endpoint.',
+  'Expand product pages into full launch detail pages.',
+  'Add public launch copy and final domain handling.',
+  'Prepare social release assets and deployment notes.',
+];
+
+export const reviewLimitations = [
+  'Preorder submissions still store locally until a backend is connected.',
+  'Some social assets remain SVG masters only.',
+  'No analytics or CRM integration has been added yet.',
+];
+
+export const reviewHandoff = [
+  'Public copy remains centered on ZeroChill Co.',
+  'Internal notes remain in repo documentation.',
+  'Live deployment and repo URLs should be filled before client delivery.',
+];
