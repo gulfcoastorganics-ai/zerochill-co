@@ -49,6 +49,35 @@ npm run build
 - The preorder form currently stores submissions in `localStorage`; replace that path with an API when the backend is ready.
 - `public/_redirects` is included for hosts that respect Netlify-style fallback rules.
 
+## Asset Structure
+
+```text
+assets/
+├── banners/
+├── logos/
+├── mockups/
+├── social/
+└── wallpapers/
+```
+
+## Logo Usage
+
+- Use `assets/logos/zerochill-primary.svg` for standard brand placements.
+- Use `assets/logos/zerochill-monogram.svg` for compact UI spaces and avatars.
+- Use `assets/logos/zerochill-terminal.svg` for launch, docs, and console contexts.
+- Use `assets/logos/zerochill-monochrome.svg` on light, dark, or single-color placements.
+- Use `assets/logos/zerochill-crimson.svg` when a stronger signal treatment is needed.
+- Use `assets/logos/zerochill-icon.svg` for favicon and app-icon source material.
+
+## Brand References
+
+- Obsidian black
+- Deep charcoal
+- Crimson telemetry glow
+- Industrial grid panels
+- Tactical minimalism
+- Cyberpunk infrastructure
+
 ## Route Map
 
 - `/`

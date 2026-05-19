@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" role="img" aria-label="ZeroChill Co X Twitter banner">
+  <rect width="1500" height="500" fill="#050505"/>
+  <rect x="0" y="0" width="1500" height="500" fill="none" stroke="#2c2c2f" stroke-width="2"/>
+  <g opacity="0.55" stroke="#2b2b2e" stroke-width="1">
+    <path d="M0 92h1500M0 184h1500M0 276h1500M0 368h1500M0 460h1500"/>
+    <path d="M180 0v500M360 0v500M540 0v500M720 0v500M900 0v500M1080 0v500M1260 0v500M1440 0v500"/>
+  </g>
+  <g transform="translate(92 92)">
+    <rect x="0" y="0" width="316" height="316" fill="#0c0c0d" stroke="#b11226" stroke-width="4"/>
+    <path d="M68 82h180l-34 52 34 52H68l34-52-34-52Z" fill="none" stroke="#f14b5f" stroke-width="12" stroke-linejoin="miter"/>
+    <path d="M112 146h92" stroke="#f5f3ef" stroke-width="8"/>
+    <text x="158" y="250" text-anchor="middle" fill="#b11226" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="48" font-weight="800" letter-spacing="8">ZC</text>
+  </g>
+  <g transform="translate(470 120)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="78" fill="#f5f3ef" font-size="82" font-weight="800" letter-spacing="8">ZEROCHILL CO</text>
+    <text x="2" y="142" fill="#b11226" font-size="28" font-weight="700" letter-spacing="10">YOUR AI. UNPLUGGED.</text>
+    <text x="2" y="190" fill="#8f8a81" font-size="22" font-weight="700" letter-spacing="6">LOCALIZED INTELLIGENCE INFRASTRUCTURE</text>
+  </g>
+  <g transform="translate(470 308)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" fill="#c6c0b6" font-size="18" letter-spacing="4">
+    <text x="0" y="0">&gt; NO CLOUD DEPENDENCY</text>
+    <text x="0" y="34">&gt; NO SURVEILLANCE</text>
+    <text x="0" y="68">&gt; NO COMPROMISE</text>
+  </g>
+</svg>

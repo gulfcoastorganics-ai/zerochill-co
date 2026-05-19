@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="ZeroChill Co terminal splash screen">
+  <rect width="1600" height="900" fill="#050505"/>
+  <g opacity="0.18" stroke="#2c2c2f" stroke-width="1">
+    <path d="M0 90h1600M0 180h1600M0 270h1600M0 360h1600M0 450h1600M0 540h1600M0 630h1600M0 720h1600M0 810h1600"/>
+    <path d="M160 0v900M320 0v900M480 0v900M640 0v900M800 0v900M960 0v900M1120 0v900M1280 0v900M1440 0v900"/>
+  </g>
+  <g transform="translate(168 172)">
+    <rect x="0" y="0" width="332" height="332" fill="#0c0c0d" stroke="#b11226" stroke-width="5"/>
+    <path d="M74 96h184l-34 54 34 54H74l34-54-34-54Z" fill="none" stroke="#f14b5f" stroke-width="14" stroke-linejoin="miter"/>
+    <path d="M124 182h84" stroke="#f5f3ef" stroke-width="10"/>
+    <text x="166" y="270" text-anchor="middle" fill="#b11226" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="56" font-weight="800" letter-spacing="8">ZC</text>
+  </g>
+  <g transform="translate(580 192)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="88" fill="#f5f3ef" font-size="92" font-weight="800" letter-spacing="10">ZEROCHILL CO</text>
+    <text x="2" y="154" fill="#b11226" font-size="30" font-weight="700" letter-spacing="10">TERMINAL SPLASH / BOOT READY</text>
+    <text x="2" y="214" fill="#8f8a81" font-size="22" font-weight="700" letter-spacing="6">LOCALIZED INTELLIGENCE INFRASTRUCTURE</text>
+  </g>
+  <g transform="translate(580 420)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" fill="#c6c0b6" font-size="20" letter-spacing="4">
+    <text x="0" y="0">&gt; INIT SYSTEM SIGNATURE</text>
+    <text x="0" y="42">&gt; CHECK LOCAL STORAGE</text>
+    <text x="0" y="84">&gt; ENABLE OPERATOR CONSOLE</text>
+    <text x="0" y="126">&gt; NO CLOUD DEPENDENCY</text>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" role="img" aria-label="ZeroChill Co LinkedIn banner">
+  <rect width="1584" height="396" fill="#050505"/>
+  <g opacity="0.7" stroke="#2c2c2f" stroke-width="1">
+    <path d="M0 66h1584M0 132h1584M0 198h1584M0 264h1584M0 330h1584"/>
+    <path d="M176 0v396M352 0v396M528 0v396M704 0v396M880 0v396M1056 0v396M1232 0v396M1408 0v396"/>
+  </g>
+  <rect x="74" y="58" width="250" height="250" fill="#0c0c0d" stroke="#2c2c2f" stroke-width="3"/>
+  <path d="M122 102h154l-30 44 30 44H122l30-44-30-44Z" fill="none" stroke="#b11226" stroke-width="10" stroke-linejoin="miter"/>
+  <path d="M160 190h78" stroke="#f14b5f" stroke-width="7"/>
+  <text x="199" y="250" text-anchor="middle" fill="#f5f3ef" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="44" font-weight="800" letter-spacing="6">ZC</text>
+  <g transform="translate(380 98)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="70" fill="#f5f3ef" font-size="72" font-weight="800" letter-spacing="8">ZEROCHILL CO</text>
+    <text x="2" y="130" fill="#b11226" font-size="26" font-weight="700" letter-spacing="8">LOCAL AI INFRASTRUCTURE</text>
+    <text x="2" y="178" fill="#8f8a81" font-size="20" font-weight="700" letter-spacing="5">SOVEREIGN COMPUTE / EDGE SYSTEMS / OPERATOR CONTROL</text>
+  </g>
+  <g transform="translate(380 274)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" fill="#c6c0b6" font-size="18" letter-spacing="3">
+    <text x="0" y="0">YOUR AI. UNPLUGGED.</text>
+  </g>
+</svg>

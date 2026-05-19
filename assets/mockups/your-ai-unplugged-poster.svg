@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-label="ZeroChill Co YOUR AI UNPLUGGED poster">
+  <rect width="1080" height="1350" fill="#050505"/>
+  <g opacity="0.18" stroke="#2c2c2f" stroke-width="1">
+    <path d="M0 150h1080M0 300h1080M0 450h1080M0 600h1080M0 750h1080M0 900h1080M0 1050h1080M0 1200h1080"/>
+    <path d="M90 0v1350M270 0v1350M450 0v1350M630 0v1350M810 0v1350M990 0v1350"/>
+  </g>
+  <rect x="92" y="92" width="896" height="1166" fill="none" stroke="#2c2c2f" stroke-width="3"/>
+  <g transform="translate(112 112)">
+    <rect x="0" y="0" width="216" height="216" fill="#0c0c0d" stroke="#b11226" stroke-width="4"/>
+    <path d="M44 52h128l-24 36 24 36H44l24-36-24-36Z" fill="none" stroke="#f14b5f" stroke-width="10" stroke-linejoin="miter"/>
+    <path d="M80 104h56" stroke="#f5f3ef" stroke-width="8"/>
+  </g>
+  <g transform="translate(112 400)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="0" fill="#f5f3ef" font-size="124" font-weight="800" letter-spacing="10">YOUR AI.</text>
+    <text x="0" y="124" fill="#b11226" font-size="124" font-weight="800" letter-spacing="10">UNPLUGGED.</text>
+    <text x="4" y="236" fill="#8f8a81" font-size="28" font-weight="700" letter-spacing="8">LOCALIZED INTELLIGENCE INFRASTRUCTURE</text>
+  </g>
+  <g transform="translate(112 776)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="0" fill="#c6c0b6" font-size="24" letter-spacing="6">&gt; NO CLOUD DEPENDENCY</text>
+    <text x="0" y="52" fill="#c6c0b6" font-size="24" letter-spacing="6">&gt; NO SURVEILLANCE</text>
+    <text x="0" y="104" fill="#c6c0b6" font-size="24" letter-spacing="6">&gt; NO COMPROMISE</text>
+  </g>
+  <g transform="translate(112 980)">
+    <path d="M0 0h856" stroke="#b11226" stroke-width="4"/>
+    <text x="0" y="52" fill="#f5f3ef" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="32" font-weight="800" letter-spacing="8">ZEROCHILL CO / LAUNCH SYSTEMS</text>
+  </g>
+</svg>

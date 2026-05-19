@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-label="ZeroChill Co crimson logo">
+  <rect width="1200" height="320" fill="#050505"/>
+  <g transform="translate(56 52)">
+    <rect x="0" y="0" width="216" height="216" fill="#0c0c0d" stroke="#b11226" stroke-width="4"/>
+    <path d="M44 52h128l-24 36 24 36H44l24-36-24-36Z" fill="none" stroke="#f14b5f" stroke-width="10" stroke-linejoin="miter"/>
+    <path d="M80 104h56" stroke="#f5f3ef" stroke-width="8" stroke-linecap="square"/>
+    <circle cx="176" cy="176" r="7" fill="#b11226"/>
+  </g>
+  <g transform="translate(324 88)">
+    <text x="0" y="88" fill="#f5f3ef" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="92" font-weight="800" letter-spacing="10">ZEROCHILL</text>
+    <text x="4" y="158" fill="#f14b5f" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="30" font-weight="700" letter-spacing="12">CO / CRIMSON TELEMETRY</text>
+  </g>
+</svg>

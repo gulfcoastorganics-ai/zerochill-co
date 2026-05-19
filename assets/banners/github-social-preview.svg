@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" role="img" aria-label="ZeroChill Co GitHub social preview">
+  <rect width="1280" height="640" fill="#050505"/>
+  <path d="M0 510h1280" stroke="#2c2c2f" stroke-width="2"/>
+  <path d="M70 110h1140" stroke="#2c2c2f" stroke-width="1"/>
+  <path d="M70 190h1140" stroke="#2c2c2f" stroke-width="1"/>
+  <path d="M70 270h1140" stroke="#2c2c2f" stroke-width="1"/>
+  <path d="M70 350h1140" stroke="#2c2c2f" stroke-width="1"/>
+  <path d="M70 430h1140" stroke="#2c2c2f" stroke-width="1"/>
+  <g transform="translate(84 84)">
+    <rect x="0" y="0" width="360" height="360" fill="#0c0c0d" stroke="#b11226" stroke-width="4"/>
+    <path d="M78 92h204l-38 58 38 58H78l38-58-38-58Z" fill="none" stroke="#f14b5f" stroke-width="14" stroke-linejoin="miter"/>
+    <path d="M126 160h108" stroke="#f5f3ef" stroke-width="10"/>
+    <text x="180" y="270" text-anchor="middle" fill="#b11226" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="54" font-weight="800" letter-spacing="8">ZC</text>
+  </g>
+  <g transform="translate(490 132)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="82" fill="#f5f3ef" font-size="80" font-weight="800" letter-spacing="7">ZEROCHILL CO</text>
+    <text x="2" y="150" fill="#f14b5f" font-size="28" font-weight="700" letter-spacing="10">SOVEREIGN AI INFRASTRUCTURE</text>
+    <text x="2" y="200" fill="#8f8a81" font-size="22" font-weight="700" letter-spacing="6">LOCAL-FIRST / ANTI-CLOUD / INDUSTRIAL</text>
+  </g>
+  <g transform="translate(490 332)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" fill="#c6c0b6" font-size="18" letter-spacing="4">
+    <text x="0" y="0">&gt; PRODUCT DENSITY IS CONTROLLED</text>
+    <text x="0" y="34">&gt; DEPLOYMENT READY / BUILT FOR EDGE</text>
+    <text x="0" y="68">&gt; LAUNCH WAVE / PUBLIC DEPLOYMENT</text>
+  </g>
+</svg>

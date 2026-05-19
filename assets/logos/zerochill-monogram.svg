@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ZeroChill Co monogram mark">
+  <rect width="512" height="512" rx="32" fill="#050505"/>
+  <rect x="56" y="56" width="400" height="400" fill="#0c0c0d" stroke="#2c2c2f" stroke-width="8"/>
+  <path d="M116 160h260l-52 72 52 72H116l52-72-52-72Z" fill="none" stroke="#b11226" stroke-width="18" stroke-linejoin="miter"/>
+  <path d="M188 256h136" stroke="#f14b5f" stroke-width="12" stroke-linecap="square"/>
+  <path d="M160 120h192" stroke="#434347" stroke-width="6"/>
+  <text x="256" y="360" text-anchor="middle" fill="#f5f3ef" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="92" font-weight="800" letter-spacing="6">ZC</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ZeroChill Co icon">
+  <rect width="64" height="64" rx="14" fill="#050505"/>
+  <rect x="6" y="6" width="52" height="52" rx="10" fill="#0c0c0d" stroke="#2c2c2f" stroke-width="2"/>
+  <path d="M14 18h36l-10 14 10 14H14l10-14-10-14Z" fill="none" stroke="#b11226" stroke-width="3" stroke-linejoin="miter"/>
+  <path d="M20 32h24" stroke="#f14b5f" stroke-width="2" stroke-linecap="square"/>
+  <circle cx="48" cy="48" r="2.5" fill="#f14b5f"/>
+</svg>

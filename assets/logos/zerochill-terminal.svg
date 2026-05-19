@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="ZeroChill Co terminal logo">
+  <rect width="1200" height="360" fill="#050505"/>
+  <g transform="translate(72 72)">
+    <rect x="0" y="0" width="216" height="216" fill="#050505" stroke="#2c2c2f" stroke-width="4"/>
+    <path d="M44 52h128l-24 36 24 36H44l24-36-24-36Z" fill="none" stroke="#f14b5f" stroke-width="8" stroke-linejoin="miter"/>
+    <path d="M80 104h56" stroke="#f5f3ef" stroke-width="6" stroke-linecap="square"/>
+    <text x="108" y="182" text-anchor="middle" fill="#b11226" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-size="44" font-weight="700">&gt;</text>
+  </g>
+  <g transform="translate(328 92)" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+    <text x="0" y="70" fill="#f5f3ef" font-size="72" font-weight="800" letter-spacing="8">ZEROCHILL CO</text>
+    <text x="2" y="126" fill="#8f8a81" font-size="24" font-weight="700" letter-spacing="10">TERMINAL / LOCAL FIRST / NO CLOUD</text>
+    <text x="0" y="190" fill="#b11226" font-size="28" font-weight="700" letter-spacing="6">&gt; YOUR AI. UNPLUGGED.</text>
+  </g>
+</svg>
