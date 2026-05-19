@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #050505;
+  --panel: #0c0c0d;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.08);
+  --text: #f5f3ef;
+  --text-muted: #c6c0b6;
+  --text-dim: #8f8a81;
+  --text-faint: #5e5952;
+  --accent: #b11226;
+  --accent-strong: #f14b5f;
+}
+
+@theme {
+  --font-sans:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top, rgba(177, 18, 38, 0.16), transparent 30%),
+    linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+  color: var(--text);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(177, 18, 38, 0.4);
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.scanline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.035),
+    transparent
+  );
+  background-size: 100% 6px;
+  pointer-events: none;
+  opacity: 0.35;
+}
