@@ -1,4 +1,5 @@
 export const navItems = [
+  { label: 'Products', to: '/products' },
   { label: 'Sovereign Zero', to: '/sovereign-zero' },
   { label: 'Zero State Matrix', to: '/zero-state-matrix' },
   { label: 'Manifest', to: '/manifest' },
@@ -398,4 +399,69 @@ export const reviewHandoff = [
   'Public copy remains centered on ZeroChill Co.',
   'Internal notes remain in repo documentation.',
   'Live deployment and repo URLs should be filled before client delivery.',
+];
+
+export const productComparison = [
+  {
+    name: 'Sovereign Zero Lite',
+    audience: 'Small teams, field operators, solo research desks',
+    environment: 'Mobile rigs, compact offices, secure home labs',
+    offline: 'Strong offline baseline; no permanent network requirement',
+    inference: 'Light local inference and routing; fast response under modest load',
+    compute: '8-core class CPU with entry or integrated GPU acceleration',
+    fit: 'Choose when portability and quiet operation matter most',
+  },
+  {
+    name: 'Sovereign Zero Core',
+    audience: 'Production teams, internal platforms, private AI operations',
+    environment: 'Office server rooms, secure studios, private labs',
+    offline: 'Offline-first with controlled relay synchronization',
+    inference: 'Balanced private serving and orchestration for sustained workloads',
+    compute: '16-core class CPU with midrange workstation GPU acceleration',
+    fit: 'Choose when you need the default production node',
+  },
+  {
+    name: 'Sovereign Zero Blacksite',
+    audience: 'Restricted rooms, sensitive research, high-trust facilities',
+    environment: 'Labs, secure rooms, private technical facilities',
+    offline: 'Air-gap ready with optional relay gating only',
+    inference: 'Restricted model execution for controlled environments',
+    compute: 'Hardened multi-socket or isolated workstation-grade CPU with pro GPU',
+    fit: 'Choose when isolation and security posture matter most',
+  },
+  {
+    name: 'Zero-State Matrix DevKit',
+    audience: 'Engineers, builders, system integrators, operator sandbox users',
+    environment: 'Development desks, lab benches, staging racks',
+    offline: 'Supports disconnected development and self-hosted testing',
+    inference: 'Build, validate, and test local workflow layers',
+    compute: 'Balanced workstation CPU with programmable local compute option',
+    fit: 'Choose when you need the control plane and developer toolkit',
+  },
+];
+
+export const productComparisonColumns = [
+  'Recommended buyer / use case',
+  'Deployment environment fit',
+  'Offline capability',
+  'Compute / inference position',
+];
+
+export const productSummaryCards = [
+  {
+    title: 'Sovereign Zero Lite',
+    body: 'Entry node for portable local AI and quiet field work.',
+  },
+  {
+    title: 'Sovereign Zero Core',
+    body: 'Balanced production node for private infrastructure teams.',
+  },
+  {
+    title: 'Sovereign Zero Blacksite',
+    body: 'Restricted deployment node for high-trust environments.',
+  },
+  {
+    title: 'Zero-State Matrix DevKit',
+    body: 'Developer control layer for testing and local workflow validation.',
+  },
 ];

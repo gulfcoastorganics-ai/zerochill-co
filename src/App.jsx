@@ -7,6 +7,7 @@ import Manifest from './pages/Manifest';
 import Docs from './pages/Docs';
 import Preorder from './pages/Preorder';
 import Review from './pages/Review';
+import Products from './pages/Products';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/docs" element={<Docs />} />
         <Route path="/preorder" element={<Preorder />} />
         <Route path="/review" element={<Review />} />
+        <Route path="/products" element={<Products />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
