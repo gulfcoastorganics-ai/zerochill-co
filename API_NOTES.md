@@ -22,7 +22,9 @@
 - Rejects malformed submissions with `400`
 - Applies a lightweight per-IP request limit
 - Returns a sanitized submission payload on success
-- Accepts preorder submissions, but does not yet persist them to a database or email provider.
+- Accepts preorder submissions, but does not yet persist them to a database.
+- Email notifications are attempted only when `RESEND_API_KEY`, `PREORDER_NOTIFY_TO`, and `PREORDER_FROM_EMAIL` are all configured.
+- Successful responses now include `emailConfigured` and `emailSent`.
 - Serverless memory is not persistent, so function state must not be treated as storage.
 - The export endpoint requires `ADMIN_EXPORT_TOKEN` and a matching `?token=` query parameter.
 - The export endpoint returns JSON in a placeholder format until durable storage is added.
@@ -36,13 +38,14 @@
 ## Future Expansion Path
 
 - Email notifications
-  - Send preorder submissions to an internal inbox or operations alias.
+  - Send preorder submissions to an internal inbox or operations alias through a production email provider.
 - Resend integration
   - Deliver lightweight transactional notifications without adding heavy infrastructure.
 - Database layer
   - Persist submissions in a managed store once the pipeline is approved.
 - CRM / export layer
   - Export leads into a sales workflow, sheet, or CRM system.
+  - Replace the placeholder export route with a real persisted export source.
 
 ## Deployment Notes
 

@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { Resend } from 'resend';
 import { productTiers } from '../src/data/site.js';
 
 const allowedTiers = new Set(productTiers.map((tier) => tier.name));
@@ -83,6 +84,72 @@ function isRateLimited(ip) {
   return false;
 }
 
+function getEmailConfig() {
+  const apiKey = String(process.env.RESEND_API_KEY || '').trim();
+  const to = String(process.env.PREORDER_NOTIFY_TO || '').trim();
+  const from = String(process.env.PREORDER_FROM_EMAIL || '').trim();
+
+  return {
+    configured: Boolean(apiKey && to && from),
+    apiKey,
+    to,
+    from,
+  };
+}
+
+function buildEmailText(submission) {
+  return [
+    'ZeroChill Co preorder submission',
+    '',
+    `Name: ${submission.name}`,
+    `Email: ${submission.email}`,
+    `Preferred tier: ${submission.preferredTier}`,
+    '',
+    'Intended use:',
+    submission.intendedUse,
+    '',
+    `Submission ID: ${submission.id}`,
+    `Created At: ${submission.createdAt}`,
+  ].join('\n');
+}
+
+async function sendPreorderEmail(submission) {
+  const config = getEmailConfig();
+
+  if (!config.configured) {
+    return {
+      emailConfigured: false,
+      emailSent: false,
+    };
+  }
+
+  try {
+    const resend = new Resend(config.apiKey);
+    await resend.emails.send({
+      from: config.from,
+      to: [config.to],
+      subject: `ZeroChill preorder: ${submission.name} / ${submission.preferredTier}`,
+      text: buildEmailText(submission),
+      replyTo: submission.email,
+    });
+
+    return {
+      emailConfigured: true,
+      emailSent: true,
+    };
+  } catch (error) {
+    console.error('ZeroChill preorder email send failed', {
+      errorType: error instanceof Error ? error.name : 'UnknownError',
+      stage: 'resend-send',
+    });
+
+    return {
+      emailConfigured: true,
+      emailSent: false,
+    };
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     send(res, 405, {
@@ -125,9 +192,12 @@ export default async function handler(req, res) {
     return;
   }
 
+  const emailStatus = await sendPreorderEmail(submission);
+
   send(res, 200, {
     ok: true,
     message: 'preorder submission accepted',
     submission,
+    ...emailStatus,
   });
 }
