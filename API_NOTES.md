@@ -53,3 +53,4 @@
 - No additional backend framework is required.
 - Keep the function stateless and maintain the local fallback for resilience.
 - Add `ADMIN_EXPORT_TOKEN` in the Vercel environment settings before using the export route.
+- See `EMAIL_NOTIFICATIONS.md` for the current notification behavior, environment variables, and troubleshooting guidance.
