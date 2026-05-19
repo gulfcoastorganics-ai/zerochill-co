@@ -14,8 +14,18 @@ export default function HardwareConceptPanels() {
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         {hardwareConcepts.map((item) => (
           <TerminalCard key={item.name} label={item.badge} title={item.name} body={item.summary}>
+            <div className="mt-5 grid gap-3 border-t border-[color:var(--line-soft)] pt-4 sm:grid-cols-2">
+              {item.specs.slice(0, 4).map((spec) => (
+                <div key={spec} className="border border-[color:var(--line-soft)] bg-black/25 p-3">
+                  <div className="text-[0.65rem] uppercase tracking-[0.26em] text-[color:var(--text-dim)]">
+                    Spec
+                  </div>
+                  <div className="mt-2 text-sm leading-7 text-[color:var(--text-muted)]">{spec}</div>
+                </div>
+              ))}
+            </div>
             <ul className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
-              {item.specs.map((spec) => (
+              {item.specs.slice(4).map((spec) => (
                 <li key={spec} className="flex gap-3 text-sm leading-7 text-[color:var(--text-muted)]">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[color:var(--accent)] shadow-[0_0_14px_var(--accent)]" />
                   {spec}

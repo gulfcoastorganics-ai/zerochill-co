@@ -3,6 +3,9 @@ import CinematicIntro from '../components/sections/CinematicIntro';
 import HardwareConceptPanels from '../components/sections/HardwareConceptPanels';
 import DeploymentArchitecture from '../components/sections/DeploymentArchitecture';
 import WhyLocalAI from '../components/sections/WhyLocalAI';
+import UseCaseDoctrine from '../components/sections/UseCaseDoctrine';
+import OperationalPhilosophy from '../components/sections/OperationalPhilosophy';
+import DeploymentTopologySet from '../components/sections/DeploymentTopologySet';
 import Blueprint from '../components/sections/Blueprint';
 import TierGrid from '../components/sections/TierGrid';
 import DocsPreview from '../components/sections/DocsPreview';
@@ -20,7 +23,10 @@ export default function Home() {
       <CinematicIntro />
       <HardwareConceptPanels />
       <DeploymentArchitecture />
+      <DeploymentTopologySet />
+      <UseCaseDoctrine />
       <WhyLocalAI />
+      <OperationalPhilosophy />
       <Blueprint />
       <TierGrid />
       <DocsPreview />

@@ -166,11 +166,15 @@ export const hardwareConcepts = [
     badge: 'EDGE ENTRY',
     summary: 'Compact local inference for field operators and small teams.',
     specs: [
-      'Processor: low-power local inference runtime',
-      'Memory: tuned for lean workstation deployments',
-      'Storage: encrypted local project cache',
-      'Network: optional / default disconnected',
-      'Positioning: starter node for sovereign compute',
+      'CPU tier: 8-core low-power local inference node',
+      'GPU tier: integrated accelerator or entry-level mobile compute',
+      'Inference positioning: lightweight local model execution and prompt routing',
+      'Edge node role: starter node for field deployments and private workstations',
+      'Workstation use case: quiet operator desk, mobile command kit, or lab bench',
+      'Offline operation: designed to remain functional with no permanent network dependency',
+      'Deployment environments: small offices, mobile rigs, secure home labs',
+      'Thermals / acoustics: low fan curve, near-silent under normal load',
+      'Ruggedization: transport-safe enclosure and shock-resistant storage profile',
     ],
   },
   {
@@ -178,11 +182,15 @@ export const hardwareConcepts = [
     badge: 'PRODUCTION',
     summary: 'Balanced deployment chassis for private AI workloads and command orchestration.',
     specs: [
-      'Processor: multi-task inference and policy engine',
-      'Memory: production-grade local model workspace',
-      'Storage: mirrored local project vaults',
-      'Network: filtered relay lanes only',
-      'Positioning: standard infrastructure tier',
+      'CPU tier: 16-core production inference CPU class',
+      'GPU tier: midrange workstation GPU for local model acceleration',
+      'Inference positioning: sustained private model serving and orchestration',
+      'Edge node role: primary site node for internal teams and private deployments',
+      'Workstation use case: operator console, model review, and workflow execution',
+      'Offline operation: local-first by default with controlled relay synchronization',
+      'Deployment environments: office server room, secure studio, private lab',
+      'Thermals / acoustics: tuned airflow path with stable mid-load acoustic profile',
+      'Ruggedization: rackable chassis, serviceable panels, and filtered intake path',
     ],
   },
   {
@@ -190,11 +198,15 @@ export const hardwareConcepts = [
     badge: 'RESTRICTED',
     summary: 'Isolated configuration for controlled labs, secure rooms, and sensitive work.',
     specs: [
-      'Processor: hardened edge compute stack',
-      'Memory: segmented local state partitions',
-      'Storage: offline encrypted volumes',
-      'Network: air-gap ready with relay controls',
-      'Positioning: highest-trust deployment lane',
+      'CPU tier: hardened multi-socket class or isolated workstation-grade CPU',
+      'GPU tier: professional compute card for secure local inference lanes',
+      'Inference positioning: restricted model execution in controlled environments',
+      'Edge node role: highest-trust node for classified or sensitive workflows',
+      'Workstation use case: isolated operator room, private research suite, secure review desk',
+      'Offline operation: air-gap ready with optional relay gating only',
+      'Deployment environments: labs, secure rooms, private technical facilities',
+      'Thermals / acoustics: damped airflow, restrained noise footprint, heat-aware layout',
+      'Ruggedization: reinforced chassis, tamper-conscious design cues, service-lock access',
     ],
   },
   {
@@ -202,11 +214,15 @@ export const hardwareConcepts = [
     badge: 'DEVKIT',
     summary: 'Developer console bundle for building and testing sovereign AI workflows.',
     specs: [
-      'Processor: diagnostics-first control surface',
-      'Memory: scratch space for local workflow testing',
-      'Storage: reusable development snapshots',
-      'Network: simulator and relay-aware tooling',
-      'Positioning: build system and operator sandbox',
+      'CPU tier: developer workstation class with balanced local throughput',
+      'GPU tier: programmable compute option for local testing and diagnostics',
+      'Inference positioning: build, test, and validate local workflow layers',
+      'Edge node role: staging node for toolkit validation and release prep',
+      'Workstation use case: engineering bench, operator sandbox, and control surface',
+      'Offline operation: supports disconnected development and self-hosted testing',
+      'Deployment environments: development desks, lab benches, and staging racks',
+      'Thermals / acoustics: office-friendly acoustic tuning with sustained work loads',
+      'Ruggedization: portable but precise, built for repeated deployment cycles',
     ],
   },
 ];
@@ -231,6 +247,56 @@ export const deploymentNodes = [
   {
     title: 'Secure Edge Compute',
     detail: 'Distributed placement for hardened local workloads near the mission point.',
+  },
+];
+
+export const useCaseDoctrine = [
+  {
+    title: 'Private AI Research',
+    detail: 'Run local experiments, keep datasets controlled, and avoid unnecessary data exposure.',
+  },
+  {
+    title: 'Offline Creative Pipelines',
+    detail: 'Support design, writing, and synthesis workflows in environments with limited or no internet.',
+  },
+  {
+    title: 'Tactical Edge Compute',
+    detail: 'Place inference close to the mission point where latency, availability, and control matter.',
+  },
+  {
+    title: 'Autonomous Local Inference',
+    detail: 'Keep task execution and inference inside a predictable, operator-owned boundary.',
+  },
+  {
+    title: 'Secure Developer Workstations',
+    detail: 'Give engineers a controlled machine for building, testing, and validating local systems.',
+  },
+];
+
+export const operationalPhilosophy = [
+  {
+    title: 'Ownership',
+    detail: 'The operator owns the stack, the state, and the deployment decision.',
+  },
+  {
+    title: 'Sovereignty',
+    detail: 'Critical behavior remains under local governance rather than remote platform control.',
+  },
+  {
+    title: 'Offline-first',
+    detail: 'Connectivity is optional; local operation is the baseline.',
+  },
+  {
+    title: 'Low-dependency infrastructure',
+    detail: 'Keep the runtime surface narrow and the dependency chain short.',
+  },
+  {
+    title: 'Privacy positioning',
+    detail: 'Avoid unnecessary transport and reduce exposure by default.',
+  },
+  {
+    title: 'Infrastructure resilience',
+    detail: 'Prefer systems that remain useful in degraded, disconnected, or restricted conditions.',
   },
 ];
 
