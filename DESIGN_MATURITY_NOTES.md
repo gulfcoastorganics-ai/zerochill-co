@@ -6,8 +6,10 @@ ZeroChill has moved from a heavier terminal-forward visual language into a premi
 
 - Reduced scanline noise and heavy faux-terminal texture.
 - Shifted primary surfaces toward translucent glass panels with soft blur, low-opacity highlights, and layered depth.
+- Introduced clear material levels for background atmosphere, low glass, raised glass, interactive glass, and command modules.
 - Rebalanced the palette around obsidian, graphite, slate, steel, and restrained crimson accents.
 - Tightened spacing and hierarchy so product information reads like a real infrastructure launch surface.
+- Moved the base reading font toward a premium sans-serif system and reserved monospace for operational detail.
 - Softened dashboard and form chrome to look more like executive-grade product design than hacker theater.
 
 ## What Stayed

@@ -75,7 +75,7 @@ export default function DeploymentArchitecture() {
           </div>
           <div className="mt-4 space-y-4">
             {deploymentNodes.map((node, index) => (
-              <div key={node.title} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+            <div key={node.title} className="zc-surface-low p-4">
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-sm uppercase tracking-[0.28em] text-[color:var(--text)]">
                     {node.title}

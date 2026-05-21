@@ -16,7 +16,7 @@ export default function HardwareConceptPanels() {
           <TerminalCard key={item.name} label={item.badge} title={item.name} body={item.summary}>
             <div className="mt-5 grid gap-3 border-t border-[color:var(--line-soft)] pt-4 sm:grid-cols-2">
               {item.specs.slice(0, 4).map((spec) => (
-                <div key={spec} className="border border-[color:var(--line-soft)] bg-black/25 p-3">
+                <div key={spec} className="zc-surface-low p-3">
                   <div className="text-[0.65rem] uppercase tracking-[0.26em] text-[color:var(--text-dim)]">
                     Spec
                   </div>

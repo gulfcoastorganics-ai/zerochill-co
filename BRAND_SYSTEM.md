@@ -12,9 +12,10 @@
 
 ## Typography Rules
 
-- Use terminal-first, monospaced typography across the system.
-- Keep headlines uppercase and heavy.
-- Use wide tracking for labels and signals.
+- Use a premium sans-serif default for general reading.
+- Reserve monospaced typography for operational data, commands, timestamps, and machine states.
+- Keep headlines uppercase and heavy, but let spacing and weight carry the hierarchy.
+- Use moderate tracking for labels and signals; do not let every line feel like a terminal prompt.
 - Keep body copy short, direct, and legible.
 
 ## Tone Rules
@@ -38,6 +39,12 @@
 - Use status pills, command ribbons, and thin border callouts for operational context.
 - Keep print-friendly pages clean and high-contrast when they need to be saved or shared.
 - Prefer liquid-glass surfaces for primary containers: translucent panels, layered blur, soft highlights, and restrained shadow depth.
+- Use the material levels consistently:
+  - background atmosphere
+  - low glass
+  - raised glass
+  - interactive glass
+  - command module
 - Use obsidian, graphite, slate, and steel as the structural palette, with crimson reserved for control states and focal signals.
 - Keep panel borders subtle and consistent; avoid stacked borders, neon glows, and noisy scanline treatment.
 - Let typography and spacing do most of the work. The interface should read as premium product design, not cyberpunk decoration.

@@ -42,7 +42,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <Panel className="overflow-hidden p-0">
+        <Panel className="zc-command-module overflow-hidden p-0">
           <div className="border-b border-[color:var(--line-soft)] px-5 py-4">
             <div className="flex items-center justify-between gap-3">
               <div>
@@ -71,13 +71,13 @@ export default function Hero() {
               ))}
             </div>
             <div className="mt-5 grid grid-cols-3 gap-3 text-center text-xs uppercase tracking-[0.24em]">
-              <div className="border border-[color:var(--line-soft)] bg-black/20 p-3 text-[color:var(--text-dim)]">
+              <div className="zc-surface-low p-3 text-[color:var(--text-dim)]">
                 air-gap
               </div>
-              <div className="border border-[color:var(--line-soft)] bg-black/20 p-3 text-[color:var(--text-dim)]">
+              <div className="zc-surface-low p-3 text-[color:var(--text-dim)]">
                 edge
               </div>
-              <div className="border border-[color:var(--line-soft)] bg-black/20 p-3 text-[color:var(--text-dim)]">
+              <div className="zc-surface-low p-3 text-[color:var(--text-dim)]">
                 local
               </div>
             </div>

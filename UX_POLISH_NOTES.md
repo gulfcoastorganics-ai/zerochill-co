@@ -4,6 +4,9 @@
 
 - Refined the shell into a stronger command-interface layout with clearer active nav states.
 - Shifted the visual system toward liquid glass: softer panel depth, restrained highlights, and calmer surface layering.
+- Reworked page rhythm with larger editorial spacing and fewer stacked-card impressions.
+- Added explicit material levels so background, raised surfaces, and command modules read distinctly.
+- Moved the default reading font away from a terminal-first feel and kept monospace reserved for machine data.
 - Upgraded the homepage hero with a boot motif, telemetry framing, and clearer CTA hierarchy.
 - Tightened product, mission control, and admin surfaces with more professional dashboard language.
 - Improved preorder trust copy so email is framed as notification-only and not durable storage.

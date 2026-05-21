@@ -32,7 +32,7 @@ export default function MissionControl() {
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             {missionControlCards.map((card) => (
-              <div key={card.label} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+              <div key={card.label} className="zc-surface-low p-4">
                 <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
                   {card.label}
                 </div>
@@ -44,7 +44,7 @@ export default function MissionControl() {
           </div>
 
           <div className="mt-5 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+            <div className="zc-surface-low p-4">
               <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
                 Edge relay visuals
               </div>
@@ -78,7 +78,7 @@ export default function MissionControl() {
               </svg>
             </div>
 
-            <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+            <div className="zc-surface-low p-4">
               <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
                 Local inference states
               </div>
@@ -99,7 +99,7 @@ export default function MissionControl() {
               </div>
               <div className="mt-5 grid grid-cols-4 gap-2">
                 {relayBands.map((band) => (
-                  <div key={band.label} className="flex h-24 items-end border border-[color:var(--line-soft)] bg-black/30 p-2">
+                  <div key={band.label} className="zc-surface-low flex h-24 items-end p-2">
                     <div
                       className="w-full bg-[linear-gradient(180deg,rgba(241,75,95,0.95),rgba(177,18,38,0.25))]"
                       style={{ height: `${band.value}%` }}
@@ -130,7 +130,7 @@ export default function MissionControl() {
           </div>
           <div className="mt-4 space-y-3">
             {nodeRows.map((node) => (
-              <div key={node.name} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+              <div key={node.name} className="zc-surface-low p-4">
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <div className="text-sm uppercase tracking-[0.28em] text-[color:var(--text)]">

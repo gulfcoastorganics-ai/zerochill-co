@@ -247,7 +247,7 @@ export default function PreorderForm() {
             role="status"
             aria-live="polite"
             className={[
-              'zc-glass mt-5 border p-5',
+              'zc-surface-raised mt-5 p-5',
               status.phase === 'success'
                 ? 'border-[color:var(--accent)]'
                 : status.phase === 'fallback'

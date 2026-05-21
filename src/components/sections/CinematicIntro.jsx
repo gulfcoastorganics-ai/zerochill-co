@@ -12,7 +12,7 @@ export default function CinematicIntro() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18">
       <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr] xl:items-stretch">
-        <Panel className="telemetry-scan tactical-grid shadow-telemetry overflow-hidden p-6 sm:p-8 lg:p-10">
+        <Panel className="zc-command-module telemetry-scan tactical-grid shadow-telemetry overflow-hidden p-6 sm:p-8 lg:p-10">
           <div className="relative z-10 flex h-full flex-col">
             <div className="flex flex-wrap items-center gap-3">
               <span className="status-pill">Local node online</span>
@@ -56,7 +56,7 @@ export default function CinematicIntro() {
                 ['State', 'Controlled'],
                 ['Surface', 'Minimized'],
               ].map(([label, value]) => (
-                <div key={label} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                <div key={label} className="zc-surface-low p-4">
                   <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
                     {label}
                   </div>
@@ -90,51 +90,53 @@ export default function CinematicIntro() {
           <Panel className="shadow-telemetry p-6 sm:p-7">
             <div className="flex items-center justify-between gap-3">
               <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-                Node telemetry
+                Hero command module
               </div>
               <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
                 live motif
               </span>
             </div>
-            <div className="mt-5 grid gap-3">
-              {[
-                ['LOCAL NODE', 'ZC-01'],
-                ['STATE', 'ONLINE'],
-                ['POLICY', 'STRICT'],
-                ['MODE', 'OFFLINE FIRST'],
-              ].map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between border-b border-[color:var(--line-soft)] pb-3">
-                  <span className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)]">{label}</span>
-                  <span className="font-mono text-sm uppercase tracking-[0.18em] text-[color:var(--text)]">{value}</span>
+            <div className="mt-5 grid gap-5">
+              <div>
+                <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+                  Node telemetry
                 </div>
-              ))}
-            </div>
-          </Panel>
-
-          <Panel className="shadow-telemetry p-6 sm:p-7">
-            <div className="flex items-center justify-between gap-3">
-              <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-                Signal summary
+                <div className="mt-4 grid gap-3">
+                  {[
+                    ['LOCAL NODE', 'ZC-01'],
+                    ['STATE', 'ONLINE'],
+                    ['POLICY', 'STRICT'],
+                    ['MODE', 'OFFLINE FIRST'],
+                  ].map(([label, value]) => (
+                    <div key={label} className="flex items-center justify-between border-b border-[color:var(--line-soft)] pb-3">
+                      <span className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)]">{label}</span>
+                      <span className="font-mono text-sm uppercase tracking-[0.18em] text-[color:var(--text)]">{value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
-                operator view
-              </span>
-            </div>
-            <div className="mt-5 grid grid-cols-4 gap-3">
-              {['A', 'B', 'C', 'D'].map((bar, index) => (
-                <div key={bar} className="flex h-28 items-end border border-[color:var(--line-soft)] bg-black/25 p-2">
-                  <div
-                    className="w-full bg-[linear-gradient(180deg,rgba(241,75,95,0.95),rgba(177,18,38,0.4))]"
-                    style={{ height: `${45 + index * 12}%` }}
-                    aria-hidden="true"
-                  />
+
+              <div className="border-t border-[color:var(--line-soft)] pt-5">
+                <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+                  Signal summary
                 </div>
-              ))}
+                <div className="mt-4 grid grid-cols-4 gap-3">
+                  {['A', 'B', 'C', 'D'].map((bar, index) => (
+                    <div key={bar} className="zc-surface-low flex h-28 items-end p-2">
+                      <div
+                        className="w-full bg-[linear-gradient(180deg,rgba(241,75,95,0.95),rgba(177,18,38,0.4))]"
+                        style={{ height: `${45 + index * 12}%` }}
+                        aria-hidden="true"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">
+                  Continuous but low-noise telemetry. Enough visibility to trust the machine without
+                  dragging the operator into dashboard clutter.
+                </p>
+              </div>
             </div>
-            <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">
-              Continuous but low-noise telemetry. Enough visibility to trust the machine without
-              dragging the operator into dashboard clutter.
-            </p>
           </Panel>
         </div>
       </div>

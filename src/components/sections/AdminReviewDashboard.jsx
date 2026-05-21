@@ -55,7 +55,7 @@ export default function AdminReviewDashboard() {
               'Operator onboarding review',
               'Deployment readiness checkpoint',
             ].map((item, index) => (
-              <div key={item} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+              <div key={item} className="zc-surface-low p-4">
                 <div className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
                   0{index + 1}
                 </div>
@@ -83,7 +83,7 @@ export default function AdminReviewDashboard() {
           </div>
           <div className="mt-4 space-y-3">
             {systemHealth.map((item) => (
-              <div key={item.label} className="flex items-center justify-between border border-[color:var(--line-soft)] bg-black/25 px-4 py-3">
+              <div key={item.label} className="zc-surface-low flex items-center justify-between px-4 py-3">
                 <span className="text-sm uppercase tracking-[0.28em] text-[color:var(--text)]">
                   {item.label}
                 </span>
@@ -116,7 +116,7 @@ export default function AdminReviewDashboard() {
               ['Deployment bundle', 'STAGED'],
               ['Audit summary', 'DRAFT'],
             ].map(([label, value]) => (
-              <div key={label} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+              <div key={label} className="zc-surface-low p-4">
                 <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
                   {label}
                 </div>

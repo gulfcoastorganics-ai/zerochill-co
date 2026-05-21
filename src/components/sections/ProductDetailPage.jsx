@@ -69,7 +69,7 @@ function ProductFlow({ product }) {
       </svg>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {product.operationalDiagrams.map((line) => (
-          <div key={line} className="border border-[color:var(--line-soft)] bg-black/25 p-4 text-sm leading-7 text-[color:var(--text-muted)]">
+          <div key={line} className="zc-surface-low p-4 text-sm leading-7 text-[color:var(--text-muted)]">
             {line}
           </div>
         ))}
@@ -131,7 +131,7 @@ export default function ProductDetailPage({ product }) {
           >
             <div className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
               {product.useCaseDoctrine.map((item) => (
-                <div key={item} className="border border-[color:var(--line-soft)] bg-black/25 p-4 text-sm leading-7 text-[color:var(--text-muted)]">
+                <div key={item} className="zc-surface-low p-4 text-sm leading-7 text-[color:var(--text-muted)]">
                   {item}
                 </div>
               ))}
@@ -145,7 +145,7 @@ export default function ProductDetailPage({ product }) {
           >
             <div className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4">
               {product.targetOperators.map((item) => (
-                <div key={item} className="flex items-center justify-between border border-[color:var(--line-soft)] bg-black/25 px-4 py-3">
+                <div key={item} className="zc-surface-low flex items-center justify-between px-4 py-3">
                   <span className="text-sm leading-7 text-[color:var(--text-muted)]">{item}</span>
                   <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
                     operator
