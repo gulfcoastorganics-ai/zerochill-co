@@ -247,12 +247,12 @@ export default function PreorderForm() {
             role="status"
             aria-live="polite"
             className={[
-              'mt-5 border p-5',
+              'zc-glass mt-5 border p-5',
               status.phase === 'success'
-                ? 'border-[color:var(--accent)] bg-[rgba(177,18,38,0.08)]'
+                ? 'border-[color:var(--accent)]'
                 : status.phase === 'fallback'
-                  ? 'border-[color:var(--line)] bg-black/25'
-                  : 'border-[color:var(--accent-strong)] bg-[rgba(241,75,95,0.08)]',
+                  ? 'border-[color:var(--line)]'
+                  : 'border-[color:var(--accent-strong)]',
             ].join(' ')}
           >
             <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--accent-strong)]">
@@ -288,7 +288,7 @@ export default function PreorderForm() {
               onChange={handleChange}
               aria-invalid={Boolean(fieldErrors.name)}
               aria-describedby="preorder-name-help preorder-name-error"
-              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)] focus:border-[color:var(--accent)]"
+              className="zc-field px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)]"
               placeholder="Name for the preorder record"
             />
             <span id="preorder-name-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
@@ -313,7 +313,7 @@ export default function PreorderForm() {
               onChange={handleChange}
               aria-invalid={Boolean(fieldErrors.email)}
               aria-describedby="preorder-email-help preorder-email-error"
-              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)] focus:border-[color:var(--accent)]"
+              className="zc-field px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)]"
               placeholder="name@domain.com"
             />
             <span id="preorder-email-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
@@ -337,7 +337,7 @@ export default function PreorderForm() {
               onChange={handleChange}
               aria-invalid={Boolean(fieldErrors.intendedUse)}
               aria-describedby="preorder-use-help preorder-use-error"
-              className="min-h-32 border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)] focus:border-[color:var(--accent)]"
+              className="zc-field min-h-32 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)]"
               placeholder="Describe the environment, team size, and whether the node needs offline operation."
             />
             <span id="preorder-use-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
@@ -360,7 +360,7 @@ export default function PreorderForm() {
               onChange={handleChange}
               aria-invalid={Boolean(fieldErrors.preferredTier)}
               aria-describedby="preorder-tier-help preorder-tier-error"
-              className="border border-[color:var(--line)] bg-black/30 px-4 py-3 text-sm text-[color:var(--text)] outline-none focus:border-[color:var(--accent)]"
+              className="zc-field px-4 py-3 text-sm text-[color:var(--text)] outline-none"
             >
               {productTiers.map((tier) => (
                 <option key={tier.name} value={tier.name}>

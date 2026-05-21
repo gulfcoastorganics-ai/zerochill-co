@@ -2,17 +2,18 @@
 
 :root {
   --bg: #050505;
-  --panel: #0c0c0d;
-  --line: rgba(208, 214, 224, 0.16);
-  --line-soft: rgba(208, 214, 224, 0.1);
+  --panel: rgba(12, 14, 18, 0.58);
+  --panel-strong: rgba(12, 14, 18, 0.78);
+  --line: rgba(216, 222, 232, 0.14);
+  --line-soft: rgba(216, 222, 232, 0.08);
   --text: #f5f3ef;
   --text-muted: #c6c0b6;
   --text-dim: #8f8a81;
   --text-faint: #5e5952;
   --accent: #b11226;
-  --accent-strong: #f14b5f;
-  --steel: rgba(208, 214, 224, 0.35);
-  --surface-glow: rgba(241, 75, 95, 0.08);
+  --accent-strong: #e85a69;
+  --steel: rgba(208, 214, 224, 0.28);
+  --surface-glow: rgba(255, 255, 255, 0.05);
   --focus-ring: rgba(241, 75, 95, 0.55);
 }
 
@@ -31,7 +32,9 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top, rgba(177, 18, 38, 0.14), transparent 28%),
+    radial-gradient(circle at 20% 8%, rgba(255, 255, 255, 0.06), transparent 18%),
+    radial-gradient(circle at top, rgba(177, 18, 38, 0.1), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(140, 151, 171, 0.08), transparent 26%),
     linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
   color: var(--text);
   font-family: var(--font-sans);
@@ -99,7 +102,16 @@ textarea::placeholder {
 .zc-panel {
   position: relative;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+    var(--panel);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 24px 64px rgba(0, 0, 0, 0.38);
 }
 
 .zc-panel::before,
@@ -112,18 +124,19 @@ textarea::placeholder {
 
 .zc-panel::before {
   background:
-    linear-gradient(135deg, rgba(241, 75, 95, 0.28), transparent 12px) top left,
-    linear-gradient(225deg, rgba(241, 75, 95, 0.28), transparent 12px) top right,
-    linear-gradient(45deg, rgba(241, 75, 95, 0.28), transparent 12px) bottom left,
-    linear-gradient(315deg, rgba(241, 75, 95, 0.28), transparent 12px) bottom right;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 14px) top left,
+    linear-gradient(225deg, rgba(255, 255, 255, 0.08), transparent 14px) top right,
+    linear-gradient(45deg, rgba(241, 75, 95, 0.16), transparent 14px) bottom left,
+    linear-gradient(315deg, rgba(241, 75, 95, 0.14), transparent 14px) bottom right;
   background-repeat: no-repeat;
-  background-size: 12px 12px;
-  opacity: 0.55;
+  background-size: 14px 14px;
+  opacity: 0.36;
 }
 
 .zc-panel::after {
   inset: 0;
-  border: 1px solid rgba(208, 214, 224, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: inherit;
 }
 
 .zc-reveal {
@@ -142,13 +155,16 @@ textarea::placeholder {
 
 .zc-interactive:hover,
 .zc-interactive:focus-within {
-  transform: translateY(-2px);
-  border-color: rgba(241, 75, 95, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(241, 75, 95, 0.12);
+  transform: translateY(-1px);
+  border-color: rgba(241, 75, 95, 0.24);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(241, 75, 95, 0.1);
 }
 
 .zc-nav-link {
   position: relative;
+  border-radius: 9999px;
   padding-bottom: 0.35rem;
 }
 
@@ -159,7 +175,7 @@ textarea::placeholder {
   bottom: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(241, 75, 95, 0.95), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 180ms ease;
@@ -182,31 +198,35 @@ textarea::placeholder {
 
 .zc-nav-link[aria-current='page'],
 .zc-nav-link[aria-current='page']:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(208, 214, 224, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(216, 222, 232, 0.22);
   color: var(--text);
 }
 
 .zc-button-primary {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .zc-button-primary:hover,
 .zc-button-primary:focus-visible {
   transform: translateY(-1px);
   box-shadow:
-    0 18px 34px rgba(0, 0, 0, 0.34),
-    0 0 0 1px rgba(241, 75, 95, 0.18);
+    0 18px 36px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(241, 75, 95, 0.16);
 }
 
 .zc-button-secondary {
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .zc-button-secondary:hover,
 .zc-button-secondary:focus-visible {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(241, 75, 95, 0.34);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(241, 75, 95, 0.22);
 }
 
 .crt-shell {
@@ -219,11 +239,12 @@ textarea::placeholder {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.03)),
-    linear-gradient(90deg, rgba(177, 18, 38, 0.12), transparent 18%, transparent 82%, rgba(177, 18, 38, 0.08));
+    radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.05), transparent 28%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025), transparent 16%, transparent 84%, rgba(255, 255, 255, 0.02)),
+    linear-gradient(90deg, rgba(177, 18, 38, 0.08), transparent 18%, transparent 82%, rgba(177, 18, 38, 0.05));
   pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 0.45;
+  opacity: 0.32;
   z-index: 0;
 }
 
@@ -233,21 +254,21 @@ textarea::placeholder {
   inset: 0;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.03) 0,
-    rgba(255, 255, 255, 0.03) 1px,
+    rgba(255, 255, 255, 0.018) 0,
+    rgba(255, 255, 255, 0.018) 1px,
     transparent 1px,
-    transparent 6px
+    transparent 8px
   );
   pointer-events: none;
-  opacity: 0.22;
+  opacity: 0.12;
   z-index: 0;
 }
 
 .tactical-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 .telemetry-scan {
@@ -262,10 +283,10 @@ textarea::placeholder {
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(241, 75, 95, 0.18) 48%,
+    rgba(255, 255, 255, 0.09) 48%,
     transparent 52%
   );
-  animation: scan-sweep 8s linear infinite;
+  animation: scan-sweep 12s linear infinite;
   pointer-events: none;
 }
 
@@ -295,9 +316,48 @@ textarea::placeholder {
 
 .shadow-telemetry {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 24px 60px rgba(0, 0, 0, 0.55);
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 24px 56px rgba(0, 0, 0, 0.44);
+}
+
+.zc-glass {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    rgba(12, 14, 18, 0.5);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 48px rgba(0, 0, 0, 0.26);
+}
+
+.zc-glass-strong {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    var(--panel-strong);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+:where(
+  [class*='bg-black/20'],
+  [class*='bg-black/25'],
+  [class*='bg-black/30'],
+  [class*='bg-black/35'],
+  [class*='bg-black/40'],
+  [class*='bg-black/45']
+) {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    rgba(10, 12, 16, 0.44);
+  backdrop-filter: blur(14px) saturate(128%);
+  -webkit-backdrop-filter: blur(14px) saturate(128%);
 }
 
 .system-boot-line {
@@ -348,6 +408,27 @@ textarea::placeholder {
   border-radius: 9999px;
   background: var(--accent-strong);
   box-shadow: 0 0 0 4px rgba(241, 75, 95, 0.12);
+}
+
+.zc-field {
+  border: 1px solid rgba(216, 222, 232, 0.12);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+    rgba(0, 0, 0, 0.28);
+  color: var(--text);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.zc-field:focus {
+  border-color: rgba(241, 75, 95, 0.38);
+  box-shadow:
+    0 0 0 1px rgba(241, 75, 95, 0.18),
+    0 10px 28px rgba(0, 0, 0, 0.26);
 }
 
 .funding-summary-page {

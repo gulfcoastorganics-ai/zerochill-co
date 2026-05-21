@@ -18,6 +18,7 @@ ZeroChill Co is a sovereign AI infrastructure brand presented through a cinemati
 - No heavy animation libraries or video backgrounds
 - Private funding summary route added for client review and Phase 2 approval
 - Interface polish milestone added for command-interface hierarchy and visual refinement
+- Design maturity pass moved the UI toward liquid-glass product presentation with softer panels and stronger spacing discipline
 
 ## Funding Status
 
@@ -31,7 +32,7 @@ ZeroChill Co is a sovereign AI infrastructure brand presented through a cinemati
 - The home page now uses animated terminal boot styling.
 - Hardware concept panels and deployment architecture visuals reinforce the infrastructure story.
 - The footer and overlays are tuned for a premium, tactical presentation.
-- Shared panel, nav, and form styles now aim for a more professional-grade command surface.
+- Shared panel, nav, and form styles now aim for a more professional-grade command surface with liquid-glass treatment.
 
 ## Internal Handling
 

@@ -37,6 +37,11 @@
 - Prefer consistent section rhythm: headline, subcopy, then structured content blocks.
 - Use status pills, command ribbons, and thin border callouts for operational context.
 - Keep print-friendly pages clean and high-contrast when they need to be saved or shared.
+- Prefer liquid-glass surfaces for primary containers: translucent panels, layered blur, soft highlights, and restrained shadow depth.
+- Use obsidian, graphite, slate, and steel as the structural palette, with crimson reserved for control states and focal signals.
+- Keep panel borders subtle and consistent; avoid stacked borders, neon glows, and noisy scanline treatment.
+- Let typography and spacing do most of the work. The interface should read as premium product design, not cyberpunk decoration.
+- Use glass utility classes or equivalent shared primitives for repeat surfaces instead of hand-tuning every card.
 
 ## Accessibility Rules
 

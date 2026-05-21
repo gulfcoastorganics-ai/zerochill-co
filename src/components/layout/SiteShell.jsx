@@ -7,10 +7,10 @@ function NavItem({ to, children }) {
       to={to}
       className={({ isActive }) =>
         [
-          'zc-nav-link rounded-none border px-3 py-2 text-xs uppercase tracking-[0.22em] transition-colors hover:text-[color:var(--text)] focus-visible:text-[color:var(--text)]',
+          'zc-nav-link rounded-full border px-3 py-2 text-xs uppercase tracking-[0.22em] transition-colors hover:text-[color:var(--text)] focus-visible:text-[color:var(--text)]',
           isActive
-            ? 'border-[color:var(--line)] bg-white/5 text-[color:var(--text)]'
-            : 'border-transparent text-[color:var(--text-dim)] hover:border-[color:var(--line-soft)] hover:bg-white/[0.03]',
+            ? 'border-[color:var(--line)] bg-white/[0.06] text-[color:var(--text)]'
+            : 'border-transparent text-[color:var(--text-dim)] hover:border-[color:var(--line-soft)] hover:bg-white/[0.04]',
         ].join(' ')
       }
     >
@@ -28,7 +28,7 @@ export default function SiteShell() {
       <div className="pointer-events-none fixed inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(241,75,95,0.85),rgba(255,255,255,0.14),transparent)]" />
       <div className="pointer-events-none fixed inset-0 opacity-[0.035] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:4px_4px]" />
 
-      <header className="sticky top-0 z-40 border-b border-[color:var(--line)] bg-[rgba(5,5,5,0.84)] backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-[color:var(--line)] bg-[rgba(7,8,10,0.72)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
           <NavLink to="/" className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center border border-[color:var(--line)] bg-white/5 text-sm font-bold tracking-[0.24em] text-[color:var(--accent)]">
@@ -67,7 +67,7 @@ export default function SiteShell() {
         </div>
       </main>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[color:var(--line)] bg-[rgba(5,5,5,0.95)] px-4 py-3 backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[color:var(--line)] bg-[rgba(7,8,10,0.9)] px-4 py-3 backdrop-blur-xl md:hidden">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3">
           <NavLink
             to="/products"
