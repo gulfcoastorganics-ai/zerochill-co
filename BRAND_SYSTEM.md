@@ -14,6 +14,13 @@ The goal is a serious infrastructure workspace:
 - precise spacing
 - restrained signal accents
 
+Final polish pass:
+- soften panels until they feel composed rather than armored
+- prefer quiet spacing over dense card stacks
+- keep uppercase reserved for labels, not body copy
+- use monospace only for operational data and state
+- make hover states barely perceptible
+
 ## Color System
 
 - Background: near-black graphite, not pure black
@@ -48,6 +55,7 @@ The goal is a serious infrastructure workspace:
 - Avoid oversized hero treatments except for the overview statement
 - Keep forms clean and direct
 - Preserve print-friendly treatment for private documents
+- Avoid stacked utility chrome that makes the interface feel constructed from parts
 
 ## Accessibility Rules
 

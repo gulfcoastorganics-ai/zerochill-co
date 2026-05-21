@@ -10,6 +10,8 @@
 - Overview, product, docs, preorder, mission control, and review pages were rewritten to feel like app screens.
 - The preorder form was simplified into a cleaner intake flow.
 - Crimson is now a signal color only.
+- Shared components were softened so heading rhythm, panel weight, and hover states feel more premium.
+- Uppercase usage was reduced where it did not improve hierarchy.
 
 ## What Not To Copy
 
@@ -17,6 +19,7 @@
 - Do not mirror Linear spacing ratios or proprietary component treatment exactly.
 - Do not introduce bright gradient hero effects or noisy cyberpunk overlays.
 - Do not turn the shell back into a marketing page with oversized hero sections and decorative cards.
+- Do not reintroduce dense chrome stacks or fake control-room theatrics.
 
 ## QA Checklist
 

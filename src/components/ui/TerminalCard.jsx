@@ -4,12 +4,12 @@ export default function TerminalCard({ label, title, command, body, children, cl
   return (
     <Panel className={`zc-interactive p-6 ${className}`}>
       {label ? (
-        <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+        <div className="text-[0.66rem] tracking-[0.14em] text-[color:var(--text-faint)]">
           {label}
         </div>
       ) : null}
       {title ? (
-        <h3 className="mt-3 text-[1.05rem] font-semibold leading-[1.15] tracking-[-0.03em] text-[color:var(--text)] sm:text-[1.2rem]">
+        <h3 className="mt-3 text-[1.05rem] font-medium leading-[1.2] tracking-[-0.03em] text-[color:var(--text)] sm:text-[1.16rem]">
           {title}
         </h3>
       ) : null}

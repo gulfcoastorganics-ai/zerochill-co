@@ -3,10 +3,10 @@ export default function SectionHeader({ eyebrow, title, copy, align = 'left' }) 
     <div
       className={`${align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'}`}
     >
-      <p className="inline-flex rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] px-2.5 py-1 text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
+      <p className="inline-flex rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] px-2.5 py-1 text-[0.64rem] tracking-[0.12em] text-[color:var(--text-faint)]">
         {eyebrow}
       </p>
-      <h2 className="mt-4 text-2xl font-semibold leading-[1.08] tracking-[-0.04em] text-[color:var(--text)] sm:text-4xl lg:text-5xl">
+      <h2 className="mt-4 text-2xl font-medium leading-[1.12] tracking-[-0.035em] text-[color:var(--text)] sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {copy ? (

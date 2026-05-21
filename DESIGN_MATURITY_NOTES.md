@@ -2,6 +2,13 @@
 
 ZeroChill has moved from a launch-page aesthetic to a dark product workspace.
 
+This final pass focuses on the last mile of polish:
+- calmer hierarchy
+- softer materials
+- less repeated chrome
+- more editorial spacing
+- fewer terminal-style cues outside of actual operational data
+
 ## What Changed
 
 - Replaced the top-heavy marketing layout with an app-like shell.
@@ -12,6 +19,7 @@ ZeroChill has moved from a launch-page aesthetic to a dark product workspace.
 - Tightened typography and spacing so product copy reads more like internal documentation.
 - Reworked overview, products, docs, mission control, preorder, and review routes into calmer workspace screens.
 - Refined the preorder form into a product intake surface with clearer labels and quieter status copy.
+- Softened the shell, sidebar, cards, and hover states so the interface reads more expensive and less assembled.
 
 ## What Stayed
 
