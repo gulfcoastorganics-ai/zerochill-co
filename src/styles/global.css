@@ -14,6 +14,7 @@
   --accent: #b33a44;
   --accent-soft: #d26c74;
   --focus-ring: rgba(211, 111, 120, 0.48);
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 @theme {
@@ -34,10 +35,10 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.05), transparent 22%),
-    radial-gradient(circle at 82% 0%, rgba(179, 58, 68, 0.11), transparent 19%),
-    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.035), transparent 22%),
-    linear-gradient(180deg, #090a0d 0%, #050608 100%);
+    radial-gradient(circle at 14% 12%, rgba(255, 255, 255, 0.055), transparent 18%),
+    radial-gradient(circle at 84% 10%, rgba(179, 58, 68, 0.14), transparent 20%),
+    radial-gradient(circle at 50% 102%, rgba(91, 183, 255, 0.15), transparent 24%),
+    linear-gradient(180deg, #06070a 0%, #040506 58%, #07080b 100%);
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.5;
@@ -92,6 +93,25 @@ textarea {
 
 .zc-page {
   animation: page-enter 280ms ease both;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.06em;
+}
+
+.zc-reveal {
+  animation: reveal-up 820ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+.zc-reveal-slow {
+  animation-duration: 1100ms;
+}
+
+.zc-glow-float {
+  animation: glow-float 12s ease-in-out infinite;
 }
 
 .zc-panel {
@@ -234,6 +254,41 @@ textarea {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes glow-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .zc-page,
+  .zc-reveal,
+  .zc-glow-float {
+    animation: none !important;
   }
 }
 

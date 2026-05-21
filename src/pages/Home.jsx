@@ -17,27 +17,18 @@ const storyPoints = [
   {
     eyebrow: 'What it is',
     title: 'A private AI product company with a sharper public surface.',
-    copy:
-      'ZeroChill now reads like a luxury digital magazine cover fused with a practical product landing page. It is designed to feel cinematic, premium, and easy to buy from.',
+    copy: 'ZeroChill reads like a luxury cover story fused with a product page.',
   },
   {
     eyebrow: 'Who it is for',
     title: 'Operators, founders, teams, and investors who want clarity fast.',
-    copy:
-      'The experience is built for people who need to understand the product quickly, trust the presentation, and move toward preorder without friction.',
+    copy: 'The page is built for fast trust, quick scanning, and low-friction preorder.',
   },
   {
     eyebrow: 'Why it feels different',
     title: 'Editorial hierarchy first, proof second, product evidence always visible.',
-    copy:
-      'Large type, split-screen rhythm, and restrained glass treatment carry the page. Bento cards stay as supporting evidence, not the main identity.',
+    copy: 'Large type and restrained glass carry the page. Proof stays in support.',
   },
-];
-
-const previewStats = [
-  { label: 'Runtime', value: 'Local-first' },
-  { label: 'Access', value: 'Preorder ready' },
-  { label: 'Support', value: 'Review workflow' },
 ];
 
 const proofCards = [
@@ -45,15 +36,13 @@ const proofCards = [
     span: 'lg:col-span-7',
     eyebrow: 'Product preview',
     title: 'Cinematic product window',
-    copy:
-      'A floating preview stack hints at the app surface, access state, and review workflow without turning the page into a dashboard.',
+    copy: 'A floating preview hints at access, review, and the app surface.',
   },
   {
     span: 'lg:col-span-5',
     eyebrow: 'Key metric',
     title: 'High-trust, low-noise presentation',
-    copy:
-      'The composition reduces clutter, keeps the CTA visible, and uses dark glass to support a premium brand read.',
+    copy: 'Dark glass, clear CTAs, and tighter composition keep the read premium.',
     metrics: [
       { label: 'Cards', value: '5 supporting blocks' },
       { label: 'CTA', value: 'Mint-led conversion' },
@@ -64,54 +53,43 @@ const proofCards = [
     span: 'lg:col-span-4',
     eyebrow: 'Signature feature',
     title: 'Editorial split-screen hero',
-    copy:
-      'The opening section behaves like a magazine cover: one side carries the story, the other side carries the product atmosphere.',
+    copy: 'One side carries the story. The other carries atmosphere.',
   },
   {
     span: 'lg:col-span-4',
     eyebrow: 'Testimonial',
     title: 'Feels premium without losing speed',
-    copy:
-      '“The homepage finally feels like a premium product launch page instead of an app shell. The hierarchy is much clearer.”',
+    copy: '“It feels like a premium launch page instead of an app shell.”',
     attribution: 'Product review partner',
   },
   {
     span: 'lg:col-span-4',
     eyebrow: 'Workflow',
     title: 'Simple path to action',
-    copy:
-      'Visitors move from promise to proof to preorder without navigating a dense grid or excessive content blocks.',
+    copy: 'Visitors move from promise to proof to preorder without extra friction.',
   },
 ];
 
 const benefits = [
   {
     title: 'Sharper editorial hierarchy',
-    copy:
-      'Typography now does the heavy lifting. Headline scale, tighter rhythm, and calmer surfaces make the story more memorable.',
-    detail:
-      'The hero and story sections use size contrast, not decoration, to establish premium tone and conversion order.',
+    copy: 'Typography does the heavy lifting. Scale and rhythm do the rest.',
+    detail: 'Size contrast establishes tone and conversion order.',
   },
   {
     title: 'Bento cards as proof, not the thesis',
-    copy:
-      'The product cards remain, but they are reduced to concise evidence blocks that support the bigger narrative.',
-    detail:
-      'This keeps the page useful for quick scanning while preserving a more brand-forward, cinematic lead.',
+    copy: 'The cards remain, but only as evidence blocks.',
+    detail: 'That keeps the page scannable and brand-forward.',
   },
   {
     title: 'Conversion without clutter',
-    copy:
-      'Mint CTA accents stay consistent across the page, and the paths to preorder, review, and product detail remain clear.',
-    detail:
-      'Primary actions are placed early and repeated at the end so the page still performs like a landing page.',
+    copy: 'Mint accents stay consistent and the action paths stay clear.',
+    detail: 'Primary actions are placed early and repeated at the end.',
   },
   {
     title: 'Mobile-safe editorial stacking',
-    copy:
-      'The split-screen collapses into a readable single column, with spacing tuned so the cinematic feel survives on smaller screens.',
-    detail:
-      'Cards stack in a predictable order, keeping the experience controlled rather than crowded.',
+    copy: 'The split-screen collapses cleanly on smaller screens.',
+    detail: 'Cards stack predictably so the page stays controlled.',
   },
 ];
 
@@ -127,11 +105,11 @@ const proofLogos = ['Founders', 'Operators', 'Procurement', 'Security', 'Labs', 
 const beforeAfter = [
   {
     label: 'Before',
-    copy: 'Bento-heavy composition with a dashboard-like feel and denser supporting cards.',
+    copy: 'Bento-heavy composition with dashboard energy.',
   },
   {
     label: 'After',
-    copy: 'Editorial split-screen landing page with selective proof cards and stronger cinematic flow.',
+    copy: 'Editorial split-screen page with selective proof and stronger flow.',
   },
 ];
 
@@ -194,9 +172,9 @@ export default function Home() {
           </div>
         </Panel>
 
-        <section className="grid gap-6 lg:grid-cols-[1.06fr_0.94fr] lg:items-stretch">
-          <div className="flex flex-col justify-between gap-6">
-            <div className="flex flex-wrap gap-2">
+        <section className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-stretch">
+          <div className="flex flex-col justify-between gap-8">
+            <div className="flex flex-wrap gap-2 zc-reveal" style={{ '--reveal-delay': '40ms' }}>
               {workspaceStatus.map((signal) => (
                 <span
                   key={signal.label}
@@ -208,19 +186,18 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="max-w-3xl space-y-5">
+            <div className="max-w-3xl space-y-6 zc-reveal zc-reveal-slow" style={{ '--reveal-delay': '90ms' }}>
               <SectionEyebrow>Private AI product drop</SectionEyebrow>
-              <h1 className="text-4xl font-semibold tracking-[-0.07em] text-[color:var(--text)] sm:text-5xl lg:text-7xl">
+              <h1 className="font-display text-5xl leading-[0.92] text-[color:var(--text)] sm:text-6xl lg:text-8xl">
                 A dark luxury homepage for AI products that need to convert.
               </h1>
               <p className="max-w-2xl text-sm leading-8 text-[color:var(--text-muted)] sm:text-[0.98rem]">
-                ZeroChill now feels more like a cinematic magazine cover than a dashboard: editorial split
-                layout, spacious typography, glassy surfaces, and selective product evidence that moves
-                visitors toward preorder.
+                ZeroChill reads like a magazine cover: split composition, one accent, and product evidence
+                that feels expensive.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 zc-reveal" style={{ '--reveal-delay': '160ms' }}>
               <Link
                 to="/preorder"
                 className="inline-flex items-center justify-center rounded-full border border-[#9dffd0]/45 bg-[linear-gradient(135deg,#a8ffd5_0%,#7ef5ff_100%)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#06130d] shadow-[0_14px_34px_rgba(102,255,197,0.22)] hover:-translate-y-0.5"
@@ -235,7 +212,7 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 zc-reveal" style={{ '--reveal-delay': '220ms' }}>
               {heroSignals.map((signal) => (
                 <span
                   key={signal}
@@ -247,18 +224,21 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative min-h-[34rem] lg:min-h-full">
-            <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(circle_at_22%_20%,rgba(140,255,206,0.16),transparent_26%),radial-gradient(circle_at_80%_16%,rgba(138,125,255,0.24),transparent_22%),radial-gradient(circle_at_50%_100%,rgba(86,178,255,0.18),transparent_24%)] blur-3xl" />
+          <div className="relative min-h-[38rem] lg:min-h-full zc-reveal zc-reveal-slow" style={{ '--reveal-delay': '120ms' }}>
             <Panel className="relative h-full overflow-hidden p-4 sm:p-5">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(140,255,206,0.14),transparent_22%),radial-gradient(circle_at_88%_18%,rgba(132,123,255,0.18),transparent_20%),radial-gradient(circle_at_50%_110%,rgba(91,183,255,0.14),transparent_22%)]" />
+              <div className="pointer-events-none absolute left-[7%] top-[10%] h-56 w-56 rounded-full border border-white/10 bg-[radial-gradient(circle_at_32%_30%,rgba(255,255,255,0.24),rgba(255,255,255,0.08)_38%,rgba(132,123,255,0.2)_62%,rgba(0,0,0,0)_100%)] shadow-[0_0_90px_rgba(157,255,208,0.12)] zc-glow-float" />
+              <div className="pointer-events-none absolute right-[-8%] bottom-[-18%] h-80 w-80 rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(91,183,255,0.18),transparent_55%)] blur-3xl" />
+
               <div
                 id="product"
-                className="flex h-full min-h-[30rem] flex-col justify-between overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-6"
+                className="relative flex h-full min-h-[30rem] flex-col justify-between overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.085),rgba(255,255,255,0.03))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-6"
               >
                 <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
                   <div>
                     <SectionEyebrow>Live product system</SectionEyebrow>
-                    <div className="mt-3 text-sm text-[color:var(--text-muted)]">
-                      A floating preview panel for preorder, review, and product explanation.
+                    <div className="mt-2 text-sm text-[color:var(--text-muted)]">
+                      Moonlit depth for preorder, review, and product scope.
                     </div>
                   </div>
                   <span className="rounded-full border border-[#9dffd0]/30 bg-[#9dffd0]/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#aef8d0]">
@@ -266,33 +246,17 @@ export default function Home() {
                   </span>
                 </div>
 
-                <div className="mt-5 grid gap-4 sm:grid-cols-[1.06fr_0.94fr]">
+                <div className="mt-5 grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
                   <div className="rounded-[28px] border border-white/10 bg-[rgba(8,10,14,0.72)] p-4 sm:p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
-                          Visual panel
-                        </div>
-                        <h3 className="mt-2 max-w-sm text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)]">
-                          Product atmosphere, not dashboard noise.
-                        </h3>
-                      </div>
-                      <div className="h-14 w-14 rounded-3xl border border-white/10 bg-[radial-gradient(circle_at_30%_30%,rgba(157,255,208,0.5),transparent_40%),linear-gradient(135deg,rgba(155,184,255,0.22),rgba(181,156,255,0.2))]" />
+                    <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
+                      Visual anchor
                     </div>
-
-                    <div className="mt-5 space-y-3">
-                      {previewStats.map((row) => (
-                        <div
-                          key={row.label}
-                          className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
-                        >
-                          <span className="text-[0.66rem] uppercase tracking-[0.22em] text-[color:var(--text-faint)]">
-                            {row.label}
-                          </span>
-                          <span className="text-sm font-medium text-[color:var(--text)]">{row.value}</span>
-                        </div>
-                      ))}
+                    <div className="mt-4 flex aspect-square items-center justify-center rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.2),rgba(255,255,255,0.06)_26%,rgba(132,123,255,0.18)_58%,rgba(4,5,8,0.92)_100%)]">
+                      <div className="h-32 w-32 rounded-full border border-white/10 bg-[radial-gradient(circle_at_34%_32%,rgba(255,255,255,0.3),rgba(255,255,255,0.08)_40%,rgba(140,255,206,0.12)_70%,rgba(0,0,0,0)_100%)] shadow-[0_0_80px_rgba(140,255,206,0.14)]" />
                     </div>
+                    <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">
+                      A moonlike anchor gives the page a quieter center of gravity.
+                    </p>
                   </div>
 
                   <div className="grid gap-4">
@@ -326,8 +290,7 @@ export default function Home() {
                         Conversion strip
                       </div>
                       <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-                        Mint accents and a clear preorder path keep the page conversion-focused while the
-                        overall tone stays editorial and luxurious.
+                        Mint accents keep preorder visible without breaking the atmosphere.
                       </p>
                     </div>
                   </div>
@@ -337,39 +300,38 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="grid gap-6">
-          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div className="max-w-2xl">
+        <section className="grid gap-8">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div className="max-w-2xl zc-reveal" style={{ '--reveal-delay': '80ms' }}>
               <SectionEyebrow>Brand narrative</SectionEyebrow>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.06em] text-[color:var(--text)] sm:text-4xl">
+              <h2 className="font-display mt-3 text-3xl text-[color:var(--text)] sm:text-4xl">
                 Editorial by design, product-led by intent.
               </h2>
             </div>
-            <p className="max-w-3xl text-sm leading-8 text-[color:var(--text-muted)] sm:text-[0.98rem]">
-              This homepage is built to read like a feature spread. It explains the product in short,
-              confident blocks, keeps the atmosphere cinematic, and uses visual contrast to guide the eye
-              toward the product ladder and preorder actions.
+            <p className="max-w-3xl text-sm leading-8 text-[color:var(--text-muted)] sm:text-[0.98rem] zc-reveal" style={{ '--reveal-delay': '140ms' }}>
+              This homepage reads like a feature spread: short blocks, cinematic atmosphere, and visual
+              contrast that keeps the preorder path obvious.
             </p>
           </div>
 
           <div className="grid gap-5 lg:grid-cols-3">
             {storyPoints.map((point) => (
-              <Panel key={point.eyebrow} className="p-6 sm:p-7">
+              <Panel key={point.eyebrow} className="zc-reveal p-6 sm:p-7">
                 <SectionEyebrow>{point.eyebrow}</SectionEyebrow>
-                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)]">
+                <h3 className="font-display mt-4 text-2xl text-[color:var(--text)]">
                   {point.title}
                 </h3>
-                <p className="mt-4 text-sm leading-8 text-[color:var(--text-muted)]">{point.copy}</p>
+                <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">{point.copy}</p>
               </Panel>
             ))}
           </div>
         </section>
 
-        <section className="grid gap-5">
+        <section className="grid gap-6">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
+            <div className="zc-reveal" style={{ '--reveal-delay': '80ms' }}>
               <SectionEyebrow>Selective proof</SectionEyebrow>
-              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)] sm:text-3xl">
+              <h2 className="font-display mt-3 text-2xl text-[color:var(--text)] sm:text-3xl">
                 Bento cards that support the story.
               </h2>
             </div>
@@ -383,12 +345,12 @@ export default function Home() {
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-12">
             {proofCards.map((card) => (
-              <Panel key={card.title} className={`p-6 sm:p-7 ${card.span}`}>
+              <Panel key={card.title} className={`zc-reveal p-6 sm:p-7 ${card.span}`}>
                 <SectionEyebrow>{card.eyebrow}</SectionEyebrow>
-                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)]">
+                <h3 className="font-display mt-4 text-2xl text-[color:var(--text)]">
                   {card.title}
                 </h3>
-                <p className="mt-4 text-sm leading-8 text-[color:var(--text-muted)]">{card.copy}</p>
+                <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">{card.copy}</p>
 
                 {card.metrics ? (
                   <div className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -415,31 +377,29 @@ export default function Home() {
 
         <section id="features" className="grid gap-5">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
+            <div className="zc-reveal" style={{ '--reveal-delay': '80ms' }}>
               <SectionEyebrow>Feature deep dive</SectionEyebrow>
-              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)] sm:text-3xl">
+              <h2 className="font-display mt-3 text-2xl text-[color:var(--text)] sm:text-3xl">
                 Strong selling points, presented as editorial rows.
               </h2>
             </div>
-            <div className="text-sm text-[color:var(--text-muted)]">
-              Cleaner, cinematic, and easier to scan.
-            </div>
+            <div className="text-sm text-[color:var(--text-muted)]">Cleaner, cinematic, and easier to scan.</div>
           </div>
 
           <div className="grid gap-5">
             {benefits.map((benefit, index) => (
-              <Panel key={benefit.title} className="p-6 sm:p-7">
+              <Panel key={benefit.title} className="zc-reveal p-6 sm:p-7" style={{ '--reveal-delay': `${index * 60 + 120}ms` }}>
                 <div className="grid gap-5 lg:grid-cols-[0.42fr_0.58fr] lg:items-start">
                   <div>
                     <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
                       0{index + 1}
                     </div>
-                    <h3 className="mt-4 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)] sm:text-3xl">
+                    <h3 className="font-display mt-4 text-2xl text-[color:var(--text)] sm:text-3xl">
                       {benefit.title}
                     </h3>
                   </div>
                   <div className="space-y-3">
-                    <p className="text-sm leading-8 text-[color:var(--text-muted)]">{benefit.copy}</p>
+                    <p className="text-sm leading-7 text-[color:var(--text-muted)]">{benefit.copy}</p>
                     <div className="rounded-3xl border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-[color:var(--text-muted)]">
                       {benefit.detail}
                     </div>
@@ -452,9 +412,9 @@ export default function Home() {
 
         <section id="pricing" className="grid gap-5">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
+            <div className="zc-reveal" style={{ '--reveal-delay': '80ms' }}>
               <SectionEyebrow>Pricing</SectionEyebrow>
-              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)] sm:text-3xl">
+              <h2 className="font-display mt-3 text-2xl text-[color:var(--text)] sm:text-3xl">
                 Product tiers with a restrained, premium presentation.
               </h2>
             </div>
@@ -465,11 +425,11 @@ export default function Home() {
 
           <div className="grid gap-5 lg:grid-cols-2">
             {productTiers.map((tier) => (
-              <Panel key={tier.name} className="p-6 sm:p-7">
+              <Panel key={tier.name} className="zc-reveal p-6 sm:p-7">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <SectionEyebrow>{tier.badge}</SectionEyebrow>
-                    <h3 className="mt-3 text-xl font-semibold tracking-[-0.04em] text-[color:var(--text)]">
+                    <h3 className="font-display mt-3 text-xl text-[color:var(--text)]">
                       {tier.name}
                     </h3>
                   </div>
@@ -511,9 +471,9 @@ export default function Home() {
         </section>
 
         <section id="reviews" className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-          <Panel className="p-6 sm:p-7">
+          <Panel className="zc-reveal p-6 sm:p-7" style={{ '--reveal-delay': '80ms' }}>
             <SectionEyebrow>Proof spread</SectionEyebrow>
-            <h2 className="mt-4 text-2xl font-semibold tracking-[-0.05em] text-[color:var(--text)]">
+            <h2 className="font-display mt-4 text-2xl text-[color:var(--text)]">
               Reviews, stats, and visual proof in a magazine-style block.
             </h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -547,7 +507,7 @@ export default function Home() {
           </Panel>
 
           <div className="grid gap-5">
-            <Panel className="p-6 sm:p-7">
+            <Panel className="zc-reveal p-6 sm:p-7" style={{ '--reveal-delay': '120ms' }}>
               <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
                 Pull quote
               </div>
@@ -560,7 +520,7 @@ export default function Home() {
               </p>
             </Panel>
 
-            <Panel className="p-6 sm:p-7">
+            <Panel className="zc-reveal p-6 sm:p-7" style={{ '--reveal-delay': '180ms' }}>
               <div className="grid gap-3 sm:grid-cols-2">
                 {beforeAfter.map((item) => (
                   <div key={item.label} className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
@@ -575,17 +535,17 @@ export default function Home() {
           </div>
         </section>
 
-        <Panel className="overflow-hidden p-6 sm:p-8 lg:p-10">
+        <Panel className="zc-reveal overflow-hidden p-6 sm:p-8 lg:p-10" style={{ '--reveal-delay': '100ms' }}>
           <div className="relative isolate grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(140,255,206,0.14),transparent_24%),radial-gradient(circle_at_90%_18%,rgba(132,123,255,0.16),transparent_20%),linear-gradient(135deg,rgba(255,255,255,0.02),transparent_40%)]" />
             <div className="relative max-w-3xl">
               <SectionEyebrow>Final CTA</SectionEyebrow>
-              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.055em] text-[color:var(--text)] sm:text-4xl">
+              <h2 className="font-display mt-4 text-3xl text-[color:var(--text)] sm:text-4xl">
                 Ready to move from interest to action?
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-8 text-[color:var(--text-muted)]">
-                Choose preorder, browse the product ladder, or step into the review route. The homepage
-                stays premium, cinematic, and conversion-focused through the last scroll.
+                Choose preorder, browse products, or step into the review route. The homepage stays quiet,
+                premium, and conversion-focused through the last scroll.
               </p>
             </div>
 
