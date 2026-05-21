@@ -113,20 +113,21 @@ textarea {
   animation: glow-float 12s ease-in-out infinite;
 }
 
-.home-mars-scene {
+.home-editorial-scene {
   position: relative;
   isolation: isolate;
 }
 
-.home-mars-scene__stars,
-.home-mars-scene__space,
-.home-mars-scene__ground,
-.home-mars-scene__plant {
+.home-editorial-scene__stars,
+.home-editorial-scene__space,
+.home-editorial-scene__ground,
+.home-editorial-scene__plant,
+.home-editorial-scene__vignette {
   position: absolute;
   pointer-events: none;
 }
 
-.home-mars-scene__stars {
+.home-editorial-scene__stars {
   inset: 0;
   z-index: -4;
   background:
@@ -144,7 +145,7 @@ textarea {
   opacity: 0.7;
 }
 
-.home-mars-scene__space {
+.home-editorial-scene__space {
   inset: 0;
   z-index: -3;
   background:
@@ -154,7 +155,7 @@ textarea {
     linear-gradient(180deg, #020204 0%, #040406 44%, #070608 62%, #0a0505 100%);
 }
 
-.home-mars-scene__ground {
+.home-editorial-scene__ground {
   left: -8%;
   right: -8%;
   bottom: -4%;
@@ -169,7 +170,7 @@ textarea {
   filter: saturate(1.08);
 }
 
-.home-mars-scene__ground::before {
+.home-editorial-scene__ground::before {
   content: '';
   position: absolute;
   inset: -2rem 0 0;
@@ -181,7 +182,7 @@ textarea {
   opacity: 0.9;
 }
 
-.home-mars-scene__plant {
+.home-editorial-scene__plant {
   left: 2%;
   bottom: 16vh;
   width: min(42vw, 38rem);
@@ -200,8 +201,8 @@ textarea {
   opacity: 0.9;
 }
 
-.home-mars-scene__plant::before,
-.home-mars-scene__plant::after {
+.home-editorial-scene__plant::before,
+.home-editorial-scene__plant::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -216,9 +217,17 @@ textarea {
   opacity: 0.9;
 }
 
-.home-mars-scene__plant::after {
+.home-editorial-scene__plant::after {
   transform: scaleX(-1) translateX(8%);
   opacity: 0.75;
+}
+
+.home-editorial-scene__vignette {
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 44%, rgba(1, 2, 4, 0.18) 74%, rgba(1, 2, 4, 0.46) 100%),
+    linear-gradient(90deg, rgba(1, 2, 4, 0.26), transparent 14%, transparent 74%, rgba(1, 2, 4, 0.24));
 }
 
 .home-left-glass {
@@ -298,22 +307,6 @@ textarea {
     linear-gradient(140deg, rgba(255, 255, 255, 0.2), transparent 28%, rgba(255, 255, 255, 0.05) 60%, transparent 82%),
     repeating-linear-gradient(180deg, rgba(13, 16, 20, 0.025) 0, rgba(13, 16, 20, 0.025) 1px, transparent 1px, transparent 10px);
   opacity: 0.32;
-}
-
-.home-reference-scene {
-  isolation: isolate;
-}
-
-.home-hotspot {
-  z-index: 20;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-}
-
-.home-hotspot:focus-visible {
-  box-shadow:
-    0 0 0 1px rgba(157, 255, 208, 0.68),
-    0 0 0 8px rgba(157, 255, 208, 0.18);
 }
 
 .zc-panel {
