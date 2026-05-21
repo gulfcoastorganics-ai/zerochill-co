@@ -300,6 +300,22 @@ textarea {
   opacity: 0.32;
 }
 
+.home-reference-scene {
+  isolation: isolate;
+}
+
+.home-hotspot {
+  z-index: 20;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+.home-hotspot:focus-visible {
+  box-shadow:
+    0 0 0 1px rgba(157, 255, 208, 0.68),
+    0 0 0 8px rgba(157, 255, 208, 0.18);
+}
+
 .zc-panel {
   position: relative;
   overflow: hidden;
