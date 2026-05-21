@@ -1,53 +1,81 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import Footer from '../components/layout/Footer';
-import SectionHeader from '../components/ui/SectionHeader';
-import TerminalCard from '../components/ui/TerminalCard';
+import Panel from '../components/ui/Panel';
 import PreorderForm from '../components/forms/PreorderForm';
-import { productTiers } from '../data/site';
+import { productTiers, preorderSidebarNotes } from '../data/site';
 
 export default function Preorder() {
   return (
     <>
       <Seo
         title="Preorder"
-        description="Store preorder interest locally and choose a ZeroChill Co product tier for the first production wave."
+        description="ZeroChill preorder page with a refined product form and quiet status copy."
       />
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
-        <SectionHeader
-          eyebrow="Access"
-          title="Preorder"
-          copy="No backend yet. Interest is staged locally in the browser so the first wave can be shaped without a cloud dependency."
-        />
 
-        <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
-          <a href="#preorder-form" className="zc-nav-link">Form</a>
-          <a href="#preorder-tiers" className="zc-nav-link">Tier map</a>
-          <Link to="/products" className="zc-nav-link text-[color:var(--accent-strong)]">
-            Compare products
-          </Link>
-        </div>
-      </section>
-
-      <section id="preorder-form" className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8 lg:pb-24 scroll-mt-28">
-        <PreorderForm />
-      </section>
-
-      <section id="preorder-tiers" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20 scroll-mt-28">
-        <SectionHeader
-          eyebrow="Tier map"
-          title="Choose the right level of exposure."
-          copy="The preorder form aligns to the product tiers below so the interest signal is specific from the start."
-        />
-
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
-          {productTiers.map((tier) => (
-            <TerminalCard key={tier.name} label={tier.badge} title={tier.name} body={tier.description}>
-              <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
-                {tier.features.join(' // ')}
+      <section className="grid gap-5">
+        <Panel className="p-6 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+                Preorder
               </div>
-            </TerminalCard>
-          ))}
+              <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[color:var(--text)] sm:text-5xl">
+                Quiet, refined, and ready for review.
+              </h1>
+              <p className="mt-4 max-w-2xl text-sm leading-8 text-[color:var(--text-muted)]">
+                Interest is still captured through the existing API and email notification flow. The form now reads like a product intake screen instead of a campaign block.
+              </p>
+            </div>
+            <div className="space-y-3">
+              <Link
+                to="/products"
+                className="zc-button-secondary block border border-[color:var(--line)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]"
+              >
+                Compare products
+              </Link>
+              <Link
+                to="/review"
+                className="zc-button-secondary block border border-[color:var(--line)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]"
+              >
+                Review route
+              </Link>
+            </div>
+          </div>
+        </Panel>
+
+        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+          <PreorderForm />
+
+          <Panel className="p-6">
+            <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+              Form notes
+            </div>
+            <ul className="mt-4 space-y-3 text-sm leading-7 text-[color:var(--text-muted)]">
+              {preorderSidebarNotes.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent-soft)]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 border-t border-[color:var(--line-soft)] pt-4">
+              <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+                Tier map
+              </div>
+              <div className="mt-4 space-y-3">
+                {productTiers.map((tier) => (
+                  <div key={tier.name} className="rounded-xl border border-[color:var(--line-soft)] bg-white/[0.02] p-4">
+                    <div className="text-sm font-medium text-[color:var(--text)]">{tier.name}</div>
+                    <p className="mt-2 text-sm leading-7 text-[color:var(--text-muted)]">
+                      {tier.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Panel>
         </div>
       </section>
 

@@ -1,62 +1,93 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import Footer from '../components/layout/Footer';
-import AdminReviewDashboard from '../components/sections/AdminReviewDashboard';
 import Panel from '../components/ui/Panel';
+import TerminalCard from '../components/ui/TerminalCard';
+import { reviewSignals } from '../data/site';
+
+const reviewItems = [
+  'Homepage now reads as an overview dashboard instead of a launch banner.',
+  'Product pages are indexed like a small app, not a promotional carousel.',
+  'The preorder flow keeps the existing API and email notification behavior.',
+  'The private funding route remains hidden from public navigation.',
+];
 
 export default function Review() {
   return (
     <>
       <Seo
         title="Client Review"
-        description="Client-facing review surface for ZeroChill Co with a discreet path to the private continuation summary."
+        description="Review surface for ZeroChill Co with a discreet path to the private continuation summary."
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
-        <Panel className="shadow-telemetry p-6">
-          <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
+      <section className="grid gap-5">
+        <Panel className="p-6 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
                 Review summary
               </div>
-              <h1 className="mt-4 text-4xl font-black uppercase tracking-[-0.04em] text-[color:var(--text)] sm:text-6xl">
-                Review the build, then open the private summary.
+              <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[color:var(--text)] sm:text-5xl">
+                A cleaner build with a private continuation path.
               </h1>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-[color:var(--text-muted)]">
-                The site is live and operational. The next step is to review the private continuation summary for domain, database, verification, assets, and ongoing development.
+              <p className="mt-4 max-w-3xl text-sm leading-8 text-[color:var(--text-muted)]">
+                The site is live and routed. This review page reflects the new workspace layout while preserving the private funding continuation route behind the scenes.
               </p>
             </div>
-            <Link
-              to="/funding-summary"
-              className="text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)] underline decoration-[color:var(--accent-strong)] decoration-1 underline-offset-4"
-            >
-              Private funding summary
-            </Link>
-          </div>
-        </Panel>
-      </section>
-
-      <AdminReviewDashboard />
-
-      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8 lg:pb-24">
-        <Panel className="shadow-telemetry p-6">
-          <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-                Direct action
-              </div>
-              <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-                If the build should continue, the private summary contains the phase options and next approval steps.
-              </p>
+            <div className="space-y-3">
+              {reviewSignals.map((signal) => (
+                <div key={signal.label} className="flex items-center justify-between rounded-xl border border-[color:var(--line-soft)] bg-white/[0.02] px-4 py-3">
+                  <span className="text-[0.66rem] uppercase tracking-[0.26em] text-[color:var(--text-faint)]">
+                    {signal.label}
+                  </span>
+                  <span className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-[color:var(--text)]">
+                    {signal.value}
+                  </span>
+                </div>
+              ))}
             </div>
-            <Link
-              to="/funding-summary"
-              className="text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)] underline decoration-[color:var(--accent-strong)] decoration-1 underline-offset-4"
-            >
-              View private summary
-            </Link>
           </div>
         </Panel>
+
+        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+          <TerminalCard
+            label="What changed"
+            title="Layout discipline"
+            body="The visual language is quieter: dark matte shell, centered content, and minimal borders."
+          >
+            <ul className="mt-5 space-y-3 border-t border-[color:var(--line-soft)] pt-4 text-sm leading-7 text-[color:var(--text-muted)]">
+              {reviewItems.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent-soft)]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </TerminalCard>
+
+          <Panel className="p-6">
+            <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+              Private path
+            </div>
+            <p className="mt-4 text-sm leading-8 text-[color:var(--text-muted)]">
+              The continuation summary remains hidden from public navigation. It is still reachable through the review workflow and preserved as a private route.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                to="/funding-summary"
+                className="zc-button-secondary border border-[color:var(--line)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]"
+              >
+                Private funding summary
+              </Link>
+              <Link
+                to="/preorder"
+                className="zc-button-primary border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-black"
+              >
+                Preorder
+              </Link>
+            </div>
+          </Panel>
+        </div>
       </section>
 
       <Footer />

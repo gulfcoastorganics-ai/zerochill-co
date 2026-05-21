@@ -1,37 +1,32 @@
 import Seo from '../components/Seo';
 import Footer from '../components/layout/Footer';
-import SectionHeader from '../components/ui/SectionHeader';
-import TerminalCard from '../components/ui/TerminalCard';
 import Panel from '../components/ui/Panel';
-import {
-  docsGatewayEntries,
-  docsStatusPanel,
-  docsRoadmap,
-} from '../data/site';
+import TerminalCard from '../components/ui/TerminalCard';
+import { docsGatewayCards, docsStatusPanel, docsRoadmap } from '../data/site';
 
 const docSections = [
   {
     id: 'zero-state-architecture',
     title: 'Zero-State Architecture',
-    label: 'ARCHITECTURE',
+    label: 'Architecture',
     summary:
-      'A local-first operating structure built around edge nodes, offline inference clusters, relay topology, tactical workstations, and secure edge compute.',
+      'A local-first operating structure built around edge nodes, offline inference, relay topology, and operator-owned controls.',
     excerpt:
       '$ node local --role primary\n$ inference offline --policy strict\n$ relay sync --approved only',
   },
   {
     id: 'offline-inference-doctrine',
     title: 'Offline Inference Doctrine',
-    label: 'DOCTRINE',
+    label: 'Doctrine',
     summary:
-      'Inference should remain functional in degraded networks, restricted facilities, and disconnected environments without changing the operator model.',
+      'Inference should remain functional in degraded networks, restricted facilities, and disconnected environments.',
     excerpt:
       '$ doctrine apply --offline-first\n$ data boundary --retain local\n$ transport --optional true',
   },
   {
     id: 'edge-sovereignty-model',
     title: 'Edge Sovereignty Model',
-    label: 'SOVEREIGNTY',
+    label: 'Sovereignty',
     summary:
       'Sovereignty at the edge means the operator owns the compute boundary, the governance lane, and the release cadence.',
     excerpt:
@@ -40,9 +35,9 @@ const docSections = [
   {
     id: 'deployment-topology',
     title: 'Deployment Topology',
-    label: 'TOPOLOGY',
+    label: 'Topology',
     summary:
-      'A segmented deployment pattern that keeps the workstation, inference node, relay system, and secure edge compute in narrow, explicit roles.',
+      'A segmented deployment pattern that keeps the workstation, inference node, relay system, and secure edge roles explicit.',
     excerpt:
       '$ topology render\n> workstation -> local node -> relay systems -> secure edge\n> all lanes explicit',
   },
@@ -53,37 +48,55 @@ export default function Docs() {
     <>
       <Seo
         title="Docs"
-        description="ZeroChill Co documentation gateway for architecture, inference doctrine, edge sovereignty, and deployment topology."
+        description="ZeroChill documentation gateway with a Linear-inspired layout discipline and readable status surfaces."
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
-        <SectionHeader
-          eyebrow="Documentation"
-          title="Docs Gateway"
-          copy="ZeroChill Co technical references for operators, implementers, and deployment owners."
-        />
+      <section className="grid gap-5">
+        <Panel className="p-6 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+                Documentation gateway
+              </div>
+              <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[color:var(--text)] sm:text-5xl">
+                Workspace docs with cleaner rails.
+              </h1>
+              <p className="mt-4 max-w-2xl text-sm leading-8 text-[color:var(--text-muted)]">
+                The docs page now feels like a product workspace: compact reference cards, a quiet status rail, and readable content blocks instead of a launch banner.
+              </p>
+            </div>
+            <Panel className="p-4">
+              <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+                Status rail
+              </div>
+              <div className="mt-4 space-y-3">
+                {docsStatusPanel.map((signal) => (
+                  <div key={signal.label} className="flex items-center justify-between border-b border-[color:var(--line-soft)] pb-3">
+                    <span className="text-[0.66rem] uppercase tracking-[0.26em] text-[color:var(--text-dim)]">
+                      {signal.label}
+                    </span>
+                    <span className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-[color:var(--text)]">
+                      {signal.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          </div>
+        </Panel>
 
-        <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
-          <a href="#docs-gateway" className="zc-nav-link">Gateway</a>
-          <a href="#docs-status" className="zc-nav-link">Status</a>
-          <a href="#docs-reference" className="zc-nav-link">Reference</a>
-        </div>
-
-        <div id="docs-gateway" className="mt-10 grid gap-5 lg:grid-cols-2 scroll-mt-28">
-          {docsGatewayEntries.map((entry) => (
+        <div className="grid gap-5 lg:grid-cols-2">
+          {docsGatewayCards.map((card) => (
             <TerminalCard
-              key={entry.title}
-              label="REFERENCE"
-              title={entry.title}
-              body={entry.summary}
+              key={card.title}
+              label="Gateway"
+              title={card.title}
+              body={card.summary}
             >
-              <pre className="mt-5 overflow-x-auto border border-[color:var(--line-soft)] bg-black/40 p-4 font-mono text-xs leading-7 text-[color:var(--accent-strong)]">
-                {entry.excerpt}
-              </pre>
               <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4">
                 <a
-                  href={entry.href}
-                  className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)] underline decoration-[color:var(--accent)] decoration-1 underline-offset-4 hover:text-[color:var(--text)]"
+                  href={card.href}
+                  className="text-xs uppercase tracking-[0.26em] text-[color:var(--text-dim)] underline decoration-[color:var(--accent)] decoration-1 underline-offset-4"
                 >
                   Open section
                 </a>
@@ -93,69 +106,55 @@ export default function Docs() {
         </div>
       </section>
 
-      <section id="docs-status" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
-        <SectionHeader
-          eyebrow="Documentation status"
-          title="Current state"
-          copy="The documentation layer is static, readable, and aligned with the current build. It is ready to expand into deeper technical references."
-        />
-
-        <div className="mt-8 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-          <Panel className="shadow-telemetry p-6">
-            <div className="grid gap-3">
-              {docsStatusPanel.map((signal) => (
-                <div key={signal.label} className="flex items-center justify-between border-b border-[color:var(--line-soft)] pb-3">
-                  <span className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
-                    {signal.label}
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--text)]">
-                    {signal.value}
-                  </span>
+      <section className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <Panel className="p-6">
+          <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+            Roadmap
+          </div>
+          <div className="mt-4 space-y-3">
+            {docsRoadmap.map((item, index) => (
+              <div key={item} className="rounded-xl border border-[color:var(--line-soft)] bg-white/[0.02] p-4">
+                <div className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-[color:var(--text-dim)]">
+                  0{index + 1}
                 </div>
-              ))}
-            </div>
-            <p className="mt-5 text-sm leading-7 text-[color:var(--text-muted)]">
-              The docs are intentionally concise and infrastructure-oriented. They are written for review, implementation, and deployment ownership.
-            </p>
-          </Panel>
+                <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </Panel>
 
-          <Panel className="shadow-telemetry p-6">
-            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-              Implementation roadmap
-            </div>
-            <div className="mt-5 space-y-3">
-              {docsRoadmap.map((item, index) => (
-                <div key={item} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
-                  <div className="font-mono text-xs uppercase tracking-[0.28em] text-[color:var(--accent-strong)]">
-                    0{index + 1}
+        <Panel className="p-6">
+          <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
+            Reference docs
+          </div>
+          <div className="mt-4 grid gap-4">
+            {docSections.map((doc) => (
+              <div key={doc.id} className="rounded-xl border border-[color:var(--line-soft)] bg-white/[0.02] p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <div className="text-sm font-medium text-[color:var(--text)]">{doc.title}</div>
+                    <div className="mt-1 text-[0.66rem] uppercase tracking-[0.28em] text-[color:var(--text-faint)]">
+                      {doc.label}
+                    </div>
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">{item}</p>
+                  <a
+                    href={`#${doc.id}`}
+                    className="text-[0.66rem] uppercase tracking-[0.24em] text-[color:var(--text-dim)]"
+                  >
+                    Jump
+                  </a>
                 </div>
-              ))}
-            </div>
-          </Panel>
-        </div>
-      </section>
-
-      <section id="docs-reference" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
-        <SectionHeader
-          eyebrow="Reference docs"
-          title="Readable by operators."
-          copy="Each document below provides a concise technical summary, terminal-style excerpt, and direct path into the framework."
-        />
-
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
-          {docSections.map((doc) => (
-            <TerminalCard key={doc.id} label={doc.label} title={doc.title} body={doc.summary}>
-              <pre
-                id={doc.id}
-                className="mt-5 overflow-x-auto border border-[color:var(--line-soft)] bg-black/40 p-4 font-mono text-xs leading-7 text-[color:var(--accent-strong)]"
-              >
-                {doc.excerpt}
-              </pre>
-            </TerminalCard>
-          ))}
-        </div>
+                <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">{doc.summary}</p>
+                <pre
+                  id={doc.id}
+                  className="mt-4 overflow-x-auto rounded-xl border border-[color:var(--line-soft)] bg-black/20 p-4 font-mono text-xs leading-7 text-[color:var(--accent-soft)]"
+                >
+                  {doc.excerpt}
+                </pre>
+              </div>
+            ))}
+          </div>
+        </Panel>
       </section>
 
       <Footer />

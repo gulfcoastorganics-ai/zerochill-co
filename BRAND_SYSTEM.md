@@ -1,70 +1,72 @@
 # Brand System
 
+## Visual Direction
+
+ZeroChill now uses a Linear-inspired dark product interface as a reference point for discipline, not identity.
+
+The goal is a serious infrastructure workspace:
+- dark matte shell
+- fixed left sidebar
+- centered content column
+- optional right context rail
+- quiet active states
+- minimal borders
+- precise spacing
+- restrained signal accents
+
 ## Color System
 
-- Obsidian black: `#050505`
-- Deep charcoal: `#0c0c0d`
-- Crimson accent: `#b11226`
-- Bright crimson signal: `#f14b5f`
-- Primary text: `#f5f3ef`
-- Secondary text: muted gray-green neutrals around the UI surface
-- Steel border tone: use cool gray accents sparingly for structure and status
+- Background: near-black graphite, not pure black
+- Surfaces: charcoal and slate with very low contrast layering
+- Borders: thin cool-gray lines at low opacity
+- Text: soft white for primary reading, muted gray for secondary copy
+- Accent: crimson only for small signal states, not as a dominant theme
 
 ## Typography Rules
 
-- Use a premium sans-serif default for general reading.
-- Reserve monospaced typography for operational data, commands, timestamps, and machine states.
-- Keep headlines uppercase and heavy, but let spacing and weight carry the hierarchy.
-- Use moderate tracking for labels and signals; do not let every line feel like a terminal prompt.
-- Keep body copy short, direct, and legible.
+- Use system sans for all primary reading
+- Reserve monospace for metadata, status labels, and command fragments
+- Prefer sentence case or light-weight section labels over all-caps everywhere
+- Keep paragraphs readable with comfortable line length and line-height
 
 ## Tone Rules
 
-- Hardened
-- Tactical
-- Industrial
-- Cinematic
-- Anti-corporate
-- Minimal
-- Sovereign
+- Calm
+- Technical
+- Controlled
+- Product-oriented
+- Operator-owned
+- Readable under pressure
 
-## UI Component Rules
+## UI Rules
 
-- Use grid-based panels and hard borders.
-- Favor compact terminal cards over soft marketing sections.
-- Keep calls to action sharp and limited.
-- Use crimson only for emphasis, state, and signal.
-- Keep motion minimal or absent.
-- Prefer consistent section rhythm: headline, subcopy, then structured content blocks.
-- Use status pills, command ribbons, and thin border callouts for operational context.
-- Keep print-friendly pages clean and high-contrast when they need to be saved or shared.
-- Prefer liquid-glass surfaces for primary containers: translucent panels, layered blur, soft highlights, and restrained shadow depth.
-- Use the material levels consistently:
-  - background atmosphere
-  - low glass
-  - raised glass
-  - interactive glass
-  - command module
-- Use obsidian, graphite, slate, and steel as the structural palette, with crimson reserved for control states and focal signals.
-- Keep panel borders subtle and consistent; avoid stacked borders, neon glows, and noisy scanline treatment.
-- Let typography and spacing do most of the work. The interface should read as premium product design, not cyberpunk decoration.
-- Use glass utility classes or equivalent shared primitives for repeat surfaces instead of hand-tuning every card.
+- Lead with layout discipline, not effects
+- Keep content in a centered working column
+- Let the sidebar organize the app, not decorate it
+- Keep right-rail context secondary and optional
+- Use borders and spacing before shadows or glow
+- Avoid oversized hero treatments except for the overview statement
+- Keep forms clean and direct
+- Preserve print-friendly treatment for private documents
 
 ## Accessibility Rules
 
-- Preserve strong focus-visible states on all interactive elements.
-- Keep contrast safe on dark backgrounds.
-- Avoid horizontal overflow at mobile widths.
-- Use readable line lengths on product and dashboard pages.
-- Respect reduced-motion preferences.
+- Maintain strong focus-visible states
+- Keep contrast safe on dark backgrounds
+- Avoid horizontal overflow on mobile
+- Respect readable line length
+- Avoid motion that adds no information
 
-## Forbidden Generic SaaS Patterns
+## What Not To Copy
 
-- Rounded pastel cards
-- Soft gradient hero blobs
-- Gated marketing fluff
-- Generic Inter/Roboto/Arial presentation
-- Floating glassmorphism dashboards
-- Decorative animation for its own sake
-- Overexplained enterprise copy
-- “Book a demo” filler language with no operator value
+- Linear branding, logo, or exact wording
+- Proprietary layout details, spacing ratios, or component styling
+- Bright animated gradients and cyberpunk effects
+- Busy scanlines, neon glow, or decorative noise
+- Generic SaaS landing-page patterns
+
+## Private Surfaces
+
+- `/funding-summary` remains private and is not exposed in public navigation
+- Print styles on the funding summary must remain intact
+- Preorder routing, notifications, and payment behavior remain unchanged

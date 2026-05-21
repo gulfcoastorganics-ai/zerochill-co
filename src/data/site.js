@@ -8,6 +8,139 @@ export const navItems = [
   { label: 'Preorder', to: '/preorder' },
 ];
 
+export const workspaceNavSections = [
+  {
+    title: 'Overview',
+    items: [{ label: 'Overview', to: '/' }],
+  },
+  {
+    title: 'Products',
+    items: [
+      { label: 'Products', to: '/products' },
+      { label: 'Lite', to: '/sovereign-zero-lite' },
+      { label: 'Core', to: '/sovereign-zero-core' },
+      { label: 'Blacksite', to: '/sovereign-zero-blacksite' },
+      { label: 'DevKit', to: '/zero-state-matrix-devkit' },
+    ],
+  },
+  {
+    title: 'Mission Control',
+    items: [{ label: 'Mission Control', to: '/zero-state-matrix' }],
+  },
+  {
+    title: 'Docs',
+    items: [{ label: 'Docs', to: '/docs' }],
+  },
+  {
+    title: 'Preorder',
+    items: [{ label: 'Preorder', to: '/preorder' }],
+  },
+  {
+    title: 'Review',
+    items: [{ label: 'Review', to: '/review' }],
+  },
+];
+
+export const workspaceStatus = [
+  { label: 'SYSTEM', value: 'LOCAL-FIRST / STABLE' },
+  { label: 'SURFACE', value: 'MATTE / MINIMAL / QUIET' },
+  { label: 'MODE', value: 'APP SHELL / OPERATIONS VIEW' },
+  { label: 'CTA', value: 'PREORDER / REVIEW READY' },
+];
+
+export const overviewCards = [
+  {
+    label: 'PROJECT',
+    title: 'Serious infrastructure, not launch theater.',
+    body:
+      'ZeroChill is now framed as a product workspace: a dark shell, disciplined navigation, and a reading experience that feels closer to an internal operating system than a landing page.',
+  },
+  {
+    label: 'SYSTEM STATE',
+    title: 'Operator-owned surface, narrow visual vocabulary.',
+    body:
+      'The interface keeps the signal tight: graphite surfaces, restrained accents, and a layout that favors hierarchy over spectacle.',
+  },
+  {
+    label: 'MISSION',
+    title: 'Your AI. Unplugged.',
+    body:
+      'The brand statement stays intact, but the presentation is calmer, more editorial, and easier to scan under review.',
+  },
+];
+
+export const productHierarchy = [
+  {
+    name: 'Lite',
+    detail: 'Entry node for portable local AI and quiet field work.',
+    to: '/sovereign-zero-lite',
+  },
+  {
+    name: 'Core',
+    detail: 'Default production node for private AI operations.',
+    to: '/sovereign-zero-core',
+  },
+  {
+    name: 'Blacksite',
+    detail: 'Restricted deployment for controlled environments.',
+    to: '/sovereign-zero-blacksite',
+  },
+  {
+    name: 'DevKit',
+    detail: 'Developer control surface for workflow validation.',
+    to: '/zero-state-matrix-devkit',
+  },
+];
+
+export const overviewHighlights = [
+  'Fixed left navigation and a centered reading column create an app-like cadence.',
+  'The right rail carries status, routing context, and the preorder CTA without fighting the main content.',
+  'Crimson is reduced to a signal color rather than a full visual theme.',
+];
+
+export const missionControlSignals = [
+  { label: 'RENDER', value: 'CLEAN / LOW-NOISE / STABLE' },
+  { label: 'QUEUE', value: 'SHORT / REVIEWABLE' },
+  { label: 'AUTHORITY', value: 'OPERATOR OWNED' },
+  { label: 'SYNC', value: 'LOCAL FIRST' },
+];
+
+export const docsGatewayCards = [
+  {
+    title: 'Zero-State Architecture',
+    href: '#zero-state-architecture',
+    summary: 'Local nodes, relay lanes, and operator-owned inference boundaries.',
+  },
+  {
+    title: 'Offline Inference Doctrine',
+    href: '#offline-inference-doctrine',
+    summary: 'How the system behaves when transport is absent or restricted.',
+  },
+  {
+    title: 'Edge Sovereignty Model',
+    href: '#edge-sovereignty-model',
+    summary: 'Where authority lives when compute is pushed closer to the mission point.',
+  },
+  {
+    title: 'Deployment Topology',
+    href: '#deployment-topology',
+    summary: 'How the workstation, relay, node, and secure edge connect.',
+  },
+];
+
+export const preorderSidebarNotes = [
+  'Notifications still route through the existing API and email flow.',
+  'Local browser storage remains the fallback if the request path fails.',
+  'The form is intentionally quiet: clear labels, short helper copy, and stable spacing.',
+];
+
+export const reviewSignals = [
+  { label: 'SITE', value: 'LIVE / ROUTED' },
+  { label: 'PREORDER', value: 'NOTIFICATION READY' },
+  { label: 'PRIVATE', value: '/funding-summary REMAINS HIDDEN' },
+  { label: 'NEXT', value: 'CONTINUATION APPROVAL' },
+];
+
 export const launchPhases = [
   {
     title: 'Phase 01: The Declaration',

@@ -1,24 +1,27 @@
 # Design Maturity Notes
 
-ZeroChill has moved from a heavier terminal-forward visual language into a premium liquid-glass product interface.
+ZeroChill has moved from a launch-page aesthetic to a dark product workspace.
 
 ## What Changed
 
-- Reduced scanline noise and heavy faux-terminal texture.
-- Shifted primary surfaces toward translucent glass panels with soft blur, low-opacity highlights, and layered depth.
-- Introduced clear material levels for background atmosphere, low glass, raised glass, interactive glass, and command modules.
-- Rebalanced the palette around obsidian, graphite, slate, steel, and restrained crimson accents.
-- Tightened spacing and hierarchy so product information reads like a real infrastructure launch surface.
-- Moved the base reading font toward a premium sans-serif system and reserved monospace for operational detail.
-- Softened dashboard and form chrome to look more like executive-grade product design than hacker theater.
+- Replaced the top-heavy marketing layout with an app-like shell.
+- Added a fixed left sidebar, a centered content canvas, and a quiet right context rail on desktop.
+- Collapsed the mobile experience into a compact top bar with simplified navigation.
+- Reduced crimson to small signal accents instead of a dominant visual theme.
+- Removed scanline, glow, and other noisy cyberpunk effects from the main experience.
+- Tightened typography and spacing so product copy reads more like internal documentation.
+- Reworked overview, products, docs, mission control, preorder, and review routes into calmer workspace screens.
+- Refined the preorder form into a product intake surface with clearer labels and quieter status copy.
 
 ## What Stayed
 
-- Public site remains focused on product and brand credibility.
-- Funding content remains private at `/funding-summary`.
-- Routes, product structure, and existing operational surfaces remain intact.
+- All routes remain present.
+- The preorder API and email notification behavior remain intact.
+- The private `/funding-summary` route still exists and is excluded from public navigation.
+- Print behavior for the funding summary remains available.
 - The stack stays lightweight and Vite-friendly.
 
 ## Intent
 
-The goal is professional maturity, not visual noise. The interface should signal control, precision, and operator ownership without claiming capabilities the platform does not have.
+The interface should feel like serious infrastructure software: controlled, readable, and operational.
+It should borrow layout discipline from Linear, but it should not copy Linear branding, text, or proprietary UI details.

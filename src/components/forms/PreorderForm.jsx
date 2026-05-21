@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Panel from '../ui/Panel';
 import TerminalCard from '../ui/TerminalCard';
 import { productTiers } from '../../data/site';
@@ -56,7 +56,7 @@ function validateForm(form) {
   }
 
   if (!payload.intendedUse) {
-    errors.intendedUse = 'Describe where the system will be used and by whom.';
+    errors.intendedUse = 'Describe the intended deployment.';
   } else if (payload.intendedUse.length < 10 || payload.intendedUse.length > 500) {
     errors.intendedUse = 'Use 10 to 500 characters for the intended use field.';
   }
@@ -70,11 +70,11 @@ function validateForm(form) {
 
 function formatNotification(data) {
   if (data?.emailConfigured === false) {
-    return 'No notification email is configured yet, so the submission was stored locally only.';
+    return 'Notification email is not configured yet, so this record stayed local only.';
   }
 
   if (data?.emailConfigured && data?.emailSent) {
-    return 'A notification email was sent to the preorder inbox and the submission was stored locally.';
+    return 'Notification email was sent and the submission was stored locally.';
   }
 
   if (data?.emailConfigured && data?.emailSent === false) {
@@ -108,6 +108,19 @@ function storeSubmission(entry) {
   return next;
 }
 
+function Field({ label, help, error, children }) {
+  return (
+    <label className="grid gap-2">
+      <span className="text-[0.66rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
+        {label}
+      </span>
+      {children}
+      {help ? <span className="text-xs leading-6 text-[color:var(--text-faint)]">{help}</span> : null}
+      {error ? <span className="text-xs leading-6 text-[color:var(--accent-soft)]">{error}</span> : null}
+    </label>
+  );
+}
+
 export default function PreorderForm() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState(initialStatus);
@@ -120,7 +133,7 @@ export default function PreorderForm() {
     setSubmissions(readSubmissions());
   }, []);
 
-  const latestSubmission = useMemo(() => submissions.at(-1), [submissions]);
+  const latestSubmission = submissions.at(-1);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -147,7 +160,7 @@ export default function PreorderForm() {
       setStatus({
         phase: 'error',
         message: 'Fix the highlighted fields before submitting again.',
-        detail: 'The browser can catch basic validation before the request is sent.',
+        detail: 'Basic validation runs locally before the request is sent.',
       });
       setIsSubmitting(false);
       return;
@@ -180,7 +193,7 @@ export default function PreorderForm() {
               data?.error === 'too many requests'
                 ? 'Backend rate limit reached. Your submission was saved locally.'
                 : 'Backend unavailable. Your submission was saved locally.',
-            detail: 'You can refresh later; the local record stays in this browser.',
+            detail: 'The local record stays in this browser until the request path returns.',
             notification: 'No email notification was sent because the API could not complete the request.',
           });
           setForm(initialForm);
@@ -236,131 +249,108 @@ export default function PreorderForm() {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+    <div className="grid gap-5">
       <Panel className="p-6 sm:p-8">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="status-pill">Notification only</span>
-          <span className="status-pill">No durable database yet</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="status-pill">Email notifications preserved</span>
+          <span className="status-pill">Local fallback remains</span>
         </div>
+
         {status.phase !== 'idle' ? (
           <div
             role="status"
             aria-live="polite"
             className={[
-              'zc-surface-raised mt-5 p-5',
+              'mt-5 rounded-2xl border p-5',
               status.phase === 'success'
-                ? 'border-[color:var(--accent)]'
+                ? 'border-[color:var(--line)] bg-white/[0.03]'
                 : status.phase === 'fallback'
-                  ? 'border-[color:var(--line)]'
-                  : 'border-[color:var(--accent-strong)]',
+                  ? 'border-[color:var(--line-soft)] bg-white/[0.02]'
+                  : 'border-[color:var(--accent)] bg-[rgba(179,58,68,0.08)]',
             ].join(' ')}
           >
-            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--accent-strong)]">
+            <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
               {status.phase === 'success'
                 ? 'Submission received'
                 : status.phase === 'fallback'
                   ? 'Local fallback active'
                   : 'Submission blocked'}
             </div>
-            <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-              {status.message}
-            </p>
+            <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">{status.message}</p>
             {status.detail ? (
               <p className="mt-2 text-sm leading-7 text-[color:var(--text-dim)]">{status.detail}</p>
             ) : null}
             {status.notification ? (
-              <div className="mt-4 border-t border-[color:var(--line-soft)] pt-4 text-xs uppercase tracking-[0.26em] text-[color:var(--text-dim)]">
+              <p className="mt-3 border-t border-[color:var(--line-soft)] pt-3 text-xs uppercase tracking-[0.22em] text-[color:var(--text-dim)]">
                 Email note: <span className="text-[color:var(--text)]">{status.notification}</span>
-              </div>
+              </p>
             ) : null}
           </div>
         ) : null}
 
         <form className="mt-6 grid gap-4" onSubmit={handleSubmit} noValidate>
-          <label className="grid gap-2">
-            <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Full name
-            </span>
-            <input
-              name="name"
-              required
-              value={form.name}
-              onChange={handleChange}
-              aria-invalid={Boolean(fieldErrors.name)}
-              aria-describedby="preorder-name-help preorder-name-error"
-              className="zc-field px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)]"
-              placeholder="Name for the preorder record"
-            />
-            <span id="preorder-name-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
-              Use the contact name that should appear in review notes.
-            </span>
-            {fieldErrors.name ? (
-              <span id="preorder-name-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
-                {fieldErrors.name}
-              </span>
-            ) : null}
-          </label>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Field
+              label="Full name"
+              help="Use the contact name that should appear in review notes."
+              error={fieldErrors.name}
+            >
+              <input
+                name="name"
+                required
+                value={form.name}
+                onChange={handleChange}
+                aria-invalid={Boolean(fieldErrors.name)}
+                className="zc-field px-4 py-3 text-sm outline-none placeholder:text-[color:var(--text-faint)]"
+                placeholder="Name for the preorder record"
+              />
+            </Field>
 
-          <label className="grid gap-2">
-            <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Email address
-            </span>
-            <input
-              name="email"
-              type="email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              aria-invalid={Boolean(fieldErrors.email)}
-              aria-describedby="preorder-email-help preorder-email-error"
-              className="zc-field px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)]"
-              placeholder="name@domain.com"
-            />
-            <span id="preorder-email-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
-              Used for notification delivery only. This site does not promise durable storage yet.
-            </span>
-            {fieldErrors.email ? (
-              <span id="preorder-email-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
-                {fieldErrors.email}
-              </span>
-            ) : null}
-          </label>
+            <Field
+              label="Email address"
+              help="Used for notification delivery only."
+              error={fieldErrors.email}
+            >
+              <input
+                name="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                aria-invalid={Boolean(fieldErrors.email)}
+                className="zc-field px-4 py-3 text-sm outline-none placeholder:text-[color:var(--text-faint)]"
+                placeholder="name@domain.com"
+              />
+            </Field>
+          </div>
 
-          <label className="grid gap-2">
-            <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Intended deployment
-            </span>
+          <Field
+            label="Intended deployment"
+            help="Tell us where the system will live and how it needs to behave."
+            error={fieldErrors.intendedUse}
+          >
             <textarea
               name="intendedUse"
               required
               value={form.intendedUse}
               onChange={handleChange}
               aria-invalid={Boolean(fieldErrors.intendedUse)}
-              aria-describedby="preorder-use-help preorder-use-error"
-              className="zc-field min-h-32 px-4 py-3 text-sm text-[color:var(--text)] outline-none placeholder:text-[color:var(--text-faint)]"
+              className="zc-field min-h-32 px-4 py-3 text-sm outline-none placeholder:text-[color:var(--text-faint)]"
               placeholder="Describe the environment, team size, and whether the node needs offline operation."
             />
-            <span id="preorder-use-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
-              Give enough detail to match the preorder to the right tier and review path.
-            </span>
-            {fieldErrors.intendedUse ? (
-              <span id="preorder-use-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
-                {fieldErrors.intendedUse}
-              </span>
-            ) : null}
-          </label>
+          </Field>
 
-          <label className="grid gap-2">
-            <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-              Preferred tier
-            </span>
+          <Field
+            label="Preferred tier"
+            help="Pick the closest fit. Review can refine the final deployment later."
+            error={fieldErrors.preferredTier}
+          >
             <select
               name="preferredTier"
               value={form.preferredTier}
               onChange={handleChange}
               aria-invalid={Boolean(fieldErrors.preferredTier)}
-              aria-describedby="preorder-tier-help preorder-tier-error"
-              className="zc-field px-4 py-3 text-sm text-[color:var(--text)] outline-none"
+              className="zc-field px-4 py-3 text-sm outline-none"
             >
               {productTiers.map((tier) => (
                 <option key={tier.name} value={tier.name}>
@@ -368,39 +358,31 @@ export default function PreorderForm() {
                 </option>
               ))}
             </select>
-            <span id="preorder-tier-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
-              Pick the closest fit. The preorder review can refine the exact deployment later.
-            </span>
-            {fieldErrors.preferredTier ? (
-              <span id="preorder-tier-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
-                {fieldErrors.preferredTier}
-              </span>
-            ) : null}
-          </label>
+          </Field>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="zc-button-primary mt-2 border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black disabled:cursor-not-allowed disabled:opacity-60"
+            className="zc-button-primary mt-1 w-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-black disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? 'Submitting...' : 'Store Interest'}
+            {isSubmitting ? 'Submitting...' : 'Store interest'}
           </button>
         </form>
       </Panel>
 
-      <div className="grid gap-6">
+      <div className="grid gap-5 lg:grid-cols-2">
         <TerminalCard
-          label="local storage"
-          title="Submission state"
-          body="Entries are preserved in the browser when the network path fails or a client-side fallback is required. Email is notification-only, not storage."
+          label="Submission state"
+          title="Browser records"
+          body="Entries remain in localStorage when the network path fails or a fallback is required."
         >
-          <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
-            saved records: {submissions.length}
+          <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 text-sm leading-7 text-[color:var(--text-muted)]">
+            Saved records: <span className="font-mono text-[color:var(--text)]">{submissions.length}</span>
           </div>
         </TerminalCard>
 
         <TerminalCard
-          label="latest packet"
+          label="Latest packet"
           title={latestSubmission ? latestSubmission.name : 'No submissions yet'}
           body={
             latestSubmission
@@ -411,9 +393,9 @@ export default function PreorderForm() {
           {latestSubmission ? (
             <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 text-sm leading-7 text-[color:var(--text-muted)]">
               <div>
-                <span className="text-[color:var(--text-dim)]">Intent:</span> {latestSubmission.intendedUse}
+                <span className="text-[color:var(--text-faint)]">Intent:</span> {latestSubmission.intendedUse}
               </div>
-              <div className="mt-3 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
+              <div className="mt-3 font-mono text-[0.68rem] uppercase tracking-[0.22em] text-[color:var(--text-dim)]">
                 Transport: {latestSubmission.transport || 'api'}
               </div>
             </div>

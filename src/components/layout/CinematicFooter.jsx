@@ -4,59 +4,45 @@ import Panel from '../ui/Panel';
 
 export default function CinematicFooter() {
   return (
-    <footer className="border-t border-[color:var(--line)] bg-[rgba(7,8,10,0.56)]">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-        <Panel className="shadow-telemetry overflow-hidden">
-          <div className="border-b border-[color:var(--line-soft)] px-4 py-4 sm:px-6">
-            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-              Deployment footer
-            </div>
-            <div className="mt-2 text-sm uppercase tracking-[0.2em] text-[color:var(--accent-strong)]">
-              system uptime aesthetic // terminal signatures // node references
-            </div>
-          </div>
-
-          <div className="grid gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[1.2fr_0.8fr]">
+    <footer className="border-t border-[color:var(--line)] bg-[rgba(8,9,11,0.78)]">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+        <Panel className="p-5 sm:p-6">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
-              <div className="text-sm uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              <div className="text-[0.66rem] uppercase tracking-[0.32em] text-[color:var(--text-faint)]">
                 ZeroChill Co
               </div>
-              <p className="mt-3 max-w-xl text-sm leading-7 text-[color:var(--text-muted)]">
-                Sovereign compute infrastructure for operators that want local control, readable
-                systems, and a deployment posture that feels engineered rather than marketed.
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-[color:var(--text-muted)]">
+                Local AI infrastructure, presented as a product workspace with a quieter shell and less decorative noise.
               </p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {footerSignals.map((signal) => (
-                  <div key={signal.label} className="zc-surface-low p-3">
-                    <div className="text-[0.68rem] uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
-                      {signal.label}
-                    </div>
-                    <div className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--text)]">
-                      {signal.value}
-                    </div>
-                  </div>
+                  <span key={signal.label} className="status-pill">
+                    {signal.label} {signal.value}
+                  </span>
                 ))}
               </div>
             </div>
 
-            <div className="grid gap-2 text-sm uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
-              <Link to="/manifest" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
-                Manifest
-              </Link>
-              <Link to="/docs" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              <Link
+                to="/docs"
+                className="zc-button-secondary border border-[color:var(--line)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]"
+              >
                 Docs
               </Link>
-              <Link to="/preorder" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
+              <Link
+                to="/review"
+                className="zc-button-secondary border border-[color:var(--line)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]"
+              >
+                Review
+              </Link>
+              <Link
+                to="/preorder"
+                className="zc-button-primary border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-3 text-xs uppercase tracking-[0.22em] text-black"
+              >
                 Preorder
               </Link>
-              <a href="#top" className="zc-nav-link w-fit hover:text-[color:var(--text)]">
-                Back to top
-              </a>
-            <div className="mt-3 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs leading-7 text-[color:var(--accent-strong)]">
-                &gt; zerochill.co / edge-primary / local runtime
-                <br />
-                &gt; signature locked / no cloud dependency
-              </div>
             </div>
           </div>
         </Panel>
