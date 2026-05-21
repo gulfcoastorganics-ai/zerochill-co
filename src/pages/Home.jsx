@@ -172,7 +172,7 @@ export default function Home() {
           </div>
         </Panel>
 
-        <section className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-stretch">
+        <section className="home-hero-scene grid gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-stretch">
           <div className="flex flex-col justify-between gap-8">
             <div className="flex flex-wrap gap-2 zc-reveal" style={{ '--reveal-delay': '40ms' }}>
               {workspaceStatus.map((signal) => (
@@ -225,73 +225,93 @@ export default function Home() {
           </div>
 
           <div className="relative min-h-[38rem] lg:min-h-full zc-reveal zc-reveal-slow" style={{ '--reveal-delay': '120ms' }}>
-            <Panel className="relative h-full overflow-hidden p-4 sm:p-5">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(140,255,206,0.14),transparent_22%),radial-gradient(circle_at_88%_18%,rgba(132,123,255,0.18),transparent_20%),radial-gradient(circle_at_50%_110%,rgba(91,183,255,0.14),transparent_22%)]" />
-              <div className="pointer-events-none absolute left-[7%] top-[10%] h-56 w-56 rounded-full border border-white/10 bg-[radial-gradient(circle_at_32%_30%,rgba(255,255,255,0.24),rgba(255,255,255,0.08)_38%,rgba(132,123,255,0.2)_62%,rgba(0,0,0,0)_100%)] shadow-[0_0_90px_rgba(157,255,208,0.12)] zc-glow-float" />
-              <div className="pointer-events-none absolute right-[-8%] bottom-[-18%] h-80 w-80 rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(91,183,255,0.18),transparent_55%)] blur-3xl" />
-
+            <Panel className="home-wallpaper relative h-full overflow-hidden p-4 sm:p-5">
               <div
                 id="product"
                 className="relative flex h-full min-h-[30rem] flex-col justify-between overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.085),rgba(255,255,255,0.03))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-6"
               >
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-                  <div>
-                    <SectionEyebrow>Live product system</SectionEyebrow>
-                    <div className="mt-2 text-sm text-[color:var(--text-muted)]">
-                      Moonlit depth for preorder, review, and product scope.
-                    </div>
-                  </div>
-                  <span className="rounded-full border border-[#9dffd0]/30 bg-[#9dffd0]/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#aef8d0]">
-                    Active
-                  </span>
-                </div>
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(140,255,206,0.16),transparent_22%),radial-gradient(circle_at_88%_18%,rgba(132,123,255,0.2),transparent_20%),radial-gradient(circle_at_50%_110%,rgba(91,183,255,0.14),transparent_22%)]" aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),transparent_28%,rgba(255,255,255,0.01)_60%,transparent_80%)] opacity-70" aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(180deg,rgba(255,255,255,0.035)_0,rgba(255,255,255,0.035)_1px,transparent_1px,transparent_7px),repeating-linear-gradient(90deg,rgba(255,255,255,0.02)_0,rgba(255,255,255,0.02)_1px,transparent_1px,transparent_18px)] opacity-20" aria-hidden="true" />
+                <div className="pointer-events-none absolute -left-10 top-10 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(157,255,208,0.22),transparent_68%)] blur-3xl" aria-hidden="true" />
+                <div className="pointer-events-none absolute right-[-5%] top-[-8%] h-72 w-72 rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(132,123,255,0.2),transparent_62%)] blur-3xl" aria-hidden="true" />
+                <div className="pointer-events-none absolute right-[6%] bottom-[-12%] h-80 w-80 rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(91,183,255,0.16),transparent_58%)] blur-3xl" aria-hidden="true" />
 
-                <div className="mt-5 grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
-                  <div className="rounded-[28px] border border-white/10 bg-[rgba(8,10,14,0.72)] p-4 sm:p-5">
-                    <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
-                      Visual anchor
-                    </div>
-                    <div className="mt-4 flex aspect-square items-center justify-center rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.2),rgba(255,255,255,0.06)_26%,rgba(132,123,255,0.18)_58%,rgba(4,5,8,0.92)_100%)]">
-                      <div className="h-32 w-32 rounded-full border border-white/10 bg-[radial-gradient(circle_at_34%_32%,rgba(255,255,255,0.3),rgba(255,255,255,0.08)_40%,rgba(140,255,206,0.12)_70%,rgba(0,0,0,0)_100%)] shadow-[0_0_80px_rgba(140,255,206,0.14)]" />
-                    </div>
-                    <p className="mt-4 text-sm leading-7 text-[color:var(--text-muted)]">
-                      A moonlike anchor gives the page a quieter center of gravity.
+                <div className="relative flex h-full flex-col justify-between gap-6">
+                  <div className="max-w-sm">
+                    <SectionEyebrow>Atmospheric field</SectionEyebrow>
+                    <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                      Abstract wallpaper for dark glass, neon haze, and editorial depth.
                     </p>
                   </div>
 
-                  <div className="grid gap-4">
-                    <div className="rounded-[28px] border border-white/10 bg-[rgba(7,9,12,0.54)] p-4 sm:p-5">
-                      <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
-                        Product ladder
-                      </div>
-                      <div className="mt-4 space-y-3">
-                        {productHierarchy.map((product) => (
-                          <Link
-                            key={product.name}
-                            to={product.to}
-                            className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition hover:border-white/20 hover:bg-white/[0.06]"
-                          >
-                            <div>
-                              <div className="text-sm font-medium text-[color:var(--text)]">{product.name}</div>
-                              <div className="mt-1 text-sm leading-6 text-[color:var(--text-muted)]">
-                                {product.detail}
-                              </div>
-                            </div>
-                            <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[color:var(--text-dim)]">
-                              open
-                            </span>
-                          </Link>
-                        ))}
+                  <div className="flex flex-wrap gap-2">
+                    {['Liquid glass', 'Violet depth', 'Mint signal'].map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-black/15 px-3 py-1.5 text-[0.62rem] uppercase tracking-[0.22em] text-[color:var(--text-dim)]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                    <div>
+                      <SectionEyebrow>Live product system</SectionEyebrow>
+                      <div className="mt-2 text-sm text-[color:var(--text-muted)]">
+                        Wallpaper depth for preorder, review, and product scope.
                       </div>
                     </div>
+                    <span className="rounded-full border border-[#9dffd0]/30 bg-[#9dffd0]/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#aef8d0]">
+                      Active
+                    </span>
+                  </div>
 
-                    <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(157,255,208,0.08),rgba(135,122,255,0.08))] p-4 sm:p-5">
+                  <div className="mt-5 grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
+                    <div className="rounded-[28px] border border-white/10 bg-[rgba(8,10,14,0.72)] p-4 sm:p-5">
                       <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
-                        Conversion strip
+                        Wallpaper layers
                       </div>
                       <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-                        Mint accents keep preorder visible without breaking the atmosphere.
+                        Soft contours, liquid gradients, and a low-noise grid keep the surface cinematic.
                       </p>
+                    </div>
+
+                    <div className="grid gap-4">
+                      <div className="rounded-[28px] border border-white/10 bg-[rgba(7,9,12,0.54)] p-4 sm:p-5">
+                        <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
+                          Product ladder
+                        </div>
+                        <div className="mt-4 space-y-3">
+                          {productHierarchy.map((product) => (
+                            <Link
+                              key={product.name}
+                              to={product.to}
+                              className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition hover:border-white/20 hover:bg-white/[0.06]"
+                            >
+                              <div>
+                                <div className="text-sm font-medium text-[color:var(--text)]">{product.name}</div>
+                                <div className="mt-1 text-sm leading-6 text-[color:var(--text-muted)]">
+                                  {product.detail}
+                                </div>
+                              </div>
+                              <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[color:var(--text-dim)]">
+                                open
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(157,255,208,0.08),rgba(135,122,255,0.08))] p-4 sm:p-5">
+                        <div className="text-[0.64rem] uppercase tracking-[0.3em] text-[color:var(--text-faint)]">
+                          Conversion strip
+                        </div>
+                        <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                          Mint accents keep preorder visible without breaking the atmosphere.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
