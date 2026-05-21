@@ -1,11 +1,14 @@
 import Seo from '../components/Seo';
 import CinematicIntro from '../components/sections/CinematicIntro';
 import HardwareConceptPanels from '../components/sections/HardwareConceptPanels';
+import MissionControl from '../components/sections/MissionControl';
 import DeploymentArchitecture from '../components/sections/DeploymentArchitecture';
 import WhyLocalAI from '../components/sections/WhyLocalAI';
 import UseCaseDoctrine from '../components/sections/UseCaseDoctrine';
 import OperationalPhilosophy from '../components/sections/OperationalPhilosophy';
 import DeploymentTopologySet from '../components/sections/DeploymentTopologySet';
+import InfrastructureVisuals from '../components/sections/InfrastructureVisuals';
+import SovereignPositioning from '../components/sections/SovereignPositioning';
 import Blueprint from '../components/sections/Blueprint';
 import TierGrid from '../components/sections/TierGrid';
 import DocsPreview from '../components/sections/DocsPreview';
@@ -21,11 +24,14 @@ export default function Home() {
         description="ZeroChill Co builds sovereign local AI infrastructure, hardened product tiers, and terminal-first operator tooling."
       />
       <CinematicIntro />
+      <MissionControl />
       <HardwareConceptPanels />
       <DeploymentArchitecture />
+      <InfrastructureVisuals />
       <DeploymentTopologySet />
       <UseCaseDoctrine />
       <WhyLocalAI />
+      <SovereignPositioning />
       <OperationalPhilosophy />
       <Blueprint />
       <TierGrid />

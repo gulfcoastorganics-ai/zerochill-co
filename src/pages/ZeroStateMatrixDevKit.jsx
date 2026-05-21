@@ -1,0 +1,6 @@
+import ProductDetailPage from '../components/sections/ProductDetailPage';
+import { productDetailCatalog } from '../data/site';
+
+export default function ZeroStateMatrixDevKit() {
+  return <ProductDetailPage product={productDetailCatalog[3]} />;
+}

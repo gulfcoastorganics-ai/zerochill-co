@@ -4,6 +4,8 @@ export const navItems = [
   { label: 'Zero State Matrix', to: '/zero-state-matrix' },
   { label: 'Manifest', to: '/manifest' },
   { label: 'Docs', to: '/docs' },
+  { label: 'Funding', to: '/funding' },
+  { label: 'Review', to: '/review' },
   { label: 'Preorder', to: '/preorder' },
 ];
 
@@ -368,10 +370,16 @@ export const reviewRoutes = [
   '/',
   '/sovereign-zero',
   '/zero-state-matrix',
+  '/sovereign-zero-lite',
+  '/sovereign-zero-core',
+  '/sovereign-zero-blacksite',
+  '/zero-state-matrix-devkit',
   '/manifest',
   '/docs',
+  '/funding',
   '/preorder',
   '/review',
+  '/admin',
 ];
 
 export const reviewChecklist = [
@@ -464,4 +472,158 @@ export const productSummaryCards = [
     title: 'Zero-State Matrix DevKit',
     body: 'Developer control layer for testing and local workflow validation.',
   },
+];
+
+export const productDetailCatalog = [
+  {
+    slug: 'sovereign-zero-lite',
+    title: 'Sovereign Zero Lite',
+    eyebrow: 'Field node / entry deployment',
+    positioning:
+      'A compact sovereign workstation for small teams, mobile operators, and private labs that need local AI without a heavy footprint.',
+    deploymentScenarios: [
+      'Mobile command desks for traveling operators who need local inference and secure note handling.',
+      'Small office deployments where the machine has to sit quietly and still carry the workflow.',
+      'Private research benches that should remain useful even when the network is out of the picture.',
+    ],
+    useCaseDoctrine: [
+      'Keep the critical loop local so the operator can continue work through degraded connectivity.',
+      'Use the node as a compact trust boundary for prompts, notes, and small internal models.',
+      'Prefer quiet, repeatable operation over a broad surface of features that need constant tuning.',
+    ],
+    workstationConcepts: [
+      'Single-desk control station with a low-noise chassis, one primary display, and a minimal peripheral stack.',
+      'Field-ready carry case for transport between sites without turning the machine into a fragile demo rig.',
+      'Local admin seat for reviewing model output, SOPs, and intake forms without handing them to a cloud app.',
+    ],
+    operationalDiagrams: [
+      'Operator desk -> local model -> local storage -> optional relay sync',
+      'Task intake -> policy check -> local inference -> human review',
+    ],
+    offlineWorkflows: [
+      'Prompt handling, note capture, and task draft generation stay on-device.',
+      'Queue anything that needs sync until the relay is available again.',
+      'Use local export bundles so the workstation keeps operating during outages.',
+    ],
+    targetOperators: [
+      'Solo technical operators',
+      'Small internal teams',
+      'Private research desks',
+    ],
+  },
+  {
+    slug: 'sovereign-zero-core',
+    title: 'Sovereign Zero Core',
+    eyebrow: 'Production node / baseline deployment',
+    positioning:
+      'The default production shape for teams that need reliable local AI, stronger orchestration, and a more complete operator surface.',
+    deploymentScenarios: [
+      'Private office deployments with a central node for internal AI operations.',
+      'Secure studios that need model routing, file handling, and repeatable review flows.',
+      'Lab environments where multiple operators share the same controlled workstation stack.',
+    ],
+    useCaseDoctrine: [
+      'Treat the node as the baseline production control plane for internal AI workflows.',
+      'Keep storage, inference, and policy close to the operator and visible in one surface.',
+      'Design for sustained work, not just a short demo session or a speculative prototype.',
+    ],
+    workstationConcepts: [
+      'Rackable or desk-side workstation with a balanced compute profile and visible service access.',
+      'Shared operator console for team review, export, and approval workflows.',
+      'Durable production seat that feels like equipment, not a consumer laptop wrapped in marketing.',
+    ],
+    operationalDiagrams: [
+      'Operator console -> policy layer -> local model pool -> reviewed export',
+      'Inbound task -> routing -> inference -> status telemetry -> approval lane',
+    ],
+    offlineWorkflows: [
+      'Local model serving stays available even when remote services are degraded.',
+      'Exports can be batched for later sync instead of blocking the workflow.',
+      'Telemetry stays narrow and readable so operators know what is running without dashboards taking over.',
+    ],
+    targetOperators: [
+      'Internal platform teams',
+      'Founders and operators',
+      'Security-minded production teams',
+    ],
+  },
+  {
+    slug: 'sovereign-zero-blacksite',
+    title: 'Sovereign Zero Blacksite',
+    eyebrow: 'Restricted node / isolated deployment',
+    positioning:
+      'An isolated deployment profile for sensitive rooms, private labs, and environments where the system has to remain tightly controlled.',
+    deploymentScenarios: [
+      'Secure rooms where access, logging, and transport boundaries are managed carefully.',
+      'Private R&D spaces that need a hardened node without broad connectivity assumptions.',
+      'Controlled deployment areas where exports, updates, and review must be deliberate.',
+    ],
+    useCaseDoctrine: [
+      'Use the system as a restricted execution surface, not a generic all-purpose platform.',
+      'Treat air-gap readiness, access discipline, and export review as part of the product shape.',
+      'Keep the operational model narrow so it can stay legible under scrutiny.',
+    ],
+    workstationConcepts: [
+      'Isolated operator room with a secure console, locked storage, and limited peripheral exposure.',
+      'Dampened workstation stack that favors controlled maintenance over casual access.',
+      'High-trust seat for policy review, local inference, and tamper-conscious handling.',
+    ],
+    operationalDiagrams: [
+      'Restricted workstation -> local model -> policy gate -> export review',
+      'Secure intake -> isolated compute -> audit log -> gated relay',
+    ],
+    offlineWorkflows: [
+      'Stay functional without a permanent network path.',
+      'Cache review artifacts locally until an authorized sync path is opened.',
+      'Keep inference and evidence handling inside the same controlled perimeter.',
+    ],
+    targetOperators: [
+      'Security and compliance teams',
+      'Research leads in controlled facilities',
+      'Operators in restricted technical environments',
+    ],
+  },
+  {
+    slug: 'zero-state-matrix-devkit',
+    title: 'Zero-State Matrix DevKit',
+    eyebrow: 'Developer kit / control surface',
+    positioning:
+      'A developer-facing control layer for teams building sovereign workflows, validating integrations, and shaping the local AI stack before launch.',
+    deploymentScenarios: [
+      'Engineering desks that need a build-and-test surface for local AI tools.',
+      'Staging benches where operators validate workflows before they reach production.',
+      'Internal platform teams that need diagnostics, exports, and routing tools in one place.',
+    ],
+    useCaseDoctrine: [
+      'Make the system readable enough that engineers can shape the workflow without guessing.',
+      'Treat diagnostics, exports, and local inference as first-class developer objects.',
+      'Use the kit to reduce integration drag before the production node goes live.',
+    ],
+    workstationConcepts: [
+      'Developer bench with terminal-first tools, clear state panels, and modular controls.',
+      'Portable validation station for staging and release review.',
+      'Operator sandbox for policy checks, local inference tests, and packaging workflows.',
+    ],
+    operationalDiagrams: [
+      'Build bench -> workflow config -> local model test -> export bundle',
+      'Developer input -> state matrix -> diagnostics -> release candidate',
+    ],
+    offlineWorkflows: [
+      'Disconnected development and self-hosted test loops stay available by default.',
+      'Package updates locally before syncing to a larger deployment lane.',
+      'Use the matrix to verify what happens when the relay is absent.',
+    ],
+    targetOperators: [
+      'Software engineers',
+      'Systems integrators',
+      'Platform and tooling teams',
+    ],
+  },
+];
+
+export const missionControlCards = [
+  { label: 'Deployment telemetry', value: 'SIMULATED / STABLE / FRONTEND ONLY' },
+  { label: 'Node status', value: 'ZC-01 PRIMARY // ZC-02 EDGE // ZC-03 RESTRICTED' },
+  { label: 'Inference state', value: 'LOCAL MODEL ACTIVE // QUEUE LIGHT // POLICY LOCKED' },
+  { label: 'Relay lane', value: 'EDGE SYNC READY // OFFLINE BUFFER ARMED' },
 ];

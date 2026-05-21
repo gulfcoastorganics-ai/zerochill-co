@@ -4,6 +4,7 @@ import Footer from '../components/layout/Footer';
 import SectionHeader from '../components/ui/SectionHeader';
 import TerminalCard from '../components/ui/TerminalCard';
 import Panel from '../components/ui/Panel';
+import { productDetailCatalog } from '../data/site';
 import {
   productComparison,
   productComparisonColumns,
@@ -22,11 +23,12 @@ export default function Products() {
         <SectionHeader
           eyebrow="Products"
           title="Product ladder"
-          copy="A concise comparison layer for buyers and reviewers who need the operational differences in one place."
+          copy="A concise product catalog for buyers and reviewers who need the operational differences in one place."
         />
 
         <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
           <a href="#product-summary" className="zc-nav-link">Summary</a>
+          <a href="#product-pages" className="zc-nav-link">Pages</a>
           <a href="#product-comparison" className="zc-nav-link">Comparison</a>
           <a href="#product-fit" className="zc-nav-link">Fit</a>
           <Link to="/preorder" className="zc-nav-link text-[color:var(--accent-strong)]">
@@ -39,6 +41,58 @@ export default function Products() {
         <div className="grid gap-5 lg:grid-cols-4">
           {productSummaryCards.map((card) => (
             <TerminalCard key={card.title} label="SUMMARY" title={card.title} body={card.body} />
+          ))}
+        </div>
+      </section>
+
+      <section id="product-pages" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-18 scroll-mt-28">
+        <SectionHeader
+          eyebrow="Detail pages"
+          title="Four product pages, four deployment shapes."
+          copy="Each detail page carries deployment scenarios, doctrine, workstation language, operational diagrams, local AI workflow notes, target operators, and positioning."
+        />
+
+        <div className="mt-8 grid gap-5 xl:grid-cols-2">
+          {productDetailCatalog.map((product, index) => (
+            <TerminalCard
+              key={product.slug}
+              label={`0${index + 1}`}
+              title={product.title}
+              body={product.positioning}
+            >
+              <div className="mt-5 grid gap-3 border-t border-[color:var(--line-soft)] pt-4 sm:grid-cols-2">
+                <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                  <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+                    Best fit
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                    {product.targetOperators.join(' / ')}
+                  </p>
+                </div>
+                <div className="border border-[color:var(--line-soft)] bg-black/25 p-4">
+                  <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+                    Offline posture
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                    {product.offlineWorkflows[0]}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-3 border-t border-[color:var(--line-soft)] pt-4">
+                <Link
+                  to={`/${product.slug}`}
+                  className="zc-button-primary border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-black"
+                >
+                  Open page
+                </Link>
+                <Link
+                  to="/preorder"
+                  className="zc-button-secondary border border-[color:var(--line)] px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--text)]"
+                >
+                  Preorder
+                </Link>
+              </div>
+            </TerminalCard>
           ))}
         </div>
       </section>
