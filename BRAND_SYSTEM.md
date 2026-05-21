@@ -8,6 +8,7 @@
 - Bright crimson signal: `#f14b5f`
 - Primary text: `#f5f3ef`
 - Secondary text: muted gray-green neutrals around the UI surface
+- Steel border tone: use cool gray accents sparingly for structure and status
 
 ## Typography Rules
 
@@ -33,6 +34,17 @@
 - Keep calls to action sharp and limited.
 - Use crimson only for emphasis, state, and signal.
 - Keep motion minimal or absent.
+- Prefer consistent section rhythm: headline, subcopy, then structured content blocks.
+- Use status pills, command ribbons, and thin border callouts for operational context.
+- Keep print-friendly pages clean and high-contrast when they need to be saved or shared.
+
+## Accessibility Rules
+
+- Preserve strong focus-visible states on all interactive elements.
+- Keep contrast safe on dark backgrounds.
+- Avoid horizontal overflow at mobile widths.
+- Use readable line lengths on product and dashboard pages.
+- Respect reduced-motion preferences.
 
 ## Forbidden Generic SaaS Patterns
 

@@ -238,12 +238,16 @@ export default function PreorderForm() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
       <Panel className="p-6 sm:p-8">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="status-pill">Notification only</span>
+          <span className="status-pill">No durable database yet</span>
+        </div>
         {status.phase !== 'idle' ? (
           <div
             role="status"
             aria-live="polite"
             className={[
-              'border p-5',
+              'mt-5 border p-5',
               status.phase === 'success'
                 ? 'border-[color:var(--accent)] bg-[rgba(177,18,38,0.08)]'
                 : status.phase === 'fallback'
@@ -266,7 +270,7 @@ export default function PreorderForm() {
             ) : null}
             {status.notification ? (
               <div className="mt-4 border-t border-[color:var(--line-soft)] pt-4 text-xs uppercase tracking-[0.26em] text-[color:var(--text-dim)]">
-                Email status: <span className="text-[color:var(--text)]">{status.notification}</span>
+                Email note: <span className="text-[color:var(--text)]">{status.notification}</span>
               </div>
             ) : null}
           </div>
@@ -313,7 +317,7 @@ export default function PreorderForm() {
               placeholder="name@domain.com"
             />
             <span id="preorder-email-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
-              This is used for updates if the preorder inbox is configured.
+              Used for notification delivery only. This site does not promise durable storage yet.
             </span>
             {fieldErrors.email ? (
               <span id="preorder-email-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
@@ -337,7 +341,7 @@ export default function PreorderForm() {
               placeholder="Describe the environment, team size, and whether the node needs offline operation."
             />
             <span id="preorder-use-help" className="text-xs leading-6 text-[color:var(--text-faint)]">
-              Give enough detail to match the preorder to the right tier.
+              Give enough detail to match the preorder to the right tier and review path.
             </span>
             {fieldErrors.intendedUse ? (
               <span id="preorder-use-error" className="text-xs leading-6 text-[color:var(--accent-strong)]">
@@ -388,7 +392,7 @@ export default function PreorderForm() {
         <TerminalCard
           label="local storage"
           title="Submission state"
-          body="Entries are preserved in the browser when the network path fails or a client-side fallback is required."
+          body="Entries are preserved in the browser when the network path fails or a client-side fallback is required. Email is notification-only, not storage."
         >
           <div className="mt-5 border-t border-[color:var(--line-soft)] pt-4 font-mono text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)]">
             saved records: {submissions.length}

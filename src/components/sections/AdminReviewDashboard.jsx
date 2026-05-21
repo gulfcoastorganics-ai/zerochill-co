@@ -40,8 +40,13 @@ export default function AdminReviewDashboard() {
 
       <div className="mt-8 grid gap-5 xl:grid-cols-[1.15fr_0.85fr]">
         <Panel className="shadow-telemetry p-6">
-          <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-            Submission placeholders
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              Submission placeholders
+            </div>
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
+              review queue
+            </span>
           </div>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {[
@@ -68,8 +73,13 @@ export default function AdminReviewDashboard() {
         </Panel>
 
         <Panel className="shadow-telemetry p-6">
-          <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-            System health
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              System health
+            </div>
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
+              simulated
+            </span>
           </div>
           <div className="mt-4 space-y-3">
             {systemHealth.map((item) => (
@@ -91,8 +101,13 @@ export default function AdminReviewDashboard() {
 
       <div className="mt-8 grid gap-5 xl:grid-cols-[1fr_1fr]">
         <Panel className="shadow-telemetry p-6">
-          <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-            Export status
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              Export status
+            </div>
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
+              manual handoff
+            </span>
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {[
@@ -114,8 +129,13 @@ export default function AdminReviewDashboard() {
         </Panel>
 
         <Panel className="shadow-telemetry p-6">
-          <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-            Deployment status
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              Deployment status
+            </div>
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
+              stable
+            </span>
           </div>
           <div className="mt-4 space-y-3">
             {[

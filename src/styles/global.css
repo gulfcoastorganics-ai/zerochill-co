@@ -3,14 +3,15 @@
 :root {
   --bg: #050505;
   --panel: #0c0c0d;
-  --line: rgba(255, 255, 255, 0.12);
-  --line-soft: rgba(255, 255, 255, 0.08);
+  --line: rgba(208, 214, 224, 0.16);
+  --line-soft: rgba(208, 214, 224, 0.1);
   --text: #f5f3ef;
   --text-muted: #c6c0b6;
   --text-dim: #8f8a81;
   --text-faint: #5e5952;
   --accent: #b11226;
   --accent-strong: #f14b5f;
+  --steel: rgba(208, 214, 224, 0.35);
   --surface-glow: rgba(241, 75, 95, 0.08);
   --focus-ring: rgba(241, 75, 95, 0.55);
 }
@@ -30,7 +31,7 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top, rgba(177, 18, 38, 0.16), transparent 30%),
+    radial-gradient(circle at top, rgba(177, 18, 38, 0.14), transparent 28%),
     linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
   color: var(--text);
   font-family: var(--font-sans);
@@ -38,6 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
+  letter-spacing: 0;
 }
 
 * {
@@ -76,8 +78,8 @@ textarea {
 
 :where(a, button, input, textarea, select):focus-visible {
   outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(177, 18, 38, 0.18);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(177, 18, 38, 0.12);
 }
 
 ::placeholder {
@@ -92,6 +94,36 @@ textarea::placeholder {
 .zc-page {
   animation: page-enter 320ms ease both;
   transform-origin: top center;
+}
+
+.zc-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.zc-panel::before,
+.zc-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.zc-panel::before {
+  background:
+    linear-gradient(135deg, rgba(241, 75, 95, 0.28), transparent 12px) top left,
+    linear-gradient(225deg, rgba(241, 75, 95, 0.28), transparent 12px) top right,
+    linear-gradient(45deg, rgba(241, 75, 95, 0.28), transparent 12px) bottom left,
+    linear-gradient(315deg, rgba(241, 75, 95, 0.28), transparent 12px) bottom right;
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  opacity: 0.55;
+}
+
+.zc-panel::after {
+  inset: 0;
+  border: 1px solid rgba(208, 214, 224, 0.04);
 }
 
 .zc-reveal {
@@ -111,8 +143,8 @@ textarea::placeholder {
 .zc-interactive:hover,
 .zc-interactive:focus-within {
   transform: translateY(-2px);
-  border-color: rgba(241, 75, 95, 0.4);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(241, 75, 95, 0.1);
+  border-color: rgba(241, 75, 95, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(241, 75, 95, 0.12);
 }
 
 .zc-nav-link {
@@ -133,6 +165,11 @@ textarea::placeholder {
   transition: transform 180ms ease;
 }
 
+.zc-nav-link:hover,
+.zc-nav-link:focus-visible {
+  transform: translateY(-1px);
+}
+
 .zc-nav-link:hover::after,
 .zc-nav-link:focus-visible::after,
 .zc-nav-link[aria-current='page']::after {
@@ -140,6 +177,13 @@ textarea::placeholder {
 }
 
 .zc-nav-link[aria-current='page'] {
+  color: var(--text);
+}
+
+.zc-nav-link[aria-current='page'],
+.zc-nav-link[aria-current='page']:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(208, 214, 224, 0.18);
   color: var(--text);
 }
 
@@ -256,6 +300,56 @@ textarea::placeholder {
     0 24px 60px rgba(0, 0, 0, 0.55);
 }
 
+.system-boot-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--line-soft);
+  background: rgba(0, 0, 0, 0.26);
+  padding: 0.7rem 0.85rem;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--text-dim);
+}
+
+.system-boot-line strong {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.command-ribbon {
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(90deg, rgba(241, 75, 95, 0.08), rgba(255, 255, 255, 0.02));
+  padding: 0.9rem 1rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--text-dim);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.45rem 0.65rem;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+}
+
+.status-pill::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px rgba(241, 75, 95, 0.12);
+}
+
 .funding-summary-page {
   position: relative;
 }
@@ -370,5 +464,11 @@ textarea::placeholder {
   .boot-line {
     animation: none;
     transition: none;
+  }
+}
+
+@media print {
+  .zc-page {
+    animation: none;
   }
 }

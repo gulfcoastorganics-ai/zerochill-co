@@ -26,7 +26,11 @@ export default function MissionControl() {
 
       <div className="mt-8 grid gap-5 xl:grid-cols-[1.15fr_0.85fr]">
         <Panel className="shadow-telemetry overflow-hidden p-5 sm:p-6">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="status-pill">Simulated telemetry</span>
+            <span className="status-pill">Frontend only</span>
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
             {missionControlCards.map((card) => (
               <div key={card.label} className="border border-[color:var(--line-soft)] bg-black/25 p-4">
                 <div className="text-[0.66rem] uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
@@ -89,7 +93,7 @@ export default function MissionControl() {
                     <span className="text-xs uppercase tracking-[0.28em] text-[color:var(--text-dim)]">
                       {label}
                     </span>
-                    <span className="font-mono text-sm text-[color:var(--text)]">{value}</span>
+                    <span className="font-mono text-sm uppercase tracking-[0.18em] text-[color:var(--text)]">{value}</span>
                   </div>
                 ))}
               </div>
@@ -116,8 +120,13 @@ export default function MissionControl() {
         </Panel>
 
         <Panel className="shadow-telemetry p-5 sm:p-6">
-          <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
-            Node status indicators
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-xs uppercase tracking-[0.34em] text-[color:var(--text-dim)]">
+              Node status indicators
+            </div>
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
+              operator view
+            </span>
           </div>
           <div className="mt-4 space-y-3">
             {nodeRows.map((node) => (
@@ -131,7 +140,7 @@ export default function MissionControl() {
                       {node.role}
                     </p>
                   </div>
-                  <span className="border border-[color:var(--line-soft)] px-2 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-[color:var(--accent-strong)]">
+                  <span className="status-pill">
                     {node.state}
                   </span>
                 </div>
