@@ -160,7 +160,7 @@ export default function SiteShell() {
               </div>
               <ul className="mt-3 space-y-3 text-sm leading-7 text-[color:var(--text-muted)]">
                 <li>Routes remain intact.</li>
-                <li>/funding-summary stays private.</li>
+                <li>Sensitive continuation materials stay off the public surface.</li>
                 <li>Preorder and payment flows are preserved.</li>
               </ul>
             </div>

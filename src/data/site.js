@@ -137,7 +137,7 @@ export const preorderSidebarNotes = [
 export const reviewSignals = [
   { label: 'SITE', value: 'LIVE / ROUTED' },
   { label: 'PREORDER', value: 'NOTIFICATION READY' },
-  { label: 'PRIVATE', value: '/funding-summary REMAINS HIDDEN' },
+  { label: 'PRIVATE', value: 'CONTINUATION SUMMARY HIDDEN' },
   { label: 'NEXT', value: 'CONTINUATION APPROVAL' },
 ];
 
