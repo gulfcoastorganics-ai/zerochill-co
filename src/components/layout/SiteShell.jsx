@@ -41,15 +41,24 @@ export default function SiteShell() {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  if (isHome) {
+    return (
+      <div id="top" className="crt-shell min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
+        <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.015),transparent_18%),radial-gradient(circle_at_82%_0%,rgba(179,58,68,0.08),transparent_26%)]" />
+        <main className="relative z-10 min-h-screen">
+          <div key={location.pathname} className="zc-page">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div id="top" className="crt-shell min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
       <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.015),transparent_18%),radial-gradient(circle_at_80%_0%,rgba(179,58,68,0.08),transparent_26%)]" />
 
-      <div
-        className={`relative z-10 min-h-screen ${
-          isHome ? 'lg:grid lg:grid-cols-[19rem_minmax(0,1fr)]' : 'lg:grid lg:grid-cols-[19rem_minmax(0,1fr)_19rem]'
-        }`}
-      >
+      <div className="relative z-10 min-h-screen lg:grid lg:grid-cols-[19rem_minmax(0,1fr)_19rem]">
         <aside className="hidden border-r border-[color:var(--line)] bg-[rgba(9,10,12,0.94)] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col">
           <div className="border-b border-[color:var(--line-soft)] px-5 py-6">
             <NavLink to="/" className="flex items-center gap-3">
@@ -123,11 +132,7 @@ export default function SiteShell() {
             </div>
           </div>
 
-          <div
-            className={`mx-auto w-full px-4 py-6 sm:px-6 lg:py-10 ${
-              isHome ? 'max-w-7xl lg:px-8 xl:px-10' : 'max-w-6xl lg:px-10'
-            }`}
-          >
+          <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
             <div className="space-y-5 lg:flex lg:items-end lg:justify-between lg:gap-8">
               <div className="max-w-3xl">
                 <p className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
@@ -152,43 +157,41 @@ export default function SiteShell() {
           </div>
         </main>
 
-        {isHome ? null : (
-          <aside className="hidden border-l border-[color:var(--line)] bg-[rgba(9,10,12,0.88)] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col">
-            <div className="space-y-5 overflow-y-auto px-4 py-5">
-              <div className="zc-panel p-5">
-                <div className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
-                  Right rail
-                </div>
-                <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-                  Optional context for routing, status, and preorder access. It stays quiet and secondary to the main canvas.
-                </p>
+        <aside className="hidden border-l border-[color:var(--line)] bg-[rgba(9,10,12,0.88)] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col">
+          <div className="space-y-5 overflow-y-auto px-4 py-5">
+            <div className="zc-panel p-5">
+              <div className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
+                Right rail
               </div>
-
-              <div className="zc-panel p-5">
-                <div className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
-                  System notes
-                </div>
-                <ul className="mt-3 space-y-3 text-sm leading-7 text-[color:var(--text-muted)]">
-                  <li>Routes remain intact.</li>
-                  <li>Sensitive continuation materials stay off the public surface.</li>
-                  <li>Preorder and payment flows are preserved.</li>
-                </ul>
-              </div>
-
-              <div className="zc-panel p-5">
-                <div className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
-                  Primary action
-                </div>
-                <ShellLink
-                  to="/preorder"
-                  className="mt-3 border-[color:var(--accent)] bg-[color:var(--accent)] !text-black hover:bg-[color:var(--accent-soft)]"
-                >
-                  Open preorder
-                </ShellLink>
-              </div>
+              <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                Optional context for routing, status, and preorder access. It stays quiet and secondary to the main canvas.
+              </p>
             </div>
-          </aside>
-        )}
+
+            <div className="zc-panel p-5">
+              <div className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
+                System notes
+              </div>
+              <ul className="mt-3 space-y-3 text-sm leading-7 text-[color:var(--text-muted)]">
+                <li>Routes remain intact.</li>
+                <li>Sensitive continuation materials stay off the public surface.</li>
+                <li>Preorder and payment flows are preserved.</li>
+              </ul>
+            </div>
+
+            <div className="zc-panel p-5">
+              <div className="text-[0.66rem] tracking-[0.12em] text-[color:var(--text-faint)]">
+                Primary action
+              </div>
+              <ShellLink
+                to="/preorder"
+                className="mt-3 border-[color:var(--accent)] bg-[color:var(--accent)] !text-black hover:bg-[color:var(--accent-soft)]"
+              >
+                Open preorder
+              </ShellLink>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   );

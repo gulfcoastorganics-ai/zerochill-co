@@ -113,71 +113,81 @@ textarea {
   animation: glow-float 12s ease-in-out infinite;
 }
 
-.home-hero-scene {
+.home-cover {
   position: relative;
+}
+
+.home-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(157, 255, 208, 0.1), transparent 20%),
+    radial-gradient(circle at 88% 12%, rgba(132, 123, 255, 0.12), transparent 22%),
+    radial-gradient(circle at 52% 100%, rgba(91, 183, 255, 0.08), transparent 24%);
+  opacity: 0.9;
+}
+
+.home-cover__shell {
+  position: relative;
+}
+
+.home-cover__left {
   isolation: isolate;
 }
 
-.home-hero-scene::before {
+.home-cover__left::before {
   content: '';
   position: absolute;
-  inset: -2rem;
-  pointer-events: none;
-  z-index: -2;
-  background:
-    radial-gradient(circle at 12% 22%, rgba(157, 255, 208, 0.16), transparent 18%),
-    radial-gradient(circle at 84% 18%, rgba(132, 123, 255, 0.2), transparent 22%),
-    radial-gradient(circle at 72% 68%, rgba(91, 183, 255, 0.12), transparent 24%),
-    radial-gradient(circle at 50% 110%, rgba(255, 255, 255, 0.025), transparent 28%);
-  opacity: 0.95;
-}
-
-.home-hero-scene::after {
-  content: '';
-  position: absolute;
-  inset: -1rem;
+  inset: 0;
   pointer-events: none;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(4, 5, 8, 0.18), rgba(4, 5, 8, 0.28)),
+    radial-gradient(circle at 16% 14%, rgba(157, 255, 208, 0.08), transparent 18%),
+    radial-gradient(circle at 82% 18%, rgba(132, 123, 255, 0.1), transparent 24%),
+    radial-gradient(circle at 60% 102%, rgba(91, 183, 255, 0.07), transparent 24%);
+  opacity: 0.95;
+}
+
+.home-cover__left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(4, 5, 8, 0.1), rgba(4, 5, 8, 0.18)),
     linear-gradient(115deg, rgba(255, 255, 255, 0.03), transparent 28%, rgba(255, 255, 255, 0.015) 60%, transparent 82%),
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 24px);
-  opacity: 0.75;
+  opacity: 0.7;
 }
 
-.home-wallpaper {
-  position: relative;
-  background:
-    radial-gradient(circle at 16% 18%, rgba(157, 255, 208, 0.15), transparent 20%),
-    radial-gradient(circle at 84% 12%, rgba(132, 123, 255, 0.22), transparent 22%),
-    radial-gradient(circle at 68% 76%, rgba(91, 183, 255, 0.14), transparent 24%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02) 48%, rgba(255, 255, 255, 0.01)),
-    rgba(10, 11, 15, 0.9);
+.home-cover__right {
+  isolation: isolate;
 }
 
-.home-wallpaper::before {
+.home-cover__right::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 30%, rgba(255, 255, 255, 0.012) 56%, transparent 82%),
-    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 8px),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 16px);
-  opacity: 0.35;
+    radial-gradient(circle at 18% 16%, rgba(157, 255, 208, 0.16), transparent 22%),
+    radial-gradient(circle at 82% 18%, rgba(132, 123, 255, 0.16), transparent 24%),
+    radial-gradient(circle at 68% 76%, rgba(91, 183, 255, 0.1), transparent 22%);
+  opacity: 0.95;
 }
 
-.home-wallpaper::after {
+.home-cover__graphic::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 22% 34%, rgba(157, 255, 208, 0.11), transparent 26%),
-    radial-gradient(circle at 74% 28%, rgba(132, 123, 255, 0.11), transparent 28%),
-    radial-gradient(circle at 58% 82%, rgba(91, 183, 255, 0.08), transparent 24%);
-  mix-blend-mode: screen;
-  opacity: 0.8;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 28%, rgba(255, 255, 255, 0.06) 60%, transparent 82%),
+    repeating-linear-gradient(180deg, rgba(13, 16, 20, 0.03) 0, rgba(13, 16, 20, 0.03) 1px, transparent 1px, transparent 10px);
+  opacity: 0.5;
 }
 
 .zc-panel {
