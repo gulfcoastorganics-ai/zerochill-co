@@ -12,41 +12,43 @@ function renderHome() {
 }
 
 describe('Home', () => {
-  it('renders the homepage with one main headline', () => {
+  it('renders the ZeroChill MVP cover', () => {
     renderHome();
 
-    const heading = screen.getByRole('heading', { level: 1 });
-
-    expect(heading).toHaveTextContent(/zerochill\s*design system/i);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/zerochill\s*design system/i);
     expect(screen.getByRole('heading', { name: /build\.\s*scale\.\s*stay zerochill\./i })).toBeInTheDocument();
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
   });
 
-  it('links to the important public routes', () => {
+  it('links to the main routes', () => {
     renderHome();
 
-    expect(screen.getAllByRole('link', { name: /preorder/i })[0]).toHaveAttribute('href', '/preorder');
+    expect(screen.getAllByRole('link', { name: /preorder zerochill/i })[0]).toHaveAttribute(
+      'href',
+      '/preorder',
+    );
     expect(screen.getAllByRole('link', { name: /open products/i })[0]).toHaveAttribute('href', '/products');
     expect(screen.getAllByRole('link', { name: /open review/i })[0]).toHaveAttribute('href', '/review');
   });
 
-  it('does not expose the private funding summary route or moon wording', () => {
+  it('renders the MVP feature panels and branding cues', () => {
+    renderHome();
+
+    expect(screen.getAllByText(/^foundations$/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/^components$/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/^patterns$/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/zerochill design system/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/^live$/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/zerochill\.co/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/est\. 2025/i)[0]).toBeInTheDocument();
+  });
+
+  it('does not expose private funding or moon references', () => {
     const { container } = renderHome();
 
     expect(container.querySelector('a[href="/funding-summary"]')).toBeNull();
     expect(screen.queryByText(/moon/i)).toBeNull();
     expect(screen.queryByText(/moonlit/i)).toBeNull();
     expect(screen.queryByText(/moonlike/i)).toBeNull();
-  });
-
-  it('keeps the cover readable and branded', () => {
-    renderHome();
-
-    expect(
-      screen.getAllByText(/components, patterns, and styles for a premium digital experience\./i)[0],
-    ).toBeInTheDocument();
-    expect(screen.getAllByText(/^live$/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/zerochill\.co/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/est\. 2025/i).length).toBeGreaterThan(0);
   });
 });
