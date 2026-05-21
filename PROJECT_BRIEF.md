@@ -16,14 +16,14 @@ ZeroChill Co is a sovereign AI infrastructure brand presented through a cinemati
 - Routed pages for launch, product, doctrine, docs, and preorder
 - Lightweight SVG and CSS assets
 - No heavy animation libraries or video backgrounds
-- Funding continuation route added for client review and Phase 2 approval
+- Private funding summary route added for client review and Phase 2 approval
 
 ## Funding Status
 
 - Zero-capital bootstrap phase is complete
 - Current site is deployed and operational
 - Next phase now requires funding for domain, database, email/domain verification, product assets, and continued development
-- Client review and funding decision paths are documented in-repo for handoff clarity
+- Client review and continuation decision paths are documented in-repo for handoff clarity
 
 ## Cinematic Layer Notes
 

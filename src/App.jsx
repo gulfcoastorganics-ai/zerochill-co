@@ -9,8 +9,10 @@ import SovereignZeroBlacksite from './pages/SovereignZeroBlacksite';
 import ZeroStateMatrixDevKit from './pages/ZeroStateMatrixDevKit';
 import Manifest from './pages/Manifest';
 import Docs from './pages/Docs';
-import Funding from './pages/Funding';
 import Preorder from './pages/Preorder';
+import PaymentSuccess from './pages/PaymentSuccess';
+import PaymentCancelled from './pages/PaymentCancelled';
+import FundingSummary from './pages/FundingSummary';
 import Review from './pages/Review';
 import Admin from './pages/Admin';
 import Products from './pages/Products';
@@ -28,7 +30,9 @@ export default function App() {
         <Route path="/zero-state-matrix-devkit" element={<ZeroStateMatrixDevKit />} />
         <Route path="/manifest" element={<Manifest />} />
         <Route path="/docs" element={<Docs />} />
-        <Route path="/funding" element={<Funding />} />
+        <Route path="/funding-summary" element={<FundingSummary />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-cancelled" element={<PaymentCancelled />} />
         <Route path="/preorder" element={<Preorder />} />
         <Route path="/review" element={<Review />} />
         <Route path="/admin" element={<Admin />} />

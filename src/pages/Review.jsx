@@ -9,7 +9,7 @@ export default function Review() {
     <>
       <Seo
         title="Client Review"
-        description="Client-facing review surface for ZeroChill Co with a direct path to funding continuation."
+        description="Client-facing review surface for ZeroChill Co with a discreet path to the private continuation summary."
       />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
@@ -20,17 +20,17 @@ export default function Review() {
                 Review summary
               </div>
               <h1 className="mt-4 text-4xl font-black uppercase tracking-[-0.04em] text-[color:var(--text)] sm:text-6xl">
-                Review the build, then open funding.
+                Review the build, then open the private summary.
               </h1>
               <p className="mt-4 max-w-3xl text-sm leading-7 text-[color:var(--text-muted)]">
-                The site is live and operational. The next step is to decide whether ZeroChill continues into the funded Phase 2 path for domain, database, verification, assets, and ongoing development.
+                The site is live and operational. The next step is to review the private continuation summary for domain, database, verification, assets, and ongoing development.
               </p>
             </div>
             <Link
-              to="/funding"
-              className="zc-button-primary border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black"
+              to="/funding-summary"
+              className="text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)] underline decoration-[color:var(--accent-strong)] decoration-1 underline-offset-4"
             >
-              Open funding
+              Private funding summary
             </Link>
           </div>
         </Panel>
@@ -46,14 +46,14 @@ export default function Review() {
                 Direct action
               </div>
               <p className="mt-3 text-sm leading-7 text-[color:var(--text-muted)]">
-                If the build should continue, the funding proposal contains the phase options and next approval steps.
+                If the build should continue, the private summary contains the phase options and next approval steps.
               </p>
             </div>
             <Link
-              to="/funding"
-              className="zc-button-secondary border border-[color:var(--line)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--text)]"
+              to="/funding-summary"
+              className="text-xs uppercase tracking-[0.24em] text-[color:var(--text-dim)] underline decoration-[color:var(--accent-strong)] decoration-1 underline-offset-4"
             >
-              Continue to proposal
+              View private summary
             </Link>
           </div>
         </Panel>

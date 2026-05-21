@@ -4,7 +4,6 @@ export const navItems = [
   { label: 'Zero State Matrix', to: '/zero-state-matrix' },
   { label: 'Manifest', to: '/manifest' },
   { label: 'Docs', to: '/docs' },
-  { label: 'Funding', to: '/funding' },
   { label: 'Review', to: '/review' },
   { label: 'Preorder', to: '/preorder' },
 ];
@@ -376,7 +375,6 @@ export const reviewRoutes = [
   '/zero-state-matrix-devkit',
   '/manifest',
   '/docs',
-  '/funding',
   '/preorder',
   '/review',
   '/admin',

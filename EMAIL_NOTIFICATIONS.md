@@ -2,9 +2,9 @@
 
 ## Current Status
 
-Working in production.
+Working as notification-only delivery.
 
-The preorder API sends email notifications when the required Vercel environment variables are present. If the email path is not configured, the preorder submission is still accepted and the response reports the email state explicitly.
+The preorder API attempts email notification delivery when the required Vercel environment variables are present. If the email path is not configured, the preorder submission is still accepted and the response reports the email state explicitly. Delivery is not guaranteed, and the API should not be treated as durable storage.
 
 ## Live API Endpoint
 
@@ -73,4 +73,4 @@ The next practical layer is a small database-backed submission store, followed b
 - The frontend still behaves safely if notification delivery fails.
 - No secret values are stored in the repository.
 - The current system is suitable for launch review, but not yet for long-term lead retention without storage.
-
+- Public messaging should continue to describe email as notification-only, not guaranteed delivery.

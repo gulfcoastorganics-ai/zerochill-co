@@ -256,6 +256,60 @@ textarea::placeholder {
     0 24px 60px rgba(0, 0, 0, 0.55);
 }
 
+.funding-summary-page {
+  position: relative;
+}
+
+.funding-summary-page .funding-summary-toolbar {
+  break-inside: avoid;
+}
+
+@media print {
+  @page {
+    margin: 0.55in;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .crt-shell::before,
+  .crt-shell::after,
+  .fixed,
+  header,
+  footer,
+  .funding-summary-print-hide {
+    display: none !important;
+  }
+
+  .funding-summary-page {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .funding-summary-page,
+  .funding-summary-page * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .funding-summary-page a {
+    color: #111 !important;
+    text-decoration: none !important;
+  }
+
+  .funding-summary-page .border,
+  .funding-summary-page .shadow-telemetry {
+    border-color: #bbb !important;
+  }
+}
+
 @keyframes page-enter {
   from {
     opacity: 0.82;
