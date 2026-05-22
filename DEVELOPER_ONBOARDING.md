@@ -11,7 +11,7 @@
 
 ## Routing Model
 
-- `/` is the GulfCoast Labs homepage
+- `/` is the ZeroChill Co. homepage
 - `/preorder` handles preorder handoff
 - `/success` handles checkout completion
 
@@ -20,7 +20,7 @@ The homepage includes the `#launch-access` fallback section for missing launch l
 ## Styling System
 
 - Dark matte base
-- Ice-blue accents
+- Crimson accents
 - Infrastructure-grid background treatment
 - Card and button motion in `app/globals.css`
 - Utility-first component styling in the page and form
@@ -33,7 +33,7 @@ The homepage includes the `#launch-access` fallback section for missing launch l
    - five service cards
 3. Lightweight Hardware
    - delivery differentiation
-4. Work With GulfCoast Labs
+4. Work With ZeroChill
    - offers and pricing
 5. Credibility
    - proof points and flagship project
@@ -65,7 +65,7 @@ Currently hardcoded in [app/page.tsx](./app/page.tsx):
 - Add screenshots or video clips
 - Add analytics
 - Add CRM or pipeline integration
-- Align `/preorder` and `/success` branding with the homepage if desired
+- Keep `/preorder` and `/success` aligned with the sovereign launch narrative
 
 ## Recommended Next PRs
 
@@ -73,5 +73,4 @@ Currently hardcoded in [app/page.tsx](./app/page.tsx):
 2. Add one or two case studies with screenshots.
 3. Add analytics and lead tracking.
 4. Move homepage content into a config file if updates become frequent.
-5. Rebrand the legacy launch pages if they need to match the GulfCoast Labs tone.
-
+5. Expand the launch access / preorder experience if it needs more operator detail.

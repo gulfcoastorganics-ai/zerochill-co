@@ -2,9 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "GulfCoast Labs | Operational Startup Systems",
+  title: "ZeroChill Co. | Sovereign AI Infrastructure",
   description:
-    "GulfCoast Labs builds operational startup systems, AppSec dashboards, backend infrastructure, deployment UX, and cinematic infrastructure branding.",
+    "ZeroChill Co. builds sovereign AI infrastructure, localized deployment systems, telemetry-isolated operator tools, and edge inference surfaces.",
+  openGraph: {
+    title: "ZeroChill Co. | Sovereign AI Infrastructure",
+    description:
+      "Sovereign Zero and the Zero-State Matrix present a hardened interface for private AI deployment, local execution, and telemetry-isolated operations.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ZeroChill Co. | Sovereign AI Infrastructure",
+    description:
+      "Sovereign Zero and the Zero-State Matrix present a hardened interface for private AI deployment, local execution, and telemetry-isolated operations.",
+  },
 };
 
 export default function RootLayout({

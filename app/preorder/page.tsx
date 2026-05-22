@@ -5,6 +5,12 @@ import { getLaunchTarget, isExternalLaunchHref, launchFallbackHref } from "@/lib
 export const metadata: Metadata = {
   title: "Sovereign Zero Preorder | ZeroChill Co.",
   description: "Sovereign Zero preorder details, launch queue access, and Payhip checkout handoff.",
+  openGraph: {
+    title: "Sovereign Zero Preorder | ZeroChill Co.",
+    description:
+      "Reserve the operator-owned hardware path for private deployment and localized intelligence.",
+    type: "website",
+  },
 };
 
 function LaunchAction({
@@ -52,7 +58,7 @@ export default function PreorderPage() {
               Sovereign Zero preorder
             </div>
             <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl">
-              Operator-owned hardware for local intelligence.
+              Operator-owned hardware for localized intelligence.
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
               Sovereign Zero is the hardware line for private deployment, local execution, and a controlled

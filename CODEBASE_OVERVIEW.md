@@ -2,26 +2,26 @@
 
 ## What This Site Is
 
-`zerochill-site` is a Next.js App Router site for GulfCoast Labs. The current homepage is a conversion-focused studio landing page for operational startup systems:
+`zerochill-site` is a Next.js App Router site for ZeroChill Co. The current homepage is a sovereign infrastructure landing page for private AI deployment and operational control:
 
-- AppSec / operator dashboards
-- Backend and API workflows
-- Deployment UX
-- Cinematic infrastructure branding
-- Lightweight-hardware-friendly delivery
+- Sovereign AI deployment systems
+- Edge inference and local execution surfaces
+- Telemetry-isolated operator tooling
+- Private infrastructure and launch queue flows
+- Hardened command-center branding
 
 ## High-Level Architecture
 
 - Framework: Next.js 16 with React 19 and TypeScript
 - App structure: App Router under `app/`
 - Routing:
-  - `/` is the GulfCoast Labs homepage
+  - `/` is the ZeroChill Co. homepage
   - `/preorder` is the Sovereign Zero preorder page
   - `/success` is the post-checkout page
 - Styling system:
   - Tailwind v4 utility classes in components
   - Global theme and motion tokens in `app/globals.css`
-  - Dark matte base with ice-blue accents
+  - Dark matte base with crimson indicators and steel overlays
 - Key components:
   - `app/page.tsx` for the homepage
   - `components/InquiryForm.tsx` for the contact form
@@ -36,45 +36,49 @@
 The homepage in `app/page.tsx` is a single long-form conversion page:
 
 1. Hero
-   - Headline: `Operational startup systems built for speed.`
-   - Supporting copy describes AppSec dashboards, backend infrastructure, deployment systems, and cinematic UX.
+   - Headline: `Sovereign AI infrastructure for localized deployment.`
+   - Supporting copy describes edge inference, private deployment systems, telemetry isolation, and command-center tooling.
    - Two CTAs:
-     - `Start a Project`
-     - `View Systems`
+     - `View Launch Access`
+     - `Sovereign Zero Preorder`
 
 2. Systems
-   - Five service cards:
-     - SecureOps Live
-     - Startup Infrastructure
-     - Mobile-First UX
-     - Backend/API Workflows
-     - Cinematic Infrastructure Branding
+   - Five operational cards:
+     - Private node deployment
+     - Separated signal planes
+     - Launch orchestration surfaces
+     - Localized execution fabric
+     - Zero-State Matrix command language
    - Each card includes a short description, capability bullets, and a badge/icon treatment.
 
-3. Lightweight Hardware
-   - Explains the delivery advantage:
-     - constrained-environment engineering
-     - efficient builds
-     - rapid deployment
-     - optimization-first mindset
+3. Launch Access
+   - Centralized launch panel for the shared Payhip URLs
+   - Includes local fallback behavior when env vars are missing
 
-4. Offers / Pricing
+4. Deployment Posture
+   - Explains the delivery advantage:
+     - sovereign by design
+     - telemetry isolation
+     - efficient builds
+     - operational uptime
+
+5. Offers / Pricing
    - Shows starting prices for the core service offers:
-     - MVP Infrastructure Stack
-     - Operator Dashboard Systems
-     - Backend/API Systems
-     - Security UX & Visualization
+     - Sovereign Node Stack
+     - Operator Command Console
+     - Edge Inference Workflow
+     - Zero-State Matrix UI
    - Includes the scope disclaimer.
 
-5. Credibility / Flagship
+6. Credibility / Flagship
    - Reinforces proof points:
-     - live deployments
-     - AppSec/operator concepts
-     - backend workflows
-     - mobile-first UX
-     - SecureOps Live as the flagship project
+     - localized deployment planning
+     - telemetry-isolated surfaces
+     - edge inference concepts
+     - operator-grade workflow design
+     - Sovereign Zero as the flagship hardware path
 
-6. Inquiry / Contact
+7. Intake / Contact
    - Frontend-only form with validation
    - Collects:
      - name
@@ -102,8 +106,10 @@ The homepage in `app/page.tsx` is a single long-form conversion page:
 
 - `SectionTitle`
   - small reusable heading/eyebrow block
-- `CtaLink`
+- `ActionButton`
   - consistent CTA button styling
+- `LaunchSignalCard`
+  - reusable launch access card with fallback-aware routing
 
 ## Styling System
 
@@ -121,8 +127,8 @@ The homepage in `app/page.tsx` is a single long-form conversion page:
 ### Visual Direction
 
 - Dark matte / black surface
-- Ice-blue accent color
-- Minimal but premium startup-studio feel
+- Crimson accent color
+- Minimal but premium infrastructure feel
 - Infrastructure-grid and scanline treatment
 - Responsive card layouts that stack cleanly on mobile
 
@@ -141,10 +147,11 @@ Currently hardcoded in `app/page.tsx`:
 
 - Hero copy
 - System card content
-- Hardware principles
+- Launch access content
+- Deployment principles
 - Offer/pricing labels
 - Credibility bullets
-- Inquiry helper text
+- Intake helper text
 
 ### Configurable Later
 
@@ -174,4 +181,3 @@ npx tsc --noEmit
 ```
 
 `npm test` is not defined in `package.json`.
-

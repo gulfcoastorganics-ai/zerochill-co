@@ -15,16 +15,20 @@ function normalizeHref(value?: string) {
   return `https://${href}`;
 }
 
+function resolveLaunchHref(primaryEnvVar: string, publicEnvVar: string) {
+  return normalizeHref(process.env[primaryEnvVar] ?? process.env[publicEnvVar]);
+}
+
 const launchTargets = {
   sovereignZero: {
     label: "PRE-ORDER SOVEREIGN ZERO",
     status: "Opening Soon",
-    href: normalizeHref(process.env.NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL),
+    href: resolveLaunchHref("PAYHIP_SOVEREIGN_ZERO_URL", "NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL"),
   },
   matrixAccess: {
     label: "JOIN THE MATRIX",
     status: "Launch Queue",
-    href: normalizeHref(process.env.NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL),
+    href: resolveLaunchHref("PAYHIP_MATRIX_ACCESS_URL", "NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL"),
   },
 } as const;
 

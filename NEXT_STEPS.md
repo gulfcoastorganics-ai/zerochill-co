@@ -7,7 +7,7 @@
   - CRM
   - API route
   - mailto fallback
-- Confirm whether `/preorder` and `/success` should be rebranded to GulfCoast Labs or left as launch-only pages.
+- Confirm whether the launch queue needs additional operational detail or remains intentionally lean.
 - Replace placeholder Payhip URLs with production values if they are not already live.
 
 ## High-Value Additions
@@ -39,4 +39,3 @@
   - `npm run lint`
   - `npx tsc --noEmit`
 - Verify mobile layout before any launch or campaign push
-

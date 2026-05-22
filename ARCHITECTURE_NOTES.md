@@ -12,7 +12,7 @@ This is a static-first App Router site:
 ## Important Files
 
 - `app/page.tsx`
-  - GulfCoast Labs homepage
+  - ZeroChill Co. homepage
   - Primary conversion surface
 - `components/InquiryForm.tsx`
   - Client-side validated inquiry capture
@@ -23,9 +23,9 @@ This is a static-first App Router site:
 - `lib/launchLinks.ts`
   - Shared Payhip / launch link resolution
 - `app/preorder/page.tsx`
-  - Legacy preorder handoff page
+  - Sovereign Zero preorder handoff page
 - `app/success/page.tsx`
-  - Legacy checkout success page
+  - Checkout success page
 
 ## Routing
 
@@ -37,8 +37,8 @@ Current routes:
 
 Important note:
 
-- The homepage is GulfCoast Labs.
-- `/preorder` and `/success` still carry the earlier launch-commerce branding and are candidates for later alignment if the studio wants a single consistent brand voice.
+- The homepage is ZeroChill Co.
+- `/preorder` and `/success` now follow the same sovereign launch narrative.
 
 ## Styling Mechanics
 
@@ -46,7 +46,7 @@ The site uses a layered visual system:
 
 - Base black background
 - Light infrastructure grid
-- Ice-blue accent color
+- Crimson accent color
 - Steel-gray secondary text
 - Card shadows and subtle glow accents
 
@@ -61,7 +61,7 @@ The CSS is intentionally lightweight:
 The homepage is data-driven from local arrays inside `app/page.tsx`:
 
 - systems
-- hardwarePrinciples
+- deploymentPrinciples
 - offers
 - credibilityPoints
 
@@ -103,5 +103,4 @@ Likely next integrations:
 - add screenshots or short video clips
 - add analytics
 - add CRM / pipeline handoff
-- align the legacy `/preorder` and `/success` pages with the new GulfCoast Labs brand
-
+- wire the inquiry form into an API route or mail flow

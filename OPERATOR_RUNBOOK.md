@@ -2,13 +2,13 @@
 
 ## What This Site Is
 
-GulfCoast Labs is a conversion-focused infrastructure studio site. It sells:
+ZeroChill Co. is a sovereign AI infrastructure site. It presents:
 
-- AppSec and operator dashboards
-- Startup infrastructure systems
-- Backend and API workflows
-- Mobile-first deployment UX
-- Cinematic infrastructure branding
+- Sovereign AI deployment systems
+- Edge inference and local execution surfaces
+- Telemetry-isolated operator tooling
+- Private infrastructure and launch queue flows
+- Hardened command-center branding
 
 ## Run Locally
 
@@ -34,15 +34,16 @@ npx tsc --noEmit
 ## Deploy
 
 1. Set the required Payhip env vars in Vercel.
-2. Set the Payhip success redirect to `/success`.
-3. Run `npm run build`.
-4. Deploy to Vercel.
-5. Verify `/`, `/preorder`, and `/success` in production.
+2. Set `RESEND_API_KEY`, `ZEROCHILL_INTAKE_FROM_EMAIL`, and `ZEROCHILL_INTAKE_TO_EMAIL` if email delivery should be enabled for the intake pipeline.
+3. Set the Payhip success redirect to `/success`.
+4. Run `npm run build`.
+5. Deploy to Vercel.
+6. Verify `/`, `/preorder`, `/success`, and `/api/inquiry` in production.
 
 ## Update Homepage Content
 
 - Edit the arrays and copy in [app/page.tsx](./app/page.tsx).
-- Hero text and CTAs live near the top of the file.
+- Hero text, launch access, and the operational sections live near the top of the file.
 - Section content is hardcoded in local arrays for now.
 
 ## Update Pricing and Offers
@@ -57,6 +58,12 @@ npx tsc --noEmit
 - Keep homepage CTAs pointed at the centralized launch config.
 - If env vars are missing, the site falls back to the local `#launch-access` panel.
 
+## Update Intake Pipeline
+
+- Edit [lib/inquiryIntake.ts](./lib/inquiryIntake.ts) for schema, rate limiting, and mail body formatting.
+- Edit [app/api/inquiry/route.ts](./app/api/inquiry/route.ts) for the intake handler and delivery flow.
+- If email delivery is not configured, the route logs intake locally and still returns a success response.
+
 ## Troubleshoot Common Issues
 
 - Build fails on missing env vars:
@@ -64,13 +71,12 @@ npx tsc --noEmit
 - CTA opens the fallback panel:
   - The Payhip URL is missing or blank.
 - Form does not submit:
-  - The inquiry form is frontend-only and only validates/logs locally.
+  - Check the browser network request to `/api/inquiry` and confirm the intake env vars if email delivery is expected.
 - Layout looks cramped on mobile:
   - Check the section spacing and card grid classes in [app/page.tsx](./app/page.tsx) and [app/globals.css](./app/globals.css).
 
 ## Current Limitations
 
-- Inquiry submissions do not go to email or CRM yet.
-- `/preorder` and `/success` still reflect the launch-commerce flow and may need brand alignment later.
+- Inquiry submissions can log locally or email an internal inbox, but they do not yet flow into a CRM.
 - Case studies, screenshots, analytics, and CRM handoff are not wired yet.
-
+- Launch checkout still depends on the Payhip environment variables being set.

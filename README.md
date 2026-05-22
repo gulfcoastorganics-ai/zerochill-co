@@ -1,4 +1,4 @@
-GulfCoast Labs is a Next.js website for operational startup systems, AppSec/operator dashboards, backend workflows, deployment UX, and cinematic infrastructure branding.
+ZeroChill Co. is a Next.js website for sovereign AI infrastructure, localized deployment systems, telemetry-isolated operator tools, and edge inference surfaces.
 
 ## Main Files
 
@@ -21,6 +21,8 @@ npx tsc --noEmit
 ## Deployment Notes
 
 - Set `NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL` and `NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL` in Vercel.
+- Optionally set `PAYHIP_SOVEREIGN_ZERO_URL` and `PAYHIP_MATRIX_ACCESS_URL`; the launch helper prefers those server-side aliases when present and falls back to the public env vars.
+- Set `RESEND_API_KEY`, `ZEROCHILL_INTAKE_FROM_EMAIL`, and `ZEROCHILL_INTAKE_TO_EMAIL` if you want intake emails delivered instead of local-only logging.
 - Set the Payhip success redirect to `/success`.
 - Verify the homepage, `/preorder`, and `/success` after deploy.
 
@@ -50,7 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses the App Router, local styling tokens, and the shared launch link config in `lib/launchLinks.ts` to keep the deploy flow simple.
 
 ## Learn More
 
@@ -64,6 +66,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## Launch Commerce
 
 Payhip checkout links are centralized in [`lib/launchLinks.ts`](./lib/launchLinks.ts).
+
+Inquiry intake validation, rate limiting, and email fallback are centralized in [`lib/inquiryIntake.ts`](./lib/inquiryIntake.ts) and [`app/api/inquiry/route.ts`](./app/api/inquiry/route.ts).
 
 Paste the live URLs into `.env.local` with these keys:
 
@@ -93,15 +97,29 @@ Production deployment note:
 
 - Set the Payhip success redirect to `/success`.
 - Make sure the two `NEXT_PUBLIC_PAYHIP_*` env vars are present in your production deployment.
+- If you want email delivery, set `RESEND_API_KEY`, `ZEROCHILL_INTAKE_FROM_EMAIL`, and `ZEROCHILL_INTAKE_TO_EMAIL`.
 - Verify the `/preorder` and `/success` routes after deploy.
 
 ## Launch Deployment Checklist
 
 - Copy the Payhip env vars into Vercel production and preview environments.
+- Copy the optional intake env vars into Vercel if email delivery should be enabled.
 - Set the Payhip success redirect to `/success` or the absolute production URL.
 - Run `npm run build` before deployment.
 - Deploy to Vercel.
 - Test the live preorder CTA after deploy.
+
+## Production Deployment
+
+For a launch-ready Vercel deployment:
+
+1. Connect the repository to Vercel.
+2. Confirm framework detection resolves to Next.js.
+3. Add the documented environment variables in the Vercel project settings.
+4. Keep the default Node runtime for the intake route.
+5. Set the Payhip success redirect to `/success`.
+6. Deploy a preview build and verify `/`, `/preorder`, `/success`, and `/api/inquiry`.
+7. Promote to production after a successful preview check.
 
 ## Deploy on Vercel
 

@@ -2,35 +2,35 @@
 
 ## 1) What This Project Is
 
-`zerochill-site` is the GulfCoast Labs website. It is a Next.js App Router site built to convert visitors into project inquiries and launch buyers. The positioning is an infrastructure studio:
+`zerochill-site` is the ZeroChill Co. website. It is a Next.js App Router site built to convert visitors into project inquiries and launch buyers. The positioning is sovereign infrastructure:
 
-- operational startup systems
-- AppSec and operator dashboards
-- backend/API workflows
-- mobile-first deployment UX
-- cinematic infrastructure branding
+- sovereign AI deployment systems
+- edge inference and local execution
+- telemetry-isolated operator tooling
+- command-center deployment UX
+- hardened infrastructure branding
 
-The site is intentionally lean. It avoids a backend, database, or heavy dependencies for the current launch.
+The site stays intentionally lean. It avoids a backend, database, or heavy dependencies for the current launch.
 
 ## 2) How The App Is Structured
 
 The app is organized around a small App Router surface:
 
-- [app/page.tsx](/home/gulfcoastorganics/zerochill-site/app/page.tsx) is the main homepage and conversion page
-- [app/preorder/page.tsx](/home/gulfcoastorganics/zerochill-site/app/preorder/page.tsx) is the preorder handoff page
-- [app/success/page.tsx](/home/gulfcoastorganics/zerochill-site/app/success/page.tsx) is the checkout success page
-- [components/InquiryForm.tsx](/home/gulfcoastorganics/zerochill-site/components/InquiryForm.tsx) is the client-side inquiry form
-- [lib/launchLinks.ts](/home/gulfcoastorganics/zerochill-site/lib/launchLinks.ts) centralizes launch / Payhip link behavior
-- [app/globals.css](/home/gulfcoastorganics/zerochill-site/app/globals.css) defines the visual system
-- [app/layout.tsx](/home/gulfcoastorganics/zerochill-site/app/layout.tsx) sets the global metadata and root layout
+- [`app/page.tsx`](/home/gulfcoastorganics/zerochill-site/app/page.tsx) is the main homepage and conversion page
+- [`app/preorder/page.tsx`](/home/gulfcoastorganics/zerochill-site/app/preorder/page.tsx) is the preorder handoff page
+- [`app/success/page.tsx`](/home/gulfcoastorganics/zerochill-site/app/success/page.tsx) is the checkout success page
+- [`components/InquiryForm.tsx`](/home/gulfcoastorganics/zerochill-site/components/InquiryForm.tsx) is the client-side inquiry form
+- [`lib/launchLinks.ts`](/home/gulfcoastorganics/zerochill-site/lib/launchLinks.ts) centralizes launch / Payhip link behavior
+- [`app/globals.css`](/home/gulfcoastorganics/zerochill-site/app/globals.css) defines the visual system
+- [`app/layout.tsx`](/home/gulfcoastorganics/zerochill-site/app/layout.tsx) sets the global metadata and root layout
 
-The content is mostly hardcoded in local arrays inside `app/page.tsx`. That keeps the current implementation simple and easy to edit.
+Most content is hardcoded in local arrays inside `app/page.tsx`. That keeps the current implementation simple and easy to edit.
 
 ## 3) How Routing Works
 
 Routing follows the App Router convention:
 
-- `/` loads the GulfCoast Labs homepage
+- `/` loads the ZeroChill Co. homepage
 - `/preorder` explains Sovereign Zero preorder flow and Payhip checkout handoff
 - `/success` shows the post-checkout confirmation state
 
@@ -41,37 +41,41 @@ The homepage also includes a `#launch-access` anchor used as the local fallback 
 The homepage in `app/page.tsx` is a long-form conversion page with a fixed section order:
 
 1. Hero
-   - Headline: `Operational startup systems built for speed.`
-   - Supporting copy: AppSec dashboards, backend infrastructure, deployment systems, and cinematic operator-grade UX
+   - Headline: `Sovereign AI infrastructure for localized deployment.`
+   - Supporting copy: edge inference, private deployment systems, telemetry isolation, and command-center tooling
    - Two CTAs:
-     - `Start a Project`
-     - `View Systems`
+     - `View Launch Access`
+     - `Sovereign Zero Preorder`
 
 2. Systems
    - Five service cards:
-     - SecureOps Live
-     - Startup Infrastructure
-     - Mobile-First UX
-     - Backend/API Workflows
-     - Cinematic Infrastructure Branding
+     - Private node deployment
+     - Separated signal planes
+     - Launch orchestration surfaces
+     - Localized execution fabric
+     - Zero-State Matrix command language
    - Each card includes a short description and capability bullets
 
-3. Lightweight Hardware
-   - Explains the build philosophy:
-     - constrained-environment engineering
-     - efficient builds
-     - rapid deployment
-     - optimization-first mindset
+3. Launch Access
+   - Shared Payhip launch panel
+   - Includes a local fallback when env vars are missing
 
-4. Work With GulfCoast Labs
-   - Shows the current offers and starting prices
+4. Deployment Posture
+   - Explains the build philosophy:
+     - sovereign by design
+     - telemetry isolation
+     - efficient builds
+     - operational uptime
+
+5. Offers / Pricing
+   - Shows starting prices for the core service offers
    - Includes the scope disclaimer
 
-5. Credibility
+6. Credibility / Flagship
    - Summarizes proof points
-   - Highlights SecureOps Live as the flagship project
+   - Highlights Sovereign Zero as the flagship hardware path
 
-6. Inquiry / Contact
+7. Intake / Contact
    - Uses the `InquiryForm` component
    - Collects project details from prospects
 
@@ -95,7 +99,7 @@ There is no backend submission yet. This is deliberately frontend-only until a m
 The visual system lives mainly in `app/globals.css`:
 
 - dark matte / black background
-- ice-blue accents
+- crimson accents
 - steel-gray text tones
 - grid and scanline overlays
 - motion for cards, bars, and subtle button shimmer
@@ -121,15 +125,16 @@ Most content is edited directly in `app/page.tsx`:
 
 - hero copy
 - system cards
-- hardware principles
+- launch access
+- deployment principles
 - offers and pricing
 - credibility bullets
 
 The following are the main extension points for configuration:
 
-- [lib/launchLinks.ts](/home/gulfcoastorganics/zerochill-site/lib/launchLinks.ts) for Payhip URLs and fallback behavior
-- [components/InquiryForm.tsx](/home/gulfcoastorganics/zerochill-site/components/InquiryForm.tsx) for lead capture behavior
-- [app/preorder/page.tsx](/home/gulfcoastorganics/zerochill-site/app/preorder/page.tsx) and [app/success/page.tsx](/home/gulfcoastorganics/zerochill-site/app/success/page.tsx) for launch-commerce messaging
+- [`lib/launchLinks.ts`](/home/gulfcoastorganics/zerochill-site/lib/launchLinks.ts) for Payhip URLs and fallback behavior
+- [`components/InquiryForm.tsx`](/home/gulfcoastorganics/zerochill-site/components/InquiryForm.tsx) for lead capture behavior
+- [`app/preorder/page.tsx`](/home/gulfcoastorganics/zerochill-site/app/preorder/page.tsx) and [`app/success/page.tsx`](/home/gulfcoastorganics/zerochill-site/app/success/page.tsx) for launch-commerce messaging
 
 ## 8) How To Run, Build, Lint, And Typecheck
 
@@ -163,7 +168,7 @@ npx tsc --noEmit
 
 The following pieces are in a shippable state:
 
-- the GulfCoast Labs homepage
+- the ZeroChill Co. homepage
 - the `/preorder` page
 - the `/success` page
 - the centralized Payhip / launch link config
@@ -181,7 +186,7 @@ The next realistic additions are:
 - add screenshots or short video clips
 - add analytics
 - add a real client pipeline / lead workflow
-- align the legacy `/preorder` and `/success` pages more closely with the GulfCoast Labs brand if needed
+- add richer launch queue telemetry if the checkout flow grows
 
 ## Practical Handoff
 
@@ -193,4 +198,3 @@ If you are taking over this codebase, start here:
 4. Edit `app/page.tsx` for homepage content
 5. Edit `components/InquiryForm.tsx` if you need lead capture changes
 6. Edit `lib/launchLinks.ts` for checkout routing behavior
-

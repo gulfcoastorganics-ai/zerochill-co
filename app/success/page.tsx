@@ -4,6 +4,12 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Success | ZeroChill Co.",
   description: "Post-checkout landing page for Sovereign Zero preorder confirmations.",
+  openGraph: {
+    title: "Success | ZeroChill Co.",
+    description:
+      "Checkout completion for Sovereign Zero preorder and launch access purchases.",
+    type: "website",
+  },
 };
 
 export default function SuccessPage() {
