@@ -1,4 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+GulfCoast Labs is a Next.js website for operational startup systems, AppSec/operator dashboards, backend workflows, deployment UX, and cinematic infrastructure branding.
+
+## Main Files
+
+- [app/page.tsx](./app/page.tsx)
+- [components/InquiryForm.tsx](./components/InquiryForm.tsx)
+- [lib/launchLinks.ts](./lib/launchLinks.ts)
+- [app/globals.css](./app/globals.css)
+- [app/preorder/page.tsx](./app/preorder/page.tsx)
+- [app/success/page.tsx](./app/success/page.tsx)
+
+## Local Commands
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npx tsc --noEmit
+```
+
+## Deployment Notes
+
+- Set `NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL` and `NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL` in Vercel.
+- Set the Payhip success redirect to `/success`.
+- Verify the homepage, `/preorder`, and `/success` after deploy.
+
+## Docs
+
+- [Operator Runbook](./OPERATOR_RUNBOOK.md)
+- [Developer Onboarding](./DEVELOPER_ONBOARDING.md)
+- [Codebase Overview](./CODEBASE_OVERVIEW.md)
+- [Architecture Notes](./ARCHITECTURE_NOTES.md)
+- [Next Steps](./NEXT_STEPS.md)
 
 ## Getting Started
 

@@ -3,9 +3,9 @@
 :root {
   --background: #000000;
   --foreground: #f8fafc;
-  --accent: #b91c1c;
-  --accent-soft: #ef4444;
-  --steel: #94a3b8;
+  --accent: #60a5fa;
+  --accent-soft: #93c5fd;
+  --steel: #cbd5e1;
   --line: rgba(148, 163, 184, 0.18);
   --surface: rgba(255, 255, 255, 0.03);
 }
@@ -30,8 +30,8 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(96, 165, 250, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.045) 1px, transparent 1px),
     var(--background);
   background-size: 44px 44px;
   color: var(--foreground);
@@ -67,12 +67,12 @@ body {
 @keyframes zerochill-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.16), 0 0 0 rgba(185, 28, 28, 0);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.16), 0 0 0 rgba(96, 165, 250, 0);
   }
   50% {
     box-shadow:
-      0 0 0 1px rgba(185, 28, 28, 0.22),
-      0 0 18px rgba(185, 28, 28, 0.18);
+      0 0 0 1px rgba(96, 165, 250, 0.22),
+      0 0 18px rgba(96, 165, 250, 0.18);
   }
 }
 
@@ -120,8 +120,8 @@ body {
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(96, 165, 250, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.018) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 92%);
   opacity: 0.4;
@@ -142,8 +142,8 @@ body {
 
 .zerochill-grid-overlay {
   background:
-    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(96, 165, 250, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.05) 1px, transparent 1px);
   background-size: 38px 38px;
   mask-image: radial-gradient(circle at center, black, transparent 90%);
   opacity: 0.28;
@@ -177,7 +177,7 @@ body {
   border-color: rgba(255, 255, 255, 0.18);
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(185, 28, 28, 0.06),
+    0 0 0 1px rgba(96, 165, 250, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -189,7 +189,7 @@ body {
     box-shadow 180ms ease,
     background-color 180ms ease,
     border-color 180ms ease;
-  box-shadow: 0 0 0 rgba(185, 28, 28, 0);
+  box-shadow: 0 0 0 rgba(96, 165, 250, 0);
 }
 
 .zerochill-button::after {
@@ -208,7 +208,7 @@ body {
 
 .zerochill-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.2), 0 0 18px rgba(185, 28, 28, 0.16);
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.22), 0 0 18px rgba(96, 165, 250, 0.16);
 }
 
 .zerochill-button:hover::after {
@@ -223,12 +223,12 @@ body {
 .zerochill-bar {
   transform-origin: left center;
   border-radius: 9999px;
-  background: linear-gradient(90deg, rgba(185, 28, 28, 0.4), rgba(239, 68, 68, 0.95));
+  background: linear-gradient(90deg, rgba(96, 165, 250, 0.45), rgba(147, 197, 253, 0.95));
   animation: zerochill-bar 2.4s ease-in-out infinite;
 }
 
 .zerochill-flash {
-  text-shadow: 0 0 12px rgba(185, 28, 28, 0.18);
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.18);
 }
 
 @media (prefers-reduced-motion: reduce) {

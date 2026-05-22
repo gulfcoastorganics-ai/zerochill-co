@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ZeroChill Co. | Sovereign Zero",
-  description: "ZeroChill Co. landing page for Sovereign Zero, Zero-State Matrix, and local intelligence hardware.",
+  title: "GulfCoast Labs | Operational Startup Systems",
+  description:
+    "GulfCoast Labs builds operational startup systems, AppSec dashboards, backend infrastructure, deployment UX, and cinematic infrastructure branding.",
 };
 
 export default function RootLayout({
