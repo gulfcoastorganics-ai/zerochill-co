@@ -39,9 +39,20 @@ function requiredText(message: string, maxLength: number) {
   );
 }
 
-function enumText<const TValues extends readonly [string, ...string[]]>(values: TValues, message: string) {
+function aliasedEnumText<const TValues extends readonly [string, ...string[]]>(
+  values: TValues,
+  message: string,
+  aliases: Record<string, TValues[number]>,
+) {
   return z.preprocess(
-    (value) => (typeof value === "string" ? value.trim() : ""),
+    (value) => {
+      if (typeof value !== "string") {
+        return "";
+      }
+
+      const trimmed = value.trim();
+      return aliases[trimmed] ?? trimmed;
+    },
     z.string().refine((candidate) => values.includes(candidate as TValues[number]), message),
   );
 }
@@ -53,8 +64,12 @@ export const inquirySubmissionSchema = z.object({
     z.string().min(1, "Email is required.").email("Enter a valid email address.").max(254),
   ),
   organization: requiredText("Organization is required.", 160),
-  deploymentInterest: enumText(deploymentInterestValues, "Choose a deployment interest."),
-  projectType: enumText(projectTypeValues, "Choose a project type."),
+  deploymentInterest: aliasedEnumText(deploymentInterestValues, "Choose a deployment interest.", {
+    "Production intake delivery validation": "launch-queue",
+  }),
+  projectType: aliasedEnumText(projectTypeValues, "Choose a project type.", {
+    "sovereign-infrastructure": "node-stack",
+  }),
   message: z.preprocess(
     (value) => (typeof value === "string" ? value : ""),
     z.string().trim().min(24, "Message must be at least 24 characters.").max(4000),

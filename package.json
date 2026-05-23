@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "check:production": "node scripts/check-production.mjs",
+    "check:intake": "node scripts/check-intake.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -18,21 +18,31 @@ function jsonResponse(
   return NextResponse.json(body, init);
 }
 
-async function sendInquiryNotification(submission: InquiryLogSubmission) {
+function logIntakeEvent(event: string, details: Record<string, unknown>) {
+  console.info(`[ZeroChill] ${event}`, details);
+}
+
+async function sendInquiryNotification(intakeId: string, submission: InquiryLogSubmission) {
   const { apiKey, to, from } = resolveInquiryMailEnv();
-  const logContext = {
-    name: submission.name,
-    organization: submission.organization,
-    deploymentInterest: submission.deploymentInterest,
-    projectType: submission.projectType,
-  };
 
   if (!apiKey || !to || !from) {
-    console.info("[ZeroChill] intake logged locally", logContext);
-    return { deliveryMode: "log" as const, delivered: false };
+    logIntakeEvent("intake-email-config-missing", {
+      intakeId,
+      deliveryMode: "log",
+    });
+    logIntakeEvent("intake-log-fallback", {
+      intakeId,
+      deliveryMode: "log",
+    });
+    return { deliveryMode: "log" as const, delivered: false, deliveryAttempted: false };
   }
 
   try {
+    logIntakeEvent("intake-resend-attempted", {
+      intakeId,
+      deliveryMode: "email",
+    });
+
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -50,31 +60,48 @@ async function sendInquiryNotification(submission: InquiryLogSubmission) {
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => "");
-      console.error("[ZeroChill] intake email delivery failed", {
+      console.error("[ZeroChill] intake-resend-failure", {
+        intakeId,
         status: response.status,
-        errorText,
-        ...logContext,
+        deliveryMode: "log",
+        errorText: errorText ? "present" : "empty",
       });
-      console.info("[ZeroChill] intake logged locally", logContext);
-      return { deliveryMode: "log" as const, delivered: false };
+      logIntakeEvent("intake-log-fallback", {
+        intakeId,
+        deliveryMode: "log",
+      });
+      return { deliveryMode: "log" as const, delivered: false, deliveryAttempted: true };
     }
 
-    return { deliveryMode: "email" as const, delivered: true };
-  } catch (error) {
-    console.error("[ZeroChill] intake email delivery exception", {
-      error,
-      ...logContext,
+    logIntakeEvent("intake-resend-success", {
+      intakeId,
+      deliveryMode: "email",
     });
-    console.info("[ZeroChill] intake logged locally", logContext);
-    return { deliveryMode: "log" as const, delivered: false };
+    return { deliveryMode: "email" as const, delivered: true, deliveryAttempted: true };
+  } catch (error) {
+    console.error("[ZeroChill] intake-resend-failure", {
+      intakeId,
+      deliveryMode: "log",
+      error: error instanceof Error ? error.name : "unknown",
+    });
+    logIntakeEvent("intake-log-fallback", {
+      intakeId,
+      deliveryMode: "log",
+    });
+    return { deliveryMode: "log" as const, delivered: false, deliveryAttempted: true };
   }
 }
 
 export async function POST(request: Request) {
+  const intakeId = crypto.randomUUID();
   const clientKey = getClientKey(request);
   const rateLimit = checkInquiryRateLimit(clientKey);
 
   if (!rateLimit.allowed) {
+    logIntakeEvent("intake-rate-limit-rejected", {
+      intakeId,
+      retryAfterSeconds: rateLimit.retryAfterSeconds,
+    });
     return jsonResponse(
       {
         ok: false,
@@ -91,6 +118,10 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
+    logIntakeEvent("intake-validation-failed", {
+      intakeId,
+      fields: ["json"],
+    });
     return jsonResponse(
       {
         ok: false,
@@ -104,6 +135,10 @@ export async function POST(request: Request) {
   const parsed = inquirySubmissionSchema.safeParse(body);
 
   if (!parsed.success) {
+    logIntakeEvent("intake-validation-failed", {
+      intakeId,
+      fields: Object.keys(getInquiryFieldErrors(parsed.error)),
+    });
     return jsonResponse(
       {
         ok: false,
@@ -116,6 +151,9 @@ export async function POST(request: Request) {
   }
 
   if (parsed.data.honeypot) {
+    logIntakeEvent("intake-honeypot-rejected", {
+      intakeId,
+    });
     return jsonResponse(
       {
         ok: false,
@@ -126,17 +164,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const intakeId = crypto.randomUUID();
   const logPayload = formatInquiryLog(parsed.data);
-  const delivery = await sendInquiryNotification(logPayload);
+  const delivery = await sendInquiryNotification(intakeId, logPayload);
 
-  console.info("[ZeroChill] intake received", {
+  logIntakeEvent("intake-received", {
     intakeId,
     deliveryMode: delivery.deliveryMode,
-    name: logPayload.name,
-    organization: logPayload.organization,
-    deploymentInterest: logPayload.deploymentInterest,
-    projectType: logPayload.projectType,
+    deliveryAttempted: delivery.deliveryAttempted,
   });
 
   return jsonResponse({
@@ -145,6 +179,7 @@ export async function POST(request: Request) {
     intakeId,
     delivered: delivery.delivered,
     deliveryMode: delivery.deliveryMode,
+    deliveryAttempted: delivery.deliveryAttempted,
   });
 }
 

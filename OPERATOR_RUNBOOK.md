@@ -32,6 +32,15 @@ ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:production
 
 The checker verifies the live HTTP status codes for `/`, `/preorder`, `/success`, and a safe `OPTIONS` probe on `/api/inquiry`. It does not submit form data.
 
+## Intake Diagnostic
+
+```bash
+ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:intake
+```
+
+The intake diagnostic sends a controlled production test POST to `/api/inquiry` and reports only the response flags. It does not print secrets or the payload body.
+If the live route rejects the diagnostic payload with validation errors, the checker retries once with schema-compatible fields so operators can still verify delivery on a deployment that has not yet picked up the latest intake schema.
+
 ## Lint and Typecheck
 
 ```bash

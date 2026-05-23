@@ -17,6 +17,7 @@ npm run build
 npm run lint
 npx tsc --noEmit
 npm run check:production
+npm run check:intake
 ```
 
 ## Deployment Notes
@@ -108,6 +109,15 @@ ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:production
 ```
 
 The checker sends only `GET` requests to `/`, `/preorder`, and `/success`, plus a safe `OPTIONS` request to `/api/inquiry`. It reports HTTP status codes only and does not submit form data.
+
+Intake delivery diagnostic:
+
+```bash
+ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:intake
+```
+
+This sends a controlled POST to `/api/inquiry` using a test-only payload and reports the HTTP status plus the intake response flags. It does not print secrets or raw form content.
+If the live deployment still rejects the diagnostic payload with validation errors, the checker retries once with schema-compatible intake fields so you can still verify delivery on an older production release.
 
 ## Launch Deployment Checklist
 
