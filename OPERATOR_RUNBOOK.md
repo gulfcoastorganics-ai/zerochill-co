@@ -51,7 +51,7 @@ npx tsc --noEmit
 ## Deploy
 
 1. Set the required Payhip env vars in Vercel.
-2. Set `RESEND_API_KEY` plus either the preferred intake env vars (`ZEROCHILL_INTAKE_FROM_EMAIL`, `ZEROCHILL_INTAKE_TO_EMAIL`) or the legacy Vercel aliases (`PREORDER_FROM_EMAIL`, `PREORDER_NOTIFY_TO`) if email delivery should be enabled for the intake pipeline.
+2. Set `RESEND_API_KEY` and, if available, `RESEND_FROM_EMAIL` with a verified sender. If `RESEND_FROM_EMAIL` is not present, the route will only use `ZEROCHILL_INTAKE_FROM_EMAIL` or `PREORDER_FROM_EMAIL` when they are not consumer mailbox domains. Set `ZEROCHILL_INTAKE_TO_EMAIL` or `PREORDER_NOTIFY_TO` as the recipient. Use Gmail as the recipient inbox, not as the Resend sender.
 3. Set the Payhip success redirect to `/success`.
 4. Run `npm run build`.
 5. Deploy to Vercel.

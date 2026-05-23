@@ -95,7 +95,14 @@ export type InquiryMailEnv = {
   apiKey?: string;
   to?: string;
   from?: string;
+  fromSource?: InquiryMailSenderSource;
 };
+
+export type InquiryMailSenderSource =
+  | "resend_from_email"
+  | "zerochill_intake_from_email"
+  | "preorder_from_email"
+  | "resend_default_fallback";
 
 type RateLimitBucket = {
   count: number;
@@ -200,10 +207,77 @@ export function getInquiryFieldErrors(error: z.ZodError) {
   return fieldErrors;
 }
 
+const blockedConsumerMailboxDomains = new Set([
+  "gmail.com",
+  "googlemail.com",
+  "yahoo.com",
+  "yahoo.co.uk",
+  "yahoo.ca",
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "msn.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "aol.com",
+]);
+
+function getEmailDomain(value: string) {
+  const atIndex = value.lastIndexOf("@");
+
+  if (atIndex < 0) {
+    return "";
+  }
+
+  return value.slice(atIndex + 1).toLowerCase();
+}
+
+export function isBlockedResendSender(value: string) {
+  const domain = getEmailDomain(value.trim());
+
+  if (!domain) {
+    return true;
+  }
+
+  return blockedConsumerMailboxDomains.has(domain);
+}
+
+function pickSafeSenderSource(
+  value: string | undefined,
+  source: InquiryMailSenderSource,
+): { from: string; fromSource: InquiryMailSenderSource } | undefined {
+  const trimmed = value?.trim();
+
+  if (!trimmed || isBlockedResendSender(trimmed)) {
+    return undefined;
+  }
+
+  return {
+    from: trimmed,
+    fromSource: source,
+  };
+}
+
 export function resolveInquiryMailEnv(): InquiryMailEnv {
+  const resendFrom = pickSafeSenderSource(process.env.RESEND_FROM_EMAIL, "resend_from_email");
+  const zerochillFrom = pickSafeSenderSource(
+    process.env.ZEROCHILL_INTAKE_FROM_EMAIL,
+    "zerochill_intake_from_email",
+  );
+  const preorderFrom = pickSafeSenderSource(
+    process.env.PREORDER_FROM_EMAIL,
+    "preorder_from_email",
+  );
+  const resolvedFrom = resendFrom || zerochillFrom || preorderFrom || {
+    from: "onboarding@resend.dev",
+    fromSource: "resend_default_fallback" as const,
+  };
+
   return {
     apiKey: process.env.RESEND_API_KEY?.trim(),
     to: process.env.ZEROCHILL_INTAKE_TO_EMAIL?.trim() || process.env.PREORDER_NOTIFY_TO?.trim(),
-    from: process.env.ZEROCHILL_INTAKE_FROM_EMAIL?.trim() || process.env.PREORDER_FROM_EMAIL?.trim(),
+    from: resolvedFrom.from,
+    fromSource: resolvedFrom.fromSource,
   };
 }

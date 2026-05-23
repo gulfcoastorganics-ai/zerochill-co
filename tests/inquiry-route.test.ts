@@ -151,7 +151,97 @@ describe("inquiry route", () => {
     );
   });
 
-  it("uses preferred ZEROCHILL intake env vars when present", async () => {
+  it("uses RESEND_FROM_EMAIL when a custom verified sender is set", async () => {
+    const fetchSpy = vi.fn(async () => {
+      return new Response(JSON.stringify({ id: "email_123" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const infoSpy = vi.spyOn(console, "info").mockImplementation(() => {});
+    vi.stubGlobal("fetch", fetchSpy);
+    vi.stubEnv("RESEND_API_KEY", "re_test_123");
+    vi.stubEnv("RESEND_FROM_EMAIL", "launch@zerochill.co");
+    vi.stubEnv("ZEROCHILL_INTAKE_FROM_EMAIL", "intake@gmail.com");
+    vi.stubEnv("ZEROCHILL_INTAKE_TO_EMAIL", "ops@zerochill.co");
+    vi.stubEnv("PREORDER_FROM_EMAIL", "legacy@gmail.com");
+    vi.stubEnv("PREORDER_NOTIFY_TO", "legacy-to@zerochill.co");
+
+    const { POST } = await loadRoute();
+    const response = await POST(buildRequest(validPayload, "203.0.113.11"));
+    const payload = (await response.json()) as {
+      ok: boolean;
+      delivered: boolean;
+      deliveryMode: string;
+      deliveryAttempted: boolean;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload.ok).toBe(true);
+    expect(payload.delivered).toBe(true);
+    expect(payload.deliveryMode).toBe("email");
+    expect(payload.deliveryAttempted).toBe(true);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    const firstCall = fetchSpy.mock.calls[0] as unknown as [string, RequestInit] | undefined;
+    const requestBody = JSON.parse(String(firstCall?.[1]?.body ?? "{}")) as {
+      from?: string;
+      to?: string[];
+    };
+    expect(requestBody.from).toBe("launch@zerochill.co");
+    expect(requestBody.to).toEqual(["ops@zerochill.co"]);
+    expect(infoSpy.mock.calls.find(([message]) => message === "[ZeroChill] intake-resend-attempted")?.[1]).toMatchObject({
+      senderSource: "resend_from_email",
+    });
+    expect(infoSpy.mock.calls.find(([message]) => message === "[ZeroChill] intake-resend-success")?.[1]).toMatchObject({
+      senderSource: "resend_from_email",
+    });
+  });
+
+  it("uses onboarding@resend.dev when blocked sender domains are configured", async () => {
+    const fetchSpy = vi.fn(async () => {
+      return new Response(JSON.stringify({ id: "email_123" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const infoSpy = vi.spyOn(console, "info").mockImplementation(() => {});
+    vi.stubGlobal("fetch", fetchSpy);
+    vi.stubEnv("RESEND_API_KEY", "re_test_123");
+    vi.stubEnv("ZEROCHILL_INTAKE_FROM_EMAIL", "intake@gmail.com");
+    vi.stubEnv("PREORDER_FROM_EMAIL", "legacy@yahoo.com");
+    vi.stubEnv("ZEROCHILL_INTAKE_TO_EMAIL", "ops@zerochill.co");
+    vi.stubEnv("PREORDER_NOTIFY_TO", "legacy-to@zerochill.co");
+
+    const { POST } = await loadRoute();
+    const response = await POST(buildRequest(validPayload, "203.0.113.12"));
+    const payload = (await response.json()) as {
+      ok: boolean;
+      delivered: boolean;
+      deliveryMode: string;
+      deliveryAttempted: boolean;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload.ok).toBe(true);
+    expect(payload.delivered).toBe(true);
+    expect(payload.deliveryMode).toBe("email");
+    expect(payload.deliveryAttempted).toBe(true);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    const firstCall = fetchSpy.mock.calls[0] as unknown as [string, RequestInit] | undefined;
+    const requestBody = JSON.parse(String(firstCall?.[1]?.body ?? "{}")) as {
+      from?: string;
+      to?: string[];
+    };
+    expect(requestBody.from).toBe("onboarding@resend.dev");
+    expect(requestBody.to).toEqual(["ops@zerochill.co"]);
+    expect(infoSpy.mock.calls.find(([message]) => message === "[ZeroChill] intake-resend-attempted")?.[1]).toMatchObject({
+      senderSource: "resend_default_fallback",
+    });
+  });
+
+  it("uses the preferred ZEROCHILL intake sender when it is safe", async () => {
     const fetchSpy = vi.fn(async () => {
       return new Response(JSON.stringify({ id: "email_123" }), {
         status: 200,
@@ -199,6 +289,48 @@ describe("inquiry route", () => {
     );
   });
 
+  it("falls back to onboarding@resend.dev when both configured sender vars are blocked", async () => {
+    const fetchSpy = vi.fn(async () => {
+      return new Response(JSON.stringify({ id: "email_123" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const infoSpy = vi.spyOn(console, "info").mockImplementation(() => {});
+    vi.stubGlobal("fetch", fetchSpy);
+    vi.stubEnv("RESEND_API_KEY", "re_test_123");
+    vi.stubEnv("ZEROCHILL_INTAKE_FROM_EMAIL", "intake@gmail.com");
+    vi.stubEnv("PREORDER_FROM_EMAIL", "legacy@yahoo.com");
+    vi.stubEnv("ZEROCHILL_INTAKE_TO_EMAIL", "ops@zerochill.co");
+    vi.stubEnv("PREORDER_NOTIFY_TO", "legacy-to@zerochill.co");
+
+    const { POST } = await loadRoute();
+    const response = await POST(buildRequest(validPayload, "203.0.113.13"));
+    const payload = (await response.json()) as {
+      ok: boolean;
+      delivered: boolean;
+      deliveryMode: string;
+      deliveryAttempted: boolean;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload.ok).toBe(true);
+    expect(payload.delivered).toBe(true);
+    expect(payload.deliveryMode).toBe("email");
+    expect(payload.deliveryAttempted).toBe(true);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    const firstCall = fetchSpy.mock.calls[0] as unknown as [string, RequestInit] | undefined;
+    const requestBody = JSON.parse(String(firstCall?.[1]?.body ?? "{}")) as {
+      from?: string;
+      to?: string[];
+    };
+    expect(requestBody.from).toBe("onboarding@resend.dev");
+    expect(infoSpy.mock.calls.find(([message]) => message === "[ZeroChill] intake-resend-attempted")?.[1]).toMatchObject({
+      senderSource: "resend_default_fallback",
+    });
+  });
+
   it("falls back to legacy PREORDER env vars when preferred intake env vars are absent", async () => {
     const fetchSpy = vi.fn(async () => {
       return new Response(JSON.stringify({ id: "email_123" }), {
@@ -242,6 +374,36 @@ describe("inquiry route", () => {
         "[ZeroChill] intake-received",
       ]),
     );
+    expect(infoSpy.mock.calls.find(([message]) => message === "[ZeroChill] intake-resend-attempted")?.[1]).toMatchObject({
+      senderSource: "preorder_from_email",
+    });
+  });
+
+  it("falls back to log mode when no recipient email exists", async () => {
+    const infoSpy = vi.spyOn(console, "info").mockImplementation(() => {});
+    const fetchSpy = vi.fn();
+    vi.stubGlobal("fetch", fetchSpy);
+    vi.stubEnv("RESEND_API_KEY", "re_test_123");
+    vi.stubEnv("RESEND_FROM_EMAIL", "launch@zerochill.co");
+
+    const { POST } = await loadRoute();
+    const response = await POST(buildRequest(validPayload, "203.0.113.14"));
+    const payload = (await response.json()) as {
+      ok: boolean;
+      delivered: boolean;
+      deliveryMode: string;
+      deliveryAttempted: boolean;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload.ok).toBe(true);
+    expect(payload.delivered).toBe(false);
+    expect(payload.deliveryMode).toBe("log");
+    expect(payload.deliveryAttempted).toBe(false);
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(infoSpy.mock.calls.find(([message]) => message === "[ZeroChill] intake-email-config-missing")?.[1]).toMatchObject({
+      senderSource: "resend_from_email",
+    });
   });
 
   it("rate limits repeated submissions from the same client key", async () => {

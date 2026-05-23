@@ -24,7 +24,7 @@ npm run check:intake
 
 - Set `NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL` and `NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL` in Vercel.
 - Optionally set `PAYHIP_SOVEREIGN_ZERO_URL` and `PAYHIP_MATRIX_ACCESS_URL`; the launch helper prefers those server-side aliases when present and falls back to the public env vars.
-- Set `RESEND_API_KEY` plus either the preferred intake env vars (`ZEROCHILL_INTAKE_FROM_EMAIL`, `ZEROCHILL_INTAKE_TO_EMAIL`) or the legacy Vercel aliases (`PREORDER_FROM_EMAIL`, `PREORDER_NOTIFY_TO`) if you want intake emails delivered instead of local-only logging.
+- Set `RESEND_API_KEY` plus the safest sender override `RESEND_FROM_EMAIL` when available. If that is not set, the route will use `ZEROCHILL_INTAKE_FROM_EMAIL` or `PREORDER_FROM_EMAIL` only when they are not consumer mailbox domains. Use `ZEROCHILL_INTAKE_TO_EMAIL` or `PREORDER_NOTIFY_TO` for the recipient. Keep the recipient as your Gmail inbox if that is where you want intake mail delivered; do not use a Gmail sender with Resend.
 - Set the Payhip success redirect to `/success`.
 - Verify the homepage, `/preorder`, and `/success` after deploy.
 
@@ -99,7 +99,7 @@ Production deployment note:
 
 - Set the Payhip success redirect to `/success`.
 - Make sure the two `NEXT_PUBLIC_PAYHIP_*` env vars are present in your production deployment.
-- If you want email delivery, set `RESEND_API_KEY` plus either `ZEROCHILL_INTAKE_FROM_EMAIL` and `ZEROCHILL_INTAKE_TO_EMAIL`, or the legacy aliases `PREORDER_FROM_EMAIL` and `PREORDER_NOTIFY_TO`.
+- If you want email delivery, set `RESEND_API_KEY` and preferably `RESEND_FROM_EMAIL` with a verified sender such as `onboarding@resend.dev` until your custom domain is verified. For recipients, use `ZEROCHILL_INTAKE_TO_EMAIL` or `PREORDER_NOTIFY_TO`. Do not use Gmail, Yahoo, Outlook, or similar consumer mailbox domains as the sender for Resend.
 - Verify the `/preorder` and `/success` routes after deploy.
 
 Production route check:

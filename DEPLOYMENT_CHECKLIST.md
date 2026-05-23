@@ -27,6 +27,7 @@ Use this checklist before promoting ZeroChill Co. to Vercel production.
 - [ ] `PAYHIP_SOVEREIGN_ZERO_URL`
 - [ ] `PAYHIP_MATRIX_ACCESS_URL`
 - [ ] `RESEND_API_KEY`
+- [ ] `RESEND_FROM_EMAIL` (safest sender override)
 - [ ] `ZEROCHILL_INTAKE_FROM_EMAIL`
 - [ ] `ZEROCHILL_INTAKE_TO_EMAIL`
 - [ ] `PREORDER_FROM_EMAIL` (legacy alias supported)
@@ -38,6 +39,7 @@ Use this checklist before promoting ZeroChill Co. to Vercel production.
 - [ ] Homepage fallback links resolve to `/#launch-access` when checkout links are missing
 - [ ] Intake submissions return a structured JSON response
 - [ ] Intake email delivery falls back to local logging when Resend is not configured
+- [ ] Sender domains are verified and consumer mailbox domains are not used as the Resend sender
 - [ ] Legacy Vercel intake aliases continue to work if preferred intake vars are not set
 
 ## Final Verification

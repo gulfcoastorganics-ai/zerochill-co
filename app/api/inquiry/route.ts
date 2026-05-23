@@ -23,15 +23,17 @@ function logIntakeEvent(event: string, details: Record<string, unknown>) {
 }
 
 async function sendInquiryNotification(intakeId: string, submission: InquiryLogSubmission) {
-  const { apiKey, to, from } = resolveInquiryMailEnv();
+  const { apiKey, to, from, fromSource } = resolveInquiryMailEnv();
 
   if (!apiKey || !to || !from) {
     logIntakeEvent("intake-email-config-missing", {
       intakeId,
+      senderSource: fromSource,
       deliveryMode: "log",
     });
     logIntakeEvent("intake-log-fallback", {
       intakeId,
+      senderSource: fromSource,
       deliveryMode: "log",
     });
     return { deliveryMode: "log" as const, delivered: false, deliveryAttempted: false };
@@ -40,6 +42,7 @@ async function sendInquiryNotification(intakeId: string, submission: InquiryLogS
   try {
     logIntakeEvent("intake-resend-attempted", {
       intakeId,
+      senderSource: fromSource,
       deliveryMode: "email",
     });
 
@@ -59,15 +62,14 @@ async function sendInquiryNotification(intakeId: string, submission: InquiryLogS
     });
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => "");
       console.error("[ZeroChill] intake-resend-failure", {
         intakeId,
+        senderSource: fromSource,
         status: response.status,
-        deliveryMode: "log",
-        errorText: errorText ? "present" : "empty",
       });
       logIntakeEvent("intake-log-fallback", {
         intakeId,
+        senderSource: fromSource,
         deliveryMode: "log",
       });
       return { deliveryMode: "log" as const, delivered: false, deliveryAttempted: true };
@@ -75,17 +77,21 @@ async function sendInquiryNotification(intakeId: string, submission: InquiryLogS
 
     logIntakeEvent("intake-resend-success", {
       intakeId,
+      senderSource: fromSource,
       deliveryMode: "email",
+      status: response.status,
     });
     return { deliveryMode: "email" as const, delivered: true, deliveryAttempted: true };
-  } catch (error) {
+  } catch {
     console.error("[ZeroChill] intake-resend-failure", {
       intakeId,
+      senderSource: fromSource,
       deliveryMode: "log",
-      error: error instanceof Error ? error.name : "unknown",
+      status: "exception",
     });
     logIntakeEvent("intake-log-fallback", {
       intakeId,
+      senderSource: fromSource,
       deliveryMode: "log",
     });
     return { deliveryMode: "log" as const, delivered: false, deliveryAttempted: true };
