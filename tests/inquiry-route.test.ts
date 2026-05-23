@@ -37,6 +37,14 @@ beforeEach(() => {
 });
 
 describe("inquiry route", () => {
+  it("responds to safe OPTIONS probes", async () => {
+    const { OPTIONS } = await loadRoute();
+    const response = OPTIONS();
+
+    expect(response.status).toBe(204);
+    expect(response.headers.get("Allow")).toBe("POST, OPTIONS");
+  });
+
   it("returns structured validation errors for incomplete payloads", async () => {
     const { POST } = await loadRoute();
     const response = await POST(buildRequest({}));

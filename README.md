@@ -16,6 +16,7 @@ npm run dev
 npm run build
 npm run lint
 npx tsc --noEmit
+npm run check:production
 ```
 
 ## Deployment Notes
@@ -99,6 +100,14 @@ Production deployment note:
 - Make sure the two `NEXT_PUBLIC_PAYHIP_*` env vars are present in your production deployment.
 - If you want email delivery, set `RESEND_API_KEY` plus either `ZEROCHILL_INTAKE_FROM_EMAIL` and `ZEROCHILL_INTAKE_TO_EMAIL`, or the legacy aliases `PREORDER_FROM_EMAIL` and `PREORDER_NOTIFY_TO`.
 - Verify the `/preorder` and `/success` routes after deploy.
+
+Production route check:
+
+```bash
+ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:production
+```
+
+The checker sends only `GET` requests to `/`, `/preorder`, and `/success`, plus a safe `OPTIONS` request to `/api/inquiry`. It reports HTTP status codes only and does not submit form data.
 
 ## Launch Deployment Checklist
 

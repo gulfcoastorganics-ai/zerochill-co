@@ -147,3 +147,12 @@ export async function POST(request: Request) {
     deliveryMode: delivery.deliveryMode,
   });
 }
+
+export function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      Allow: "POST, OPTIONS",
+    },
+  });
+}

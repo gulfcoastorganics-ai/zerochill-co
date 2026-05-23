@@ -24,6 +24,14 @@ Open `http://localhost:3000`.
 npm run build
 ```
 
+## Production Validation
+
+```bash
+ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:production
+```
+
+The checker verifies the live HTTP status codes for `/`, `/preorder`, `/success`, and a safe `OPTIONS` probe on `/api/inquiry`. It does not submit form data.
+
 ## Lint and Typecheck
 
 ```bash
