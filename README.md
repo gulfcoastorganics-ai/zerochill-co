@@ -22,7 +22,7 @@ npx tsc --noEmit
 
 - Set `NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL` and `NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL` in Vercel.
 - Optionally set `PAYHIP_SOVEREIGN_ZERO_URL` and `PAYHIP_MATRIX_ACCESS_URL`; the launch helper prefers those server-side aliases when present and falls back to the public env vars.
-- Set `RESEND_API_KEY`, `ZEROCHILL_INTAKE_FROM_EMAIL`, and `ZEROCHILL_INTAKE_TO_EMAIL` if you want intake emails delivered instead of local-only logging.
+- Set `RESEND_API_KEY` plus either the preferred intake env vars (`ZEROCHILL_INTAKE_FROM_EMAIL`, `ZEROCHILL_INTAKE_TO_EMAIL`) or the legacy Vercel aliases (`PREORDER_FROM_EMAIL`, `PREORDER_NOTIFY_TO`) if you want intake emails delivered instead of local-only logging.
 - Set the Payhip success redirect to `/success`.
 - Verify the homepage, `/preorder`, and `/success` after deploy.
 
@@ -97,7 +97,7 @@ Production deployment note:
 
 - Set the Payhip success redirect to `/success`.
 - Make sure the two `NEXT_PUBLIC_PAYHIP_*` env vars are present in your production deployment.
-- If you want email delivery, set `RESEND_API_KEY`, `ZEROCHILL_INTAKE_FROM_EMAIL`, and `ZEROCHILL_INTAKE_TO_EMAIL`.
+- If you want email delivery, set `RESEND_API_KEY` plus either `ZEROCHILL_INTAKE_FROM_EMAIL` and `ZEROCHILL_INTAKE_TO_EMAIL`, or the legacy aliases `PREORDER_FROM_EMAIL` and `PREORDER_NOTIFY_TO`.
 - Verify the `/preorder` and `/success` routes after deploy.
 
 ## Launch Deployment Checklist

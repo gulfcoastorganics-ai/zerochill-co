@@ -76,6 +76,12 @@ export type InquiryLogSubmission = {
   message: string;
 };
 
+export type InquiryMailEnv = {
+  apiKey?: string;
+  to?: string;
+  from?: string;
+};
+
 type RateLimitBucket = {
   count: number;
   resetAt: number;
@@ -177,4 +183,12 @@ export function getInquiryFieldErrors(error: z.ZodError) {
   }
 
   return fieldErrors;
+}
+
+export function resolveInquiryMailEnv(): InquiryMailEnv {
+  return {
+    apiKey: process.env.RESEND_API_KEY?.trim(),
+    to: process.env.ZEROCHILL_INTAKE_TO_EMAIL?.trim() || process.env.PREORDER_NOTIFY_TO?.trim(),
+    from: process.env.ZEROCHILL_INTAKE_FROM_EMAIL?.trim() || process.env.PREORDER_FROM_EMAIL?.trim(),
+  };
 }

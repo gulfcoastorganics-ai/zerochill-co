@@ -7,6 +7,7 @@ import {
   getClientKey,
   getInquiryFieldErrors,
   inquirySubmissionSchema,
+  resolveInquiryMailEnv,
   type InquiryLogSubmission,
 } from "@/lib/inquiryIntake";
 
@@ -18,9 +19,7 @@ function jsonResponse(
 }
 
 async function sendInquiryNotification(submission: InquiryLogSubmission) {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const to = process.env.ZEROCHILL_INTAKE_TO_EMAIL?.trim();
-  const from = process.env.ZEROCHILL_INTAKE_FROM_EMAIL?.trim();
+  const { apiKey, to, from } = resolveInquiryMailEnv();
   const logContext = {
     name: submission.name,
     organization: submission.organization,

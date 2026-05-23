@@ -29,6 +29,8 @@ Use this checklist before promoting ZeroChill Co. to Vercel production.
 - [ ] `RESEND_API_KEY`
 - [ ] `ZEROCHILL_INTAKE_FROM_EMAIL`
 - [ ] `ZEROCHILL_INTAKE_TO_EMAIL`
+- [ ] `PREORDER_FROM_EMAIL` (legacy alias supported)
+- [ ] `PREORDER_NOTIFY_TO` (legacy alias supported)
 
 ## Launch Checks
 
@@ -36,6 +38,7 @@ Use this checklist before promoting ZeroChill Co. to Vercel production.
 - [ ] Homepage fallback links resolve to `/#launch-access` when checkout links are missing
 - [ ] Intake submissions return a structured JSON response
 - [ ] Intake email delivery falls back to local logging when Resend is not configured
+- [ ] Legacy Vercel intake aliases continue to work if preferred intake vars are not set
 
 ## Final Verification
 

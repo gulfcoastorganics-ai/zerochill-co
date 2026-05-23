@@ -94,7 +94,7 @@ describe("inquiry route", () => {
     expect(infoSpy).toHaveBeenCalled();
   });
 
-  it("attempts email delivery when Resend env vars exist", async () => {
+  it("uses preferred ZEROCHILL intake env vars when present", async () => {
     const fetchSpy = vi.fn(async () => {
       return new Response(JSON.stringify({ id: "email_123" }), {
         status: 200,
@@ -106,6 +106,8 @@ describe("inquiry route", () => {
     vi.stubEnv("RESEND_API_KEY", "re_test_123");
     vi.stubEnv("ZEROCHILL_INTAKE_FROM_EMAIL", "intake@zerochill.co");
     vi.stubEnv("ZEROCHILL_INTAKE_TO_EMAIL", "ops@zerochill.co");
+    vi.stubEnv("PREORDER_FROM_EMAIL", "legacy-from@zerochill.co");
+    vi.stubEnv("PREORDER_NOTIFY_TO", "legacy-to@zerochill.co");
 
     const { POST } = await loadRoute();
     const response = await POST(buildRequest(validPayload, "203.0.113.11"));
@@ -122,6 +124,47 @@ describe("inquiry route", () => {
     expect(fetchSpy).toHaveBeenCalledTimes(1);
     const firstCall = fetchSpy.mock.calls[0] as unknown as [string, RequestInit] | undefined;
     expect(firstCall?.[0]).toBe("https://api.resend.com/emails");
+    const requestBody = JSON.parse(String(firstCall?.[1]?.body ?? "{}")) as {
+      from?: string;
+      to?: string[];
+    };
+    expect(requestBody.from).toBe("intake@zerochill.co");
+    expect(requestBody.to).toEqual(["ops@zerochill.co"]);
+  });
+
+  it("falls back to legacy PREORDER env vars when preferred intake env vars are absent", async () => {
+    const fetchSpy = vi.fn(async () => {
+      return new Response(JSON.stringify({ id: "email_123" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    vi.stubGlobal("fetch", fetchSpy);
+    vi.stubEnv("RESEND_API_KEY", "re_test_123");
+    vi.stubEnv("PREORDER_FROM_EMAIL", "legacy-from@zerochill.co");
+    vi.stubEnv("PREORDER_NOTIFY_TO", "legacy-to@zerochill.co");
+
+    const { POST } = await loadRoute();
+    const response = await POST(buildRequest(validPayload, "203.0.113.12"));
+    const payload = (await response.json()) as {
+      ok: boolean;
+      delivered: boolean;
+      deliveryMode: string;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload.ok).toBe(true);
+    expect(payload.delivered).toBe(true);
+    expect(payload.deliveryMode).toBe("email");
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    const firstCall = fetchSpy.mock.calls[0] as unknown as [string, RequestInit] | undefined;
+    const requestBody = JSON.parse(String(firstCall?.[1]?.body ?? "{}")) as {
+      from?: string;
+      to?: string[];
+    };
+    expect(requestBody.from).toBe("legacy-from@zerochill.co");
+    expect(requestBody.to).toEqual(["legacy-to@zerochill.co"]);
   });
 
   it("rate limits repeated submissions from the same client key", async () => {
