@@ -296,25 +296,42 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="glass-panel mt-5 rounded-3xl p-4 sm:p-5">
-              {[
-                ["Edge", "Local"],
-                ["Telemetry", "Isolated"],
-                ["Mode", "Operator"],
-                ["Queue", "Ready"],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="flex min-w-0 items-center justify-between gap-4 border-b border-white/10 py-3 last:border-b-0 first:pt-0 last:pb-0"
-                >
-                  <div className="min-w-0 text-[0.58rem] uppercase leading-none tracking-[0.2em] text-[color:var(--steel)] sm:text-[0.62rem] sm:tracking-[0.26em]">
-                    {label}
+            <div className="glass-panel mt-5 rounded-3xl p-5 sm:p-6">
+              <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+                <div>
+                  <div className="text-[0.64rem] uppercase tracking-[0.28em] text-[color:var(--steel)] sm:tracking-[0.34em]">
+                    System posture
                   </div>
-                  <div className="min-w-0 text-right font-mono text-[0.76rem] uppercase leading-none tracking-[0.06em] text-white sm:text-[0.82rem] sm:tracking-[0.08em]">
-                    {value}
+                  <div className="mt-2 text-sm uppercase tracking-[0.12em] text-white/65">
+                    Operational readiness
                   </div>
                 </div>
-              ))}
+                <span className="h-2 w-2 shrink-0 rounded-full bg-[color:var(--accent)] shadow-[0_0_12px_rgba(220,38,38,0.35)]" />
+              </div>
+
+              <div className="mt-3 divide-y divide-white/10">
+                {[
+                  ["Edge Layer", "Local"],
+                  ["Telemetry", "Isolated"],
+                  ["Operator Mode", "Active"],
+                  ["Queue", "Ready"],
+                ].map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3 first:pt-0 last:pb-0"
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span className="h-px w-6 shrink-0 bg-[linear-gradient(90deg,rgba(220,38,38,0.85),rgba(220,38,38,0.15))]" />
+                      <div className="min-w-0 text-[0.62rem] uppercase leading-[1.2] tracking-[0.12em] text-[color:var(--steel)] sm:text-[0.66rem]">
+                        {label}
+                      </div>
+                    </div>
+                    <div className="min-w-0 justify-self-end whitespace-nowrap font-mono text-[0.82rem] uppercase leading-[1.1] tracking-[0.06em] text-white sm:text-[0.9rem]">
+                      {value}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
