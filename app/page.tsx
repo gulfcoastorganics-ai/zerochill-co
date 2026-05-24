@@ -296,18 +296,21 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="glass-panel mt-5 rounded-3xl p-4 sm:p-5">
               {[
                 ["Edge", "Local"],
                 ["Telemetry", "Isolated"],
                 ["Mode", "Operator"],
                 ["Queue", "Ready"],
               ].map(([label, value]) => (
-                <div key={label} className="glass-card min-w-0 rounded-2xl p-3 sm:p-4">
-                  <div className="text-[0.58rem] uppercase leading-none tracking-[0.28em] text-[color:var(--steel)] sm:text-[0.64rem] sm:tracking-[0.34em]">
+                <div
+                  key={label}
+                  className="flex min-w-0 items-center justify-between gap-4 border-b border-white/10 py-3 last:border-b-0 first:pt-0 last:pb-0"
+                >
+                  <div className="min-w-0 text-[0.58rem] uppercase leading-none tracking-[0.2em] text-[color:var(--steel)] sm:text-[0.62rem] sm:tracking-[0.26em]">
                     {label}
                   </div>
-                  <div className="mt-2 font-mono text-[0.72rem] uppercase leading-none tracking-[0.1em] text-white sm:text-sm sm:tracking-[0.14em]">
+                  <div className="min-w-0 text-right font-mono text-[0.76rem] uppercase leading-none tracking-[0.06em] text-white sm:text-[0.82rem] sm:tracking-[0.08em]">
                     {value}
                   </div>
                 </div>
