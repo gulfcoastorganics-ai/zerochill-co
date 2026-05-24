@@ -78,3 +78,26 @@ ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:intake
 - `/api/academy-session`
 - `/api/academy-health`
 
+## Post-Deploy Verification
+
+After the production deploy finishes, verify the live release with these checks:
+
+- [ ] Visit `/api/academy-health`
+- [ ] Confirm `academyOperational=true`
+- [ ] Test `/login` magic link
+- [ ] Test protected `/academy` redirect behavior
+- [ ] Test `/academy/intake`
+- [ ] Test local Ollama validation
+- [ ] Confirm `deployments` insert
+- [ ] Confirm `gate_completions` insert
+- [ ] Confirm Tier 2 unlock at `/academy/orchestration`
+
+## Vercel Deployment Notes
+
+- Connect the GitHub repository to Vercel.
+- Use `main` as the production branch.
+- Keep the framework preset set to Next.js.
+- Configure all production environment variables before deploying.
+- Redeploy after any environment variable change.
+- Configure the Supabase redirect URL to `https://YOUR_DOMAIN/auth/callback`.
+- Configure the Payhip webhook URL to `https://YOUR_DOMAIN/api/payhip-webhook`.
