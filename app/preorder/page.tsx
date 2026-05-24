@@ -23,7 +23,7 @@ function LaunchAction({
   external?: boolean;
 }) {
   const className =
-    "zerochill-button zerochill-action inline-flex items-center justify-center border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:tracking-[0.22em]";
+    "zerochill-button zerochill-action inline-flex w-full max-w-full items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] leading-tight text-white sm:w-auto sm:tracking-[0.22em]";
 
   if (external) {
     return (
@@ -129,7 +129,7 @@ export default function PreorderPage() {
               />
               <Link
                 href="/#launch-access"
-                className="zerochill-action inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:tracking-[0.22em]"
+                className="zerochill-action inline-flex w-full max-w-full items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] leading-tight text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:w-auto sm:tracking-[0.22em]"
               >
                 Launch Access
               </Link>
@@ -172,11 +172,14 @@ export default function PreorderPage() {
                   ["3", "Email confirmation"],
                   ["4", "Access follows"],
                 ].map(([step, label]) => (
-                  <div key={step} className="glass-card flex items-center justify-between rounded-2xl p-4">
+                  <div
+                    key={step}
+                    className="glass-card flex flex-col gap-1 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                  >
                     <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-[color:var(--steel)]">
                       Step {step}
                     </span>
-                    <span className="max-w-[10rem] text-right text-sm uppercase tracking-[0.14em] text-white">
+                    <span className="text-sm uppercase tracking-[0.12em] text-white sm:text-right">
                       {label}
                     </span>
                   </div>

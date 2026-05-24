@@ -110,7 +110,7 @@ export default function InquiryForm() {
   }
 
   const fieldClass =
-    "glass-field rounded-2xl px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30";
+    "glass-field w-full rounded-2xl px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30";
 
   return (
     <form
@@ -125,7 +125,9 @@ export default function InquiryForm() {
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Name</span>
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
+            Name
+          </span>
           <input
             className={fieldClass}
             value={values.name}
@@ -137,7 +139,9 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Email</span>
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
+            Email
+          </span>
           <input
             className={fieldClass}
             type="email"
@@ -150,7 +154,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-            <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
             Organization
           </span>
           <input
@@ -166,7 +170,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-            <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
             Deployment interest
           </span>
           <select
@@ -188,7 +192,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
             Project type
           </span>
           <select
@@ -210,7 +214,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
             Budget range
           </span>
           <select
@@ -231,7 +235,9 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2 sm:col-span-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Timeline</span>
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
+            Timeline
+          </span>
           <select
             className={fieldClass}
             value={values.timeline}
@@ -248,7 +254,9 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2 sm:col-span-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Message</span>
+          <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-[color:var(--steel)] sm:tracking-[0.32em]">
+            Message
+          </span>
           <textarea
             className={`${fieldClass} min-h-[140px]`}
             value={values.message}

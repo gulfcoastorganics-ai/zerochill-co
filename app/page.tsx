@@ -158,8 +158,8 @@ function ActionButton({
 }) {
   const className =
     variant === "primary"
-      ? "zerochill-button zerochill-action inline-flex items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:tracking-[0.22em]"
-      : "zerochill-action inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:tracking-[0.22em]";
+      ? "zerochill-button zerochill-action inline-flex w-full max-w-full items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] leading-tight text-white sm:w-auto sm:tracking-[0.22em]"
+      : "zerochill-action inline-flex w-full max-w-full items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] leading-tight text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:w-auto sm:tracking-[0.22em]";
 
   if (external) {
     return (
