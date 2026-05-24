@@ -299,34 +299,32 @@ export default function Home() {
             <div className="glass-panel mt-5 rounded-3xl p-5 sm:p-6">
               <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
                 <div>
-                  <div className="text-[0.64rem] uppercase tracking-[0.28em] text-[color:var(--steel)] sm:tracking-[0.34em]">
+                  <div className="text-[0.64rem] uppercase tracking-[0.22em] text-[color:var(--steel)] sm:tracking-[0.28em]">
                     SYSTEM POSTURE
                   </div>
-                  <div className="mt-2 text-sm uppercase tracking-[0.1em] text-white/65">
+                  <div className="mt-2 text-sm uppercase tracking-[0.08em] text-white/65">
                     Operational Readiness
                   </div>
                 </div>
                 <span className="h-2 w-2 shrink-0 rounded-full bg-[color:var(--accent)] shadow-[0_0_12px_rgba(220,38,38,0.35)]" />
               </div>
 
-              <div className="mt-3 space-y-4">
+              <div className="mt-3 divide-y divide-white/10">
                 {[
                   ["Edge Layer", "Local"],
                   ["Telemetry", "Isolated"],
                   ["Operator Mode", "Active"],
                   ["Queue", "Ready"],
                 ].map(([label, value]) => (
-                  <div key={label} className="border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
-                    <div className="flex items-center gap-3">
-                      <span className="h-px w-6 shrink-0 bg-[linear-gradient(90deg,rgba(220,38,38,0.85),rgba(220,38,38,0.15))]" />
-                      <div className="min-w-0 text-[0.58rem] uppercase leading-[1.2] tracking-[0.16em] text-[color:var(--steel)] sm:text-[0.62rem]">
-                        {label}
-                      </div>
-                    </div>
-                    <div className="mt-2 min-w-0 text-sm font-mono uppercase leading-[1.2] tracking-[0.08em] text-white sm:text-[0.92rem]">
+                  <div key={label} className="py-4 first:pt-0 last:pb-0">
+                    <span className="block h-px w-8 bg-[linear-gradient(90deg,rgba(220,38,38,0.85),rgba(220,38,38,0.12))]" />
+                    <span className="mt-3 block text-[0.65rem] uppercase leading-[1.2] tracking-[0.12em] text-[color:var(--steel)] sm:text-[0.7rem]">
+                      {label}
+                    </span>
+                    <span className="mt-2 block font-mono text-sm uppercase leading-[1.2] tracking-[0.06em] text-white sm:text-[0.95rem]">
                       {value}
+                    </span>
                     </div>
-                  </div>
                 ))}
               </div>
             </div>
