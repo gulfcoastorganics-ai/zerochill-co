@@ -239,13 +239,13 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 zerochill-grid-overlay zerochill-hero-grid-overlay" />
         <div className="pointer-events-none absolute inset-0 zerochill-scanlines zerochill-hero-scanlines" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(220,38,38,0.08),transparent_30%),linear-gradient(180deg,rgba(6,10,16,0.08)_0%,rgba(6,10,16,0.18)_58%,rgba(6,10,16,0.3)_100%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-18 sm:px-8 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-10 lg:py-28">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_1fr] lg:items-start lg:px-10 lg:py-24">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-[0.64rem] uppercase tracking-[0.46em] text-[color:var(--steel)]">
               <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)] shadow-[0_0_14px_rgba(220,38,38,0.45)]" />
               ZeroChill Co. / Sovereign Zero
             </div>
-            <h1 className="mt-6 text-5xl font-black uppercase leading-[0.86] tracking-[-0.08em] sm:text-7xl lg:text-[clamp(4.4rem,8.2vw,8.6rem)]">
+            <h1 className="mt-6 text-[clamp(3.4rem,10vw,4.6rem)] font-black uppercase leading-[0.88] tracking-[-0.08em] sm:text-[clamp(4.75rem,8vw,7rem)] lg:text-[clamp(4.4rem,8.2vw,8.6rem)]">
               Sovereign AI infrastructure for localized deployment.
             </h1>
             <p className="mt-6 max-w-2xl text-balance text-base leading-8 text-white/70 sm:text-lg">
@@ -267,13 +267,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="glass-panel-strong rounded-3xl p-6 sm:p-8">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="glass-panel-strong rounded-3xl p-5 sm:p-6">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div>
                 <div className="text-[0.64rem] uppercase tracking-[0.48em] text-[color:var(--steel)]">
                   Command signal
                 </div>
-                <div className="mt-2 text-sm uppercase tracking-[0.22em] text-white/80">
+                <div className="mt-1.5 text-[0.78rem] uppercase tracking-[0.16em] text-white/80 sm:mt-2 sm:text-sm sm:tracking-[0.22em]">
                   Private AI / edge / deployment
                 </div>
               </div>
@@ -282,49 +282,48 @@ export default function Home() {
               </span>
             </div>
 
-            <div className="mt-5 grid gap-3 text-sm leading-7 text-white/70">
+            <div className="mt-4 grid gap-2.5 text-sm leading-6 text-white/70">
               {[
                 "Telemetry stays isolated from the public surface.",
                 "Deployment stays centered on local control and uptime.",
                 "The Matrix keeps operator state readable at a glance.",
                 "The interface stays dark, precise, and production-grade.",
               ].map((line) => (
-                <div key={line} className="terminal-surface flex gap-3 rounded-2xl p-4">
+                <div key={line} className="terminal-surface flex gap-3 rounded-2xl p-3 sm:p-4">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
                   <span>{line}</span>
                 </div>
               ))}
             </div>
 
-            <div className="glass-panel mt-5 rounded-3xl p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div className="glass-panel mt-4 rounded-3xl p-4 sm:p-5">
+              <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-3">
                 <div>
-                  <div className="text-[0.64rem] uppercase tracking-[0.22em] text-[color:var(--steel)] sm:tracking-[0.28em]">
+                  <div className="text-[0.62rem] uppercase tracking-[0.18em] text-[color:var(--steel)] sm:text-[0.64rem] sm:tracking-[0.26em]">
                     SYSTEM POSTURE
                   </div>
-                  <div className="mt-2 text-sm uppercase tracking-[0.08em] text-white/65">
+                  <div className="mt-1.5 text-[0.78rem] uppercase tracking-[0.05em] text-white/65 sm:text-sm">
                     Operational Readiness
                   </div>
                 </div>
                 <span className="h-2 w-2 shrink-0 rounded-full bg-[color:var(--accent)] shadow-[0_0_12px_rgba(220,38,38,0.35)]" />
               </div>
 
-              <div className="mt-3 divide-y divide-white/10">
+              <div className="mt-2 divide-y divide-white/10">
                 {[
                   ["Edge Layer", "Local"],
                   ["Telemetry", "Isolated"],
                   ["Operator Mode", "Active"],
                   ["Queue", "Ready"],
                 ].map(([label, value]) => (
-                  <div key={label} className="py-4 first:pt-0 last:pb-0">
-                    <span className="block h-px w-8 bg-[linear-gradient(90deg,rgba(220,38,38,0.85),rgba(220,38,38,0.12))]" />
-                    <span className="mt-3 block text-[0.65rem] uppercase leading-[1.2] tracking-[0.12em] text-[color:var(--steel)] sm:text-[0.7rem]">
+                  <div key={label} className="border-l border-[color:var(--accent)]/18 py-3 pl-3 first:pt-0 last:pb-0">
+                    <span className="block text-[0.6rem] uppercase leading-[1.15] tracking-[0.08em] text-[color:var(--steel)] sm:text-[0.64rem] sm:tracking-[0.12em]">
                       {label}
                     </span>
-                    <span className="mt-2 block font-mono text-sm uppercase leading-[1.2] tracking-[0.06em] text-white sm:text-[0.95rem]">
+                    <span className="mt-1 block font-mono text-[0.84rem] uppercase leading-[1.15] tracking-[0.04em] text-white sm:text-[0.95rem]">
                       {value}
                     </span>
-                    </div>
+                  </div>
                 ))}
               </div>
             </div>
