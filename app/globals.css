@@ -149,11 +149,38 @@ body {
   z-index: 1;
 }
 
+.zerochill-hero-wallpaper {
+  background:
+    linear-gradient(180deg, rgba(6, 10, 16, 0.12) 0%, rgba(6, 10, 16, 0.26) 42%, rgba(6, 10, 16, 0.42) 100%),
+    image-set(
+      url("/wallpapers/red-sand-sovereign-beach.webp") type("image/webp"),
+      url("/wallpapers/red-sand-sovereign-beach.png") type("image/png")
+    );
+  background-position: center 26%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.46;
+  filter: saturate(1.04) contrast(0.98);
+}
+
+.zerochill-hero-grid-overlay {
+  opacity: 0.14;
+}
+
+.zerochill-hero-scanlines {
+  opacity: 0.22;
+}
+
 @media (max-width: 767px) {
   body {
     background-position: center 8%, center 26%, center top, center 34%, 0 0, 0 0;
     background-attachment: scroll, scroll, scroll, scroll, scroll, scroll;
     background-size: 100% 100%, 100% 100%, 100% 100%, cover, 44px 44px, 44px 44px;
+  }
+
+  .zerochill-hero-wallpaper {
+    background-position: center 34%;
+    opacity: 0.38;
   }
 }
 

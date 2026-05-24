@@ -235,8 +235,10 @@ export default function Home() {
   return (
     <main className="zerochill-shell overflow-x-clip bg-black text-white">
       <section className="relative overflow-hidden border-b border-white/10">
-        <div className="pointer-events-none absolute inset-0 zerochill-grid-overlay" />
-        <div className="pointer-events-none absolute inset-0 zerochill-scanlines" />
+        <div className="pointer-events-none absolute inset-0 zerochill-hero-wallpaper" />
+        <div className="pointer-events-none absolute inset-0 zerochill-grid-overlay zerochill-hero-grid-overlay" />
+        <div className="pointer-events-none absolute inset-0 zerochill-scanlines zerochill-hero-scanlines" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(220,38,38,0.08),transparent_30%),linear-gradient(180deg,rgba(6,10,16,0.08)_0%,rgba(6,10,16,0.18)_58%,rgba(6,10,16,0.3)_100%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-18 sm:px-8 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-10 lg:py-28">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-[0.64rem] uppercase tracking-[0.46em] text-[color:var(--steel)]">
