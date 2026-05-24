@@ -85,6 +85,7 @@ Validation passes only when the runtime returns `ZERO_STATE_OK`. That unlocks Ti
 - `/academy`
 - `/academy/intake`
 - `/academy/orchestration`
+- `/academy/system-status`
 - `/api/payhip-webhook`
 - `/api/verify-runtime`
 - `/api/academy-health`
@@ -100,6 +101,19 @@ Validation passes only when the runtime returns `ZERO_STATE_OK`. That unlocks Ti
 - `webhook_events`: Payhip event log with replay protection, verification state, and processed state.
 - `runtime_events`: operational telemetry for runtime validation and unlock events.
 
+## Academy Health
+
+The academy health probe at `/api/academy-health` returns:
+
+- `supabaseReachable`
+- `academyTables`
+- `env`
+- `readiness`
+- `recommendedActions`
+- `warnings`
+
+Use `/academy/system-status` for the internal operator-facing summary of launch readiness, session state, and read-only runtime commands.
+
 ## QA Checklist
 
 - `npm run lint`
@@ -113,6 +127,7 @@ Validation passes only when the runtime returns `ZERO_STATE_OK`. That unlocks Ti
 - Tier 2 unlock appears after successful validation
 - `gate_completions` receives a database insert
 - `/api/academy-health` returns table reachability and env health without exposing secrets
+- `/academy/system-status` renders the internal readiness overview for authenticated operators
 
 ## Remaining Production Risks
 

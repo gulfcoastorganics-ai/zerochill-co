@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import AcademyHealthIndicator from "@/components/AcademyHealthIndicator";
 
 type OperatorProfile = {
   email: string;
@@ -52,6 +53,27 @@ type SessionVisibilityState = {
   sessionActive: boolean;
   operatorEmail: string;
   currentTier: string;
+};
+
+type AcademyHealthSnapshot = {
+  ok?: boolean;
+  timestamp?: string;
+  supabaseReachable?: boolean;
+  academyTables?: Record<string, boolean>;
+  env?: {
+    hasSupabaseUrl?: boolean;
+    hasSupabaseAnonKey?: boolean;
+    hasServiceRole?: boolean;
+    hasSiteUrl?: boolean;
+  };
+  readiness?: {
+    authConfigured?: boolean;
+    webhookConfigured?: boolean;
+    supabaseConfigured?: boolean;
+    runtimeValidationReady?: boolean;
+    academyOperational?: boolean;
+  };
+  warnings?: string[];
 };
 
 type VerifyResponse =
@@ -243,6 +265,7 @@ export default function AcademyPage() {
   const [validationAttempted, setValidationAttempted] = useState(false);
   const [diagnostics, setDiagnostics] = useState<DiagnosticsState>(initialDiagnostics);
   const [sessionVisibility, setSessionVisibility] = useState<SessionVisibilityState>(initialSessionVisibility);
+  const [healthSnapshot, setHealthSnapshot] = useState<AcademyHealthSnapshot | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -282,6 +305,31 @@ export default function AcademyPage() {
     };
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadHealth() {
+      try {
+        const response = await fetch("/api/academy-health", { cache: "no-store" });
+        const result = (await response.json().catch(() => null)) as AcademyHealthSnapshot | null;
+
+        if (!cancelled && response.ok) {
+          setHealthSnapshot(result);
+        }
+      } catch {
+        if (!cancelled) {
+          setHealthSnapshot(null);
+        }
+      }
+    }
+
+    void loadHealth();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const progressState = useMemo(
     () => [
       { title: "Tier 1 Foundations", state: status.status === "TIER_1_VALIDATED" ? "ACTIVE" : "LOCKED" },
@@ -293,6 +341,29 @@ export default function AcademyPage() {
     ],
     [status.status],
   );
+
+  const runtimeMetrics = [
+    {
+      label: "Last Validation Status",
+      value: status.status,
+    },
+    {
+      label: "Last Inference Latency",
+      value: diagnostics.inferenceLatency,
+    },
+    {
+      label: "Last Validation Timestamp",
+      value: deploymentProfile?.validatedAt ?? "—",
+    },
+    {
+      label: "Orchestration Unlock State",
+      value: gateProfile?.rewardUnlock ?? (status.status.includes("TIER_1_VALIDATED") ? "TIER_2_ORCHESTRATION" : "LOCKED"),
+    },
+    {
+      label: "Runtime Endpoint",
+      value: diagnostics.runtimeEndpoint,
+    },
+  ];
 
   async function recordRuntimeEvent(
     eventType: string,
@@ -572,6 +643,7 @@ export default function AcademyPage() {
         <div className="inline-flex w-fit items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
           <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)] shadow-[0_0_14px_rgba(220,38,38,0.45)]" />
           Zero-State Academy / Foundations Deployment Console
+          <AcademyHealthIndicator />
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
@@ -647,6 +719,19 @@ export default function AcademyPage() {
               {statusPill("Model", status.model, status.model !== "NONE")}
               {statusPill("Latency", status.inferenceLatency, status.inferenceLatency !== "—")}
               {statusPill("Status", status.status, status.status.includes("TIER_1_VALIDATED"))}
+            </div>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+              {runtimeMetrics.map((metric) => (
+                <div key={metric.label} className="terminal-surface rounded-2xl p-4">
+                  <div className="text-[0.62rem] uppercase tracking-[0.24em] text-[color:var(--steel)]">
+                    {metric.label}
+                  </div>
+                  <div className="mt-2 break-words font-mono text-[0.82rem] leading-6 text-white sm:text-sm">
+                    {metric.value}
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className="glass-panel mt-4 rounded-3xl p-4 sm:p-5">
@@ -872,6 +957,18 @@ export default function AcademyPage() {
                 <div className="mt-2">{runtimeError}</div>
               </div>
             ) : null}
+
+            <div className="mt-4 terminal-surface rounded-2xl p-4 text-sm leading-7 text-white/72">
+              <div className="text-[0.62rem] uppercase tracking-[0.24em] text-[color:var(--steel)]">
+                Academy Health Snapshot
+              </div>
+              <div className="mt-2 flex flex-wrap gap-3 text-xs uppercase tracking-[0.12em] text-white/60">
+                <span>Supabase: {healthSnapshot?.supabaseReachable ? "REACHABLE" : "UNVERIFIED"}</span>
+                <span>Auth: {healthSnapshot?.readiness?.authConfigured ? "READY" : "PENDING"}</span>
+                <span>Webhook: {healthSnapshot?.readiness?.webhookConfigured ? "READY" : "PENDING"}</span>
+                <span>Runtime: {healthSnapshot?.readiness?.runtimeValidationReady ? "READY" : "PENDING"}</span>
+              </div>
+            </div>
           </article>
 
           <aside className="grid gap-4">

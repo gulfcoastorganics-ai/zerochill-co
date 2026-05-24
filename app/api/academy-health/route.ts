@@ -29,6 +29,10 @@ export async function GET() {
   const hasSupabaseAnonKey = hasEnv(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
   const hasServiceRole = hasEnv(process.env.SUPABASE_SERVICE_ROLE_KEY);
   const hasSiteUrl = hasEnv(process.env.NEXT_PUBLIC_SITE_URL);
+  const hasPayhipWebhookSecret = hasEnv(process.env.PAYHIP_WEBHOOK_SECRET);
+  const allowUnverifiedPayhipWebhooks = (process.env.ALLOW_UNVERIFIED_PAYHIP_WEBHOOKS ?? "")
+    .trim()
+    .toLowerCase() === "true";
 
   const warnings: string[] = [];
   const academyTables: Record<AcademyTableName, boolean> = {
@@ -60,15 +64,23 @@ export async function GET() {
     warnings.push("Missing NEXT_PUBLIC_SITE_URL.");
   }
 
+  if (!hasPayhipWebhookSecret) {
+    warnings.push("Missing PAYHIP_WEBHOOK_SECRET.");
+  }
+
+  if (allowUnverifiedPayhipWebhooks) {
+    warnings.push("ALLOW_UNVERIFIED_PAYHIP_WEBHOOKS enabled.");
+  }
+
   if (hasSupabaseUrl && hasServiceRole) {
     try {
       const supabase = getSupabaseAdminClient();
 
-      const { error: reachabilityError } = await supabase.from("academy_profiles").select("id").limit(1);
+      const { error: reachabilityError } = await supabase.from("academy_profiles").select("*").limit(1);
       supabaseReachable = !reachabilityError;
 
       for (const tableName of academyTableNames) {
-        const { error } = await supabase.from(tableName).select("id").limit(1);
+        const { error } = await supabase.from(tableName).select("*").limit(1);
         academyTables[tableName] = !error;
 
         if (error) {
@@ -82,6 +94,33 @@ export async function GET() {
     warnings.push("Supabase probe skipped because the required server variables are not configured.");
   }
 
+  const authConfigured = hasSupabaseUrl && hasSupabaseAnonKey && hasSiteUrl;
+  const webhookConfigured = hasPayhipWebhookSecret && !allowUnverifiedPayhipWebhooks;
+  const supabaseConfigured = hasSupabaseUrl && hasSupabaseAnonKey && hasServiceRole;
+  const runtimeValidationReady = hasSupabaseUrl && hasSupabaseAnonKey && hasServiceRole;
+  const academyOperational = authConfigured && webhookConfigured && supabaseConfigured && supabaseReachable;
+  const webhookProcessingState = webhookConfigured
+    ? "READY"
+    : allowUnverifiedPayhipWebhooks
+      ? "DEGRADED"
+      : "OFFLINE";
+
+  if (!authConfigured) {
+    warnings.push("Auth redirect or Supabase browser config is incomplete.");
+  }
+
+  if (!webhookConfigured) {
+    warnings.push("Configure Payhip signature verification before public launch.");
+  }
+
+  if (!supabaseConfigured) {
+    warnings.push("Supabase server configuration is incomplete.");
+  }
+
+  if (!runtimeValidationReady) {
+    warnings.push("Runtime validation is not fully ready.");
+  }
+
   return jsonResponse({
     ok: true,
     timestamp: new Date().toISOString(),
@@ -93,6 +132,20 @@ export async function GET() {
       hasServiceRole,
       hasSiteUrl,
     },
+    readiness: {
+      authConfigured,
+      webhookConfigured,
+      supabaseConfigured,
+      runtimeValidationReady,
+      academyOperational,
+    },
+    webhookProcessingState,
+    recommendedActions: [
+      !hasSiteUrl ? "Missing NEXT_PUBLIC_SITE_URL" : null,
+      !hasPayhipWebhookSecret ? "Configure Payhip signature verification" : null,
+      allowUnverifiedPayhipWebhooks ? "ALLOW_UNVERIFIED_PAYHIP_WEBHOOKS enabled" : null,
+      !supabaseReachable ? "Verify Supabase connectivity" : null,
+    ].filter((item): item is string => Boolean(item)),
     warnings,
   });
 }

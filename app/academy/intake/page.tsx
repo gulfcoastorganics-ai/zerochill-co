@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import AcademyHealthIndicator from "@/components/AcademyHealthIndicator";
 import { getAccessTokenFromCookieStore, getUserFromAccessToken } from "@/lib/academyAuth";
 import { getSupabaseAdminClient } from "@/lib/supabaseAdmin";
 
@@ -75,6 +76,7 @@ export default async function AcademyIntakePage() {
           <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)] shadow-[0_0_14px_rgba(220,38,38,0.45)]" />
             Operator Intake
+            <AcademyHealthIndicator />
           </div>
 
           <h1 className="mt-6 text-[clamp(2.5rem,6vw,4.8rem)] font-black uppercase leading-[0.9] tracking-[-0.08em]">
