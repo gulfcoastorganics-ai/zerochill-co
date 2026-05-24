@@ -402,6 +402,16 @@ body {
   animation: zerochill-shimmer 900ms ease;
 }
 
+.zerochill-action {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
 .zerochill-pulse {
   animation: zerochill-pulse 2.8s ease-in-out infinite;
 }

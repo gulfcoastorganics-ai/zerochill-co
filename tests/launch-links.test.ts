@@ -16,12 +16,12 @@ describe("launchLinks", () => {
 
     expect(launchLinks.launchFallbackHref).toBe("/#launch-access");
     expect(launchLinks.getLaunchTarget("sovereignZero")).toMatchObject({
-      label: "PRE-ORDER SOVEREIGN ZERO",
+      label: "Preorder Zero",
       status: "Opening Soon",
       href: "/#launch-access",
     });
     expect(launchLinks.getLaunchTarget("matrixAccess")).toMatchObject({
-      label: "JOIN THE MATRIX",
+      label: "Matrix Access",
       status: "Launch Queue",
       href: "/#launch-access",
     });

@@ -102,9 +102,9 @@ const launchTargets = [
   },
   {
     target: getLaunchTarget("matrixAccess"),
-    title: "Zero-State Matrix access",
+    title: "Matrix access",
     eyebrow: "Control layer",
-    copy: "Join the launch queue for the matrix layer that frames release state, operator access, and deployment readiness.",
+    copy: "Join the launch queue for operator access, release state, and deployment readiness.",
     bullets: ["Launch queue access", "Signal-plane separation", "Operational readiness tracking"],
   },
 ] as const;
@@ -158,8 +158,8 @@ function ActionButton({
 }) {
   const className =
     variant === "primary"
-      ? "zerochill-button inline-flex items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white"
-      : "inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white";
+      ? "zerochill-button zerochill-action inline-flex items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:tracking-[0.22em]"
+      : "zerochill-action inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:tracking-[0.22em]";
 
   if (external) {
     return (
@@ -284,10 +284,10 @@ export default function Home() {
 
             <div className="mt-5 grid gap-3 text-sm leading-7 text-white/70">
               {[
-                "Telemetry surfaces remain isolated from the public narrative.",
-                "Deployment posture is centered on local control and uptime.",
-                "The Zero-State Matrix keeps operator state readable at a glance.",
-                "The interface stays dark, precise, and production-oriented.",
+                "Telemetry stays isolated from the public surface.",
+                "Deployment stays centered on local control and uptime.",
+                "The Matrix keeps operator state readable at a glance.",
+                "The interface stays dark, precise, and production-grade.",
               ].map((line) => (
                 <div key={line} className="terminal-surface flex gap-3 rounded-2xl p-4">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
@@ -299,9 +299,9 @@ export default function Home() {
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               {[
                 ["Edge nodes", "Localized"],
-                ["Telemetry state", "Isolated"],
-                ["Deployment mode", "Operator-led"],
-                ["Queue status", "Ready"],
+                ["Telemetry", "Isolated"],
+                ["Mode", "Operator-led"],
+                ["Queue", "Ready"],
               ].map(([label, value]) => (
                 <div key={label} className="glass-card rounded-2xl p-4">
                   <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
@@ -366,7 +366,7 @@ export default function Home() {
           <SectionTitle
             eyebrow="Launch access"
             title="Queue entry for Sovereign Zero and the Zero-State Matrix."
-            copy="This is the local anchor for preorder routing. When a live Payhip URL is present, the cards route directly to checkout. If not, they remain on the sovereign launch panel without breaking the build."
+          copy="This local anchor routes preorder traffic. Live Payhip links go straight to checkout. Missing URLs fall back to the sovereign panel."
           />
           <div className="grid gap-4">
             {launchTargets.map((entry) => (
@@ -412,7 +412,7 @@ export default function Home() {
           <SectionTitle
             eyebrow="Deployment posture"
             title="Built for constrained environments and efficient delivery."
-            copy="The interface is designed for operators who need a fast path from plan to rollout without the visual clutter of a generic SaaS surface."
+          copy="The interface is designed for operators who need a fast path from plan to rollout without generic SaaS clutter."
           />
           <div className="grid gap-4 sm:grid-cols-2">
             {deploymentPrinciples.map((item, index) => (
@@ -441,7 +441,7 @@ export default function Home() {
         <SectionTitle
           eyebrow="Work with ZeroChill"
           title="Scoped offers for teams that want a clear starting point."
-          copy="These engagement paths are intentionally practical: enough structure to move quickly, but still flexible when the system demands more complexity."
+          copy="These engagement paths stay practical: enough structure to move quickly, with room for heavier systems when needed."
         />
         <div className="mt-8 grid gap-4 lg:grid-cols-2">
           {offers.map((offer, index) => (
@@ -531,7 +531,7 @@ export default function Home() {
         <SectionTitle
           eyebrow="Operator intake"
           title="Start the project conversation."
-          copy="Send the essentials and we’ll use the details to shape scope, timing, and the right delivery path."
+          copy="Send the essentials and we’ll use the details to shape scope, timing, and delivery path."
         />
         <div className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <article className="glass-panel rounded-3xl p-6 sm:p-8">
@@ -541,8 +541,8 @@ export default function Home() {
             <ul className="mt-4 space-y-4">
               {[
                 "Name the system you want built, not just the page you want changed.",
-                "Tell us whether this needs edge inference, telemetry isolation, deployment support, or brand direction.",
-                "Mention your timeline so scope can be matched to the delivery window.",
+                "Tell us whether this needs edge inference, deployment support, or brand direction.",
+                "Mention your timeline so scope matches the delivery window.",
               ].map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-7 text-white/70">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />

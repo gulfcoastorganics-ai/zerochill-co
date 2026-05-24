@@ -10,10 +10,10 @@ describe("Preorder page", () => {
     const { default: PreorderPage } = await import("@/app/preorder/page");
     render(<PreorderPage />);
 
-    expect(screen.getByText(/launch queue fallback active/i)).toBeInTheDocument();
+    expect(screen.getByText(/queue fallback active/i)).toBeInTheDocument();
     expect(screen.getByText(/launch checkout opening soon/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /pre-order sovereign zero/i }),
+      screen.getByRole("link", { name: /preorder zero/i }),
     ).toHaveAttribute("href", "/#launch-access");
     expect(screen.getByRole("link", { name: /launch access/i })).toHaveAttribute(
       "href",

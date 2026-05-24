@@ -23,7 +23,7 @@ function LaunchAction({
   external?: boolean;
 }) {
   const className =
-    "zerochill-button inline-flex items-center justify-center border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white";
+    "zerochill-button zerochill-action inline-flex items-center justify-center border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:tracking-[0.22em]";
 
   if (external) {
     return (
@@ -57,17 +57,17 @@ export default function PreorderPage() {
             <div className="border-b border-[color:var(--accent)]/70 pb-3 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
               Sovereign Zero preorder
             </div>
-            <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl">
+            <h1 className="mt-5 text-[clamp(2.5rem,5vw,4.75rem)] font-black uppercase leading-[0.9] tracking-[-0.08em] text-white">
               Operator-owned hardware for localized intelligence.
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
               Sovereign Zero is the hardware line for private deployment, local execution, and a controlled
-              intelligence surface. The preorder reserves your place in the launch queue and connects you to the
-              checkout flow when Payhip is live.
+              intelligence surface. The preorder reserves your place in the launch queue and connects you to
+              checkout when Payhip is live.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-2 text-[0.62rem] uppercase tracking-[0.28em] text-[color:var(--steel)]">
-              {["Local-first", "Private vault", "Edge-ready", "Operator owned"].map((tag) => (
+            <div className="mt-6 flex flex-wrap gap-2 text-[0.62rem] uppercase tracking-[0.24em] text-[color:var(--steel)]">
+              {["Local-first", "Private vault", "Edge-ready", "Operator-owned"].map((tag) => (
                 <span key={tag} className="rounded-full border border-white/10 bg-black/40 px-3 py-2">
                   {tag}
                 </span>
@@ -82,7 +82,7 @@ export default function PreorderPage() {
                 },
                 {
                   title: "What happens next",
-                  copy: "Confirmation and access details are sent by email after checkout is completed.",
+                  copy: "Confirmation and access details are emailed after checkout.",
                 },
               ].map((item) => (
                 <article key={item.title} className="terminal-surface rounded-2xl p-4">
@@ -101,7 +101,7 @@ export default function PreorderPage() {
                     Checkout status
                   </div>
                   <div className="mt-2 font-mono text-sm uppercase tracking-[0.2em] text-white">
-                    {usingFallback ? "Launch queue fallback active" : sovereignZero.status}
+                    {usingFallback ? "Queue fallback active" : sovereignZero.status}
                   </div>
                 </div>
                 <span className="rounded-full border border-[color:var(--accent)]/40 bg-[color:var(--accent)]/10 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[color:var(--accent)]">
@@ -110,7 +110,7 @@ export default function PreorderPage() {
               </div>
               <p className="mt-4 text-sm leading-7 text-white/68">
                 {usingFallback
-                  ? "The Payhip URL is not connected yet. Use the launch access panel on the homepage until the checkout link is pasted into .env.local."
+                  ? "The Payhip URL is not connected yet. Use the homepage launch panel until the checkout link is added to .env.local."
                   : "You are being sent directly to Payhip for preorder checkout."}
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function PreorderPage() {
               />
               <Link
                 href="/#launch-access"
-                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white"
+                className="zerochill-action inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:tracking-[0.22em]"
               >
                 Launch Access
               </Link>
@@ -146,9 +146,9 @@ export default function PreorderPage() {
                   "Payhip processes the preorder.",
                   "The email receipt confirms the order.",
                   "Access details are sent after checkout.",
-                  "Launch queue status is updated from there.",
+                  "Launch queue updates from there.",
                 ].map((point) => (
-                  <li key={point} className="flex gap-3 text-sm leading-7 text-white/70">
+                  <li key={point} className="flex gap-3 text-sm leading-6 text-white/70">
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
                     <span>{point}</span>
                   </li>
@@ -168,15 +168,17 @@ export default function PreorderPage() {
               <div className="mt-5 grid gap-3">
                 {[
                   ["1", "Reserve preorder"],
-                  ["2", "Checkout via Payhip"],
-                  ["3", "Receive email confirmation"],
-                  ["4", "Access details follow"],
+                  ["2", "Payhip checkout"],
+                  ["3", "Email confirmation"],
+                  ["4", "Access follows"],
                 ].map(([step, label]) => (
                   <div key={step} className="glass-card flex items-center justify-between rounded-2xl p-4">
-                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-[color:var(--steel)]">
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-[color:var(--steel)]">
                       Step {step}
                     </span>
-                    <span className="text-right text-sm uppercase tracking-[0.18em] text-white">{label}</span>
+                    <span className="max-w-[10rem] text-right text-sm uppercase tracking-[0.14em] text-white">
+                      {label}
+                    </span>
                   </div>
                 ))}
               </div>

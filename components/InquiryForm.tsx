@@ -125,7 +125,7 @@ export default function InquiryForm() {
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">Name</span>
+          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Name</span>
           <input
             className={fieldClass}
             value={values.name}
@@ -137,7 +137,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">Email</span>
+          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Email</span>
           <input
             className={fieldClass}
             type="email"
@@ -150,7 +150,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">
+            <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
             Organization
           </span>
           <input
@@ -166,7 +166,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">
+            <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
             Deployment interest
           </span>
           <select
@@ -188,7 +188,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">
+          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
             Project type
           </span>
           <select
@@ -210,7 +210,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">
+          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">
             Budget range
           </span>
           <select
@@ -231,7 +231,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2 sm:col-span-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">Timeline</span>
+          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Timeline</span>
           <select
             className={fieldClass}
             value={values.timeline}
@@ -248,7 +248,7 @@ export default function InquiryForm() {
         </label>
 
         <label className="grid gap-2 sm:col-span-2">
-          <span className="text-[0.64rem] uppercase tracking-[0.36em] text-[color:var(--steel)]">Message</span>
+          <span className="text-[0.64rem] uppercase tracking-[0.32em] text-[color:var(--steel)]">Message</span>
           <textarea
             className={`${fieldClass} min-h-[140px]`}
             value={values.message}
@@ -273,13 +273,13 @@ export default function InquiryForm() {
 
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs leading-6 text-white/50">
-          Submissions are validated locally and sent to the sovereign intake route. If mail delivery is not
-          configured, the server logs the intake and returns a stable success state.
+          Submissions validate locally and route to sovereign intake. If mail delivery is off, the server logs the
+          intake and returns success.
         </p>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-black transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+          className="zerochill-action inline-flex items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 sm:tracking-[0.22em]"
         >
           {isSubmitting ? "Sending..." : "Send Inquiry"}
         </button>

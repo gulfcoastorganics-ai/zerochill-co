@@ -26,8 +26,8 @@ export default function SuccessPage() {
             Thanks for joining the queue.
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
-            Your Sovereign Zero preorder or launch access purchase has been received. Confirmation, access details,
-            and any next-step instructions will be sent to the email address used at checkout.
+            Your preorder or launch access purchase has been received. Confirmation, access details, and next-step
+            instructions will go to the checkout email.
           </p>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
@@ -38,11 +38,11 @@ export default function SuccessPage() {
               },
               {
                 title: "Access details",
-                copy: "Any onboarding, vault, or launch queue instructions will arrive after checkout.",
+                copy: "Any onboarding, vault, or queue instructions arrive after checkout.",
               },
               {
                 title: "Next steps",
-                copy: "Watch your inbox for the handoff and keep your confirmation available.",
+                copy: "Watch your inbox for the handoff and keep your confirmation handy.",
               },
             ].map((item) => (
               <article key={item.title} className="terminal-surface rounded-2xl p-5">
@@ -61,7 +61,7 @@ export default function SuccessPage() {
                   Launch queue
                 </div>
                 <div className="mt-2 font-mono text-sm uppercase tracking-[0.2em] text-white">
-                  Confirmation and access email pending delivery
+                  Email confirmation pending
                 </div>
               </div>
               <span className="rounded-full border border-[color:var(--accent)]/40 bg-[color:var(--accent)]/10 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[color:var(--accent)]">
@@ -73,15 +73,15 @@ export default function SuccessPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/"
-              className="zerochill-button inline-flex items-center justify-center border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white"
+              className="zerochill-button zerochill-action inline-flex items-center justify-center border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:tracking-[0.22em]"
             >
               Return to ZeroChill
             </Link>
             <Link
               href="/preorder"
-              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white"
+              className="zerochill-action inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--steel)] transition-colors hover:border-[color:var(--accent)]/60 hover:text-white sm:tracking-[0.22em]"
             >
-              Review Preorder
+              Review Order
             </Link>
           </div>
         </div>

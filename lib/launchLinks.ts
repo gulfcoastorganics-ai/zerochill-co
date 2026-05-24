@@ -21,12 +21,12 @@ function resolveLaunchHref(primaryEnvVar: string, publicEnvVar: string) {
 
 const launchTargets = {
   sovereignZero: {
-    label: "PRE-ORDER SOVEREIGN ZERO",
+    label: "Preorder Zero",
     status: "Opening Soon",
     href: resolveLaunchHref("PAYHIP_SOVEREIGN_ZERO_URL", "NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL"),
   },
   matrixAccess: {
-    label: "JOIN THE MATRIX",
+    label: "Matrix Access",
     status: "Launch Queue",
     href: resolveLaunchHref("PAYHIP_MATRIX_ACCESS_URL", "NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL"),
   },

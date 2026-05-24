@@ -9,8 +9,8 @@ describe("Success page", () => {
     expect(
       screen.getByRole("heading", { name: /thanks for joining the queue/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/confirmation and access email pending delivery/i)).toBeInTheDocument();
+    expect(screen.getByText(/email confirmation pending/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /return to zerochill/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /review preorder/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /review order/i })).toBeInTheDocument();
   });
 });
