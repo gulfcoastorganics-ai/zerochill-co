@@ -1,14 +1,12 @@
 # Operator Runbook
 
-## What This Site Is
+## Current Status
 
-ZeroChill Co. is a sovereign AI infrastructure site. It presents:
+ZeroChill is production-live.
 
-- Sovereign AI deployment systems
-- Edge inference and local execution surfaces
-- Telemetry-isolated operator tooling
-- Private infrastructure and launch queue flows
-- Hardened command-center branding
+- GitHub, Vercel, Payhip, and Resend are already working.
+- Use `npm run check:production` and `npm run check:intake` for live validation.
+- Treat this document as the operational guide for an active site, not a prelaunch checklist.
 
 ## Run Locally
 
@@ -16,12 +14,22 @@ ZeroChill Co. is a sovereign AI infrastructure site. It presents:
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000` in a browser.
 
-## Build
+## Local Verification
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm test
+```
+
+If you are changing intake or launch behavior, also run:
 
 ```bash
 npm run build
+npm run check:production
+npm run check:intake
 ```
 
 ## Production Validation
@@ -30,32 +38,119 @@ npm run build
 ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:production
 ```
 
-The checker verifies the live HTTP status codes for `/`, `/preorder`, `/success`, and a safe `OPTIONS` probe on `/api/inquiry`. It does not submit form data.
-
-## Intake Diagnostic
+This checks live HTTP status codes for `/`, `/preorder`, `/success`, and a safe `OPTIONS` probe on `/api/inquiry`.
 
 ```bash
 ZEROCHILL_SITE_URL=https://zerochill-co.vercel.app npm run check:intake
 ```
 
-The intake diagnostic sends a controlled production test POST to `/api/inquiry` and reports only the response flags. It does not print secrets or the payload body.
-If the live route rejects the diagnostic payload with validation errors, the checker retries once with schema-compatible fields so operators can still verify delivery on a deployment that has not yet picked up the latest intake schema.
+This sends a controlled production POST to `/api/inquiry` and reports `ok`, `delivered`, `deliveryMode`, and `deliveryAttempted`. It does not print secrets or raw payload content.
 
-## Lint and Typecheck
+## Payhip Env Vars
+
+Payhip checkout URLs are read from the launch helper in [`lib/launchLinks.ts`](./lib/launchLinks.ts).
+
+Primary variables:
 
 ```bash
-npm run lint
-npx tsc --noEmit
+PAYHIP_SOVEREIGN_ZERO_URL
+PAYHIP_MATRIX_ACCESS_URL
 ```
+
+Public aliases:
+
+```bash
+NEXT_PUBLIC_PAYHIP_SOVEREIGN_ZERO_URL
+NEXT_PUBLIC_PAYHIP_MATRIX_ACCESS_URL
+```
+
+Resolution order:
+
+1. Server-side `PAYHIP_*`
+2. Public `NEXT_PUBLIC_PAYHIP_*`
+3. Local fallback to `/#launch-access`
+
+Set the Payhip success redirect to:
+
+```bash
+/success
+```
+
+## Intake Email Env Vars
+
+Intake email delivery is configured in [`lib/inquiryIntake.ts`](./lib/inquiryIntake.ts) and [`app/api/inquiry/route.ts`](./app/api/inquiry/route.ts).
+
+Required for email delivery:
+
+```bash
+RESEND_API_KEY
+```
+
+Recipient env vars:
+
+```bash
+ZEROCHILL_INTAKE_TO_EMAIL
+PREORDER_NOTIFY_TO
+```
+
+`ZEROCHILL_INTAKE_TO_EMAIL` is preferred. `PREORDER_NOTIFY_TO` is the legacy alias and remains supported.
+
+Sender env vars are resolved safely in this order:
+
+1. `RESEND_FROM_EMAIL`
+2. `ZEROCHILL_INTAKE_FROM_EMAIL` if safe
+3. `PREORDER_FROM_EMAIL` if safe
+4. `onboarding@resend.dev`
+
+Safe means the domain is not a blocked consumer mailbox domain such as Gmail, Yahoo, Outlook, iCloud, or AOL.
+
+## Legacy Env Aliases
+
+These older names are still honored by the runtime:
+
+```bash
+PREORDER_FROM_EMAIL
+PREORDER_NOTIFY_TO
+```
+
+Use the newer intake names where possible:
+
+```bash
+ZEROCHILL_INTAKE_FROM_EMAIL
+ZEROCHILL_INTAKE_TO_EMAIL
+```
+
+## Delivery Modes
+
+- `deliveryMode=email` means Resend accepted the message.
+- `deliveryMode=log` means the submission was captured, but the route fell back to logging instead of sending email.
+- `delivered=false` with `deliveryMode=log` is expected when mail config is missing, invalid, or rejected by Resend.
+
+## Troubleshooting
+
+- `delivered=false deliveryMode=log`
+  - Check `RESEND_API_KEY`.
+  - Check `ZEROCHILL_INTAKE_TO_EMAIL` or `PREORDER_NOTIFY_TO`.
+  - Check `RESEND_FROM_EMAIL`, then `ZEROCHILL_INTAKE_FROM_EMAIL`, then `PREORDER_FROM_EMAIL`.
+- `gmail.com` domain not verified
+  - Do not use Gmail as a Resend sender.
+  - Use `onboarding@resend.dev` until a custom domain sender is verified.
+- Vercel env changes require redeploy
+  - Update the variable in Vercel.
+  - Redeploy so the runtime picks up the new values.
+- URLs should be opened in browser, not typed directly into Bash
+  - Use the browser for live site inspection.
+  - If you need a command, pass the URL as a parameter to the checker instead of executing the URL string itself.
 
 ## Deploy
 
-1. Set the required Payhip env vars in Vercel.
-2. Set `RESEND_API_KEY` and, if available, `RESEND_FROM_EMAIL` with a verified sender. If `RESEND_FROM_EMAIL` is not present, the route will only use `ZEROCHILL_INTAKE_FROM_EMAIL` or `PREORDER_FROM_EMAIL` when they are not consumer mailbox domains. Set `ZEROCHILL_INTAKE_TO_EMAIL` or `PREORDER_NOTIFY_TO` as the recipient. Use Gmail as the recipient inbox, not as the Resend sender.
-3. Set the Payhip success redirect to `/success`.
-4. Run `npm run build`.
-5. Deploy to Vercel.
-6. Verify `/`, `/preorder`, `/success`, and `/api/inquiry` in production.
+1. Set the Payhip env vars in Vercel production and preview environments.
+2. Set `RESEND_API_KEY`.
+3. Add a safe sender and recipient for intake email if delivery should be active.
+4. Set the Payhip success redirect to `/success`.
+5. Run `npm run build`.
+6. Deploy to Vercel.
+7. Verify `/`, `/preorder`, `/success`, and `/api/inquiry` in production.
 
 ## Update Homepage Content
 
@@ -80,20 +175,3 @@ npx tsc --noEmit
 - Edit [lib/inquiryIntake.ts](./lib/inquiryIntake.ts) for schema, rate limiting, and mail body formatting.
 - Edit [app/api/inquiry/route.ts](./app/api/inquiry/route.ts) for the intake handler and delivery flow.
 - If email delivery is not configured, the route logs intake locally and still returns a success response.
-
-## Troubleshoot Common Issues
-
-- Build fails on missing env vars:
-  - Check `.env.local` or Vercel environment variables.
-- CTA opens the fallback panel:
-  - The Payhip URL is missing or blank.
-- Form does not submit:
-  - Check the browser network request to `/api/inquiry` and confirm the intake env vars if email delivery is expected.
-- Layout looks cramped on mobile:
-  - Check the section spacing and card grid classes in [app/page.tsx](./app/page.tsx) and [app/globals.css](./app/globals.css).
-
-## Current Limitations
-
-- Inquiry submissions can log locally or email an internal inbox, but they do not yet flow into a CRM.
-- Case studies, screenshots, analytics, and CRM handoff are not wired yet.
-- Launch checkout still depends on the Payhip environment variables being set.
