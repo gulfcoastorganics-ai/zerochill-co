@@ -165,6 +165,7 @@ ZEROCHILL_INTAKE_TO_EMAIL
 
 ## Docs
 
+- [Zero-State Academy](./docs/zero-state-academy.md)
 - [Operator Runbook](./OPERATOR_RUNBOOK.md)
 - [Developer Onboarding](./DEVELOPER_ONBOARDING.md)
 - [Codebase Overview](./CODEBASE_OVERVIEW.md)
