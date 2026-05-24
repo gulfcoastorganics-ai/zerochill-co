@@ -53,7 +53,7 @@ export default function PreorderPage() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-          <article className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          <article className="glass-panel-strong rounded-3xl p-6 sm:p-8">
             <div className="border-b border-[color:var(--accent)]/70 pb-3 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
               Sovereign Zero preorder
             </div>
@@ -85,7 +85,7 @@ export default function PreorderPage() {
                   copy: "Confirmation and access details are sent by email after checkout is completed.",
                 },
               ].map((item) => (
-                <article key={item.title} className="rounded-2xl border border-white/10 bg-black/50 p-4">
+                <article key={item.title} className="terminal-surface rounded-2xl p-4">
                   <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                     {item.title}
                   </div>
@@ -94,7 +94,7 @@ export default function PreorderPage() {
               ))}
             </div>
 
-            <div className="mt-8 rounded-2xl border border-white/10 bg-black/50 p-5">
+            <div className="terminal-surface mt-8 rounded-2xl p-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
@@ -137,7 +137,7 @@ export default function PreorderPage() {
           </article>
 
           <aside className="grid gap-4">
-            <article className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="glass-panel rounded-3xl p-6">
               <div className="border-b border-white/10 pb-3 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                 Buyer handoff
               </div>
@@ -156,7 +156,7 @@ export default function PreorderPage() {
               </ul>
             </article>
 
-            <article className="zerochill-card rounded-3xl border border-white/10 bg-black/50 p-6">
+            <article className="glass-panel-strong rounded-3xl p-6">
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <span className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                   Launch queue
@@ -172,7 +172,7 @@ export default function PreorderPage() {
                   ["3", "Receive email confirmation"],
                   ["4", "Access details follow"],
                 ].map(([step, label]) => (
-                  <div key={step} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <div key={step} className="glass-card flex items-center justify-between rounded-2xl p-4">
                     <span className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-[color:var(--steel)]">
                       Step {step}
                     </span>

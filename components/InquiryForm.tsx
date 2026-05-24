@@ -110,12 +110,12 @@ export default function InquiryForm() {
   }
 
   const fieldClass =
-    "w-full rounded-2xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-[color:var(--accent)]/60";
+    "glass-field rounded-2xl px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
+      className="glass-panel-strong rounded-3xl p-6 sm:p-8"
       aria-busy={isSubmitting}
       noValidate
     >
@@ -287,7 +287,7 @@ export default function InquiryForm() {
 
       {status ? (
         <div
-          className="mt-4 rounded-2xl border border-white/10 bg-black/50 p-4 text-sm leading-7 text-white/70"
+          className="terminal-surface mt-4 rounded-2xl p-4 text-sm leading-7 text-white/70"
           role="status"
           aria-live="polite"
         >

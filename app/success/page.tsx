@@ -16,7 +16,7 @@ export default function SuccessPage() {
   return (
     <main className="zerochill-shell min-h-screen bg-black text-white">
       <section className="zerochill-section mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-        <div className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 lg:p-10">
+        <div className="glass-panel-strong rounded-3xl p-6 sm:p-8 lg:p-10">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-[0.64rem] uppercase tracking-[0.46em] text-[color:var(--steel)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)] shadow-[0_0_14px_rgba(185,28,28,0.45)]" />
             Checkout complete
@@ -45,7 +45,7 @@ export default function SuccessPage() {
                 copy: "Watch your inbox for the handoff and keep your confirmation available.",
               },
             ].map((item) => (
-              <article key={item.title} className="rounded-2xl border border-white/10 bg-black/50 p-5">
+              <article key={item.title} className="terminal-surface rounded-2xl p-5">
                 <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                   {item.title}
                 </div>
@@ -54,7 +54,7 @@ export default function SuccessPage() {
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-[color:var(--accent)]/30 bg-black/60 p-5 sm:p-6">
+          <div className="terminal-surface steel-crimson-border mt-8 rounded-2xl p-5 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">

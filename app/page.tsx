@@ -192,7 +192,7 @@ function LaunchSignalCard({
   const usingFallback = target.href === launchFallbackHref;
 
   return (
-    <article className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-7">
+    <article className="glass-panel rounded-3xl p-6 sm:p-7">
       <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
           <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
@@ -265,7 +265,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-2xl shadow-black/50 sm:p-8">
+          <div className="glass-panel-strong rounded-3xl p-6 sm:p-8">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div>
                 <div className="text-[0.64rem] uppercase tracking-[0.48em] text-[color:var(--steel)]">
@@ -287,7 +287,7 @@ export default function Home() {
                 "The Zero-State Matrix keeps operator state readable at a glance.",
                 "The interface stays dark, precise, and production-oriented.",
               ].map((line) => (
-                <div key={line} className="flex gap-3 rounded-2xl border border-white/10 bg-black/40 p-4">
+                <div key={line} className="terminal-surface flex gap-3 rounded-2xl p-4">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
                   <span>{line}</span>
                 </div>
@@ -301,7 +301,7 @@ export default function Home() {
                 ["Deployment mode", "Operator-led"],
                 ["Queue status", "Ready"],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-2xl border border-white/10 bg-black/50 p-4">
+                <div key={label} className="glass-card rounded-2xl p-4">
                   <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                     {label}
                   </div>
@@ -323,7 +323,7 @@ export default function Home() {
           {systems.map((system, index) => (
             <article
               key={system.title}
-              className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+              className="glass-card rounded-3xl p-6"
               style={{ animationDelay: `${index * 75}ms` }}
             >
               <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
@@ -380,7 +380,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-3xl border border-white/10 bg-black/50 p-5 sm:p-6">
+        <div className="terminal-surface mt-6 rounded-3xl p-5 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
@@ -416,7 +416,7 @@ export default function Home() {
             {deploymentPrinciples.map((item, index) => (
               <article
                 key={item.title}
-                className="zerochill-card rounded-3xl border border-white/10 bg-black/50 p-5"
+                className="glass-card rounded-3xl p-5"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
                 <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -445,7 +445,7 @@ export default function Home() {
           {offers.map((offer, index) => (
             <article
               key={offer.title}
-              className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+              className="glass-card rounded-3xl p-6"
               style={{ animationDelay: `${index * 70}ms` }}
             >
               <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
@@ -472,7 +472,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl border-b border-white/10 px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <article className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          <article className="glass-panel rounded-3xl p-6 sm:p-8">
             <div className="border-b border-[color:var(--accent)]/70 pb-3 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
               Credibility
             </div>
@@ -493,7 +493,7 @@ export default function Home() {
             </ul>
           </article>
 
-          <article className="zerochill-card rounded-3xl border border-white/10 bg-black/50 p-6 sm:p-8">
+          <article className="glass-panel-strong rounded-3xl p-6 sm:p-8">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <span className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                 Flagship project
@@ -509,7 +509,7 @@ export default function Home() {
                 "Telemetry-isolated surfaces",
                 "Private deployment readiness",
               ].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <div key={item} className="glass-card rounded-2xl p-4">
                   <div className="text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
                     Signal
                   </div>
@@ -532,7 +532,7 @@ export default function Home() {
           copy="Send the essentials and we’ll use the details to shape scope, timing, and the right delivery path."
         />
         <div className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <article className="zerochill-card rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          <article className="glass-panel rounded-3xl p-6 sm:p-8">
             <div className="border-b border-white/10 pb-3 text-[0.64rem] uppercase tracking-[0.42em] text-[color:var(--steel)]">
               Intake notes
             </div>
