@@ -38,9 +38,9 @@ body {
   margin: 0;
   background-color: var(--background);
   background-image:
-    radial-gradient(circle at 50% 10%, rgba(220, 38, 38, 0.16), transparent 34%),
-    radial-gradient(circle at 50% 38%, rgba(15, 23, 42, 0.18), transparent 28%),
-    linear-gradient(180deg, rgba(6, 10, 16, 0.1) 0%, rgba(6, 10, 16, 0.24) 48%, rgba(6, 10, 16, 0.42) 100%),
+    radial-gradient(circle at 50% 10%, rgba(220, 38, 38, 0.12), transparent 36%),
+    radial-gradient(circle at 50% 38%, rgba(15, 23, 42, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(6, 10, 16, 0.06) 0%, rgba(6, 10, 16, 0.16) 48%, rgba(6, 10, 16, 0.28) 100%),
     image-set(
       url("/wallpapers/red-sand-sovereign-beach.webp") type("image/webp"),
       url("/wallpapers/red-sand-sovereign-beach.png") type("image/png")
@@ -48,7 +48,7 @@ body {
     linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 100% 100%, cover, 44px 44px, 44px 44px;
-  background-position: center top, center 26%, center top, center 18%, 0 0, 0 0;
+  background-position: center top, center 28%, center top, center 28%, 0 0, 0 0;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
   background-attachment: fixed, fixed, fixed, fixed, scroll, scroll;
   color: var(--foreground);
@@ -151,7 +151,7 @@ body {
 
 @media (max-width: 767px) {
   body {
-    background-position: center 10%, center 24%, center top, center 26%, 0 0, 0 0;
+    background-position: center 8%, center 26%, center top, center 34%, 0 0, 0 0;
     background-attachment: scroll, scroll, scroll, scroll, scroll, scroll;
     background-size: 100% 100%, 100% 100%, 100% 100%, cover, 44px 44px, 44px 44px;
   }
