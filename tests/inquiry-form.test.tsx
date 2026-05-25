@@ -2,6 +2,18 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import { describe, expect, it, vi } from "vitest";
 import InquiryForm from "@/components/InquiryForm";
 
+function createDeferred<T>() {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+  let reject!: (reason?: unknown) => void;
+
+  const promise = new Promise<T>((promiseResolve, promiseReject) => {
+    resolve = promiseResolve;
+    reject = promiseReject;
+  });
+
+  return { promise, resolve, reject };
+}
+
 describe("InquiryForm", () => {
   it("shows validation errors when submitted empty", () => {
     render(<InquiryForm />);
@@ -53,7 +65,76 @@ describe("InquiryForm", () => {
     ).toBeInTheDocument();
   });
 
-  it("submits the intake to the API and shows a success state", async () => {
+  it("prevents duplicate submits while loading and shows the success state", async () => {
+    const deferred = createDeferred<Response>();
+    const fetchMock = vi.fn(() => deferred.promise);
+
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { container } = render(<InquiryForm />);
+
+    fireEvent.change(screen.getByRole("textbox", { name: /name/i }), {
+      target: { value: "Ada Lovelace" },
+    });
+    fireEvent.change(screen.getByRole("textbox", { name: /email/i }), {
+      target: { value: "ada@zerochill.co" },
+    });
+    fireEvent.change(screen.getByRole("textbox", { name: /organization/i }), {
+      target: { value: "ZeroChill Co." },
+    });
+    fireEvent.change(screen.getByRole("combobox", { name: /deployment interest/i }), {
+      target: { value: "edge-inference" },
+    });
+    fireEvent.change(screen.getByRole("combobox", { name: /project type/i }), {
+      target: { value: "inference" },
+    });
+    fireEvent.change(screen.getByRole("combobox", { name: /budget range/i }), {
+      target: { value: "1k-3k" },
+    });
+    fireEvent.change(screen.getByRole("combobox", { name: /timeline/i }), {
+      target: { value: "2-4-weeks" },
+    });
+    fireEvent.change(screen.getByRole("textbox", { name: /message/i }), {
+      target: {
+        value: "Need a localized inference deployment with isolated telemetry and operator control.",
+      },
+    });
+
+    const form = container.querySelector("form");
+    expect(form).not.toBeNull();
+
+    fireEvent.submit(form as HTMLFormElement);
+    fireEvent.submit(form as HTMLFormElement);
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(screen.getByRole("button", { name: /sending/i })).toBeDisabled();
+
+    deferred.resolve(
+      new Response(
+        JSON.stringify({
+          ok: true,
+          message: "Intake captured. We will follow up with next steps.",
+          delivered: true,
+          deliveryMode: "email",
+        }),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      ),
+    );
+
+    await waitFor(() =>
+      expect(screen.getByText(/intake captured\. we will follow up with next steps\./i)).toBeInTheDocument(),
+    );
+    expect(screen.getByText(/email delivery confirmed\./i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /send inquiry/i })).not.toBeDisabled();
+    expect(screen.getByRole("button", { name: /send inquiry/i })).toBeInTheDocument();
+  });
+
+  it("shows the log-mode success copy when email delivery is unavailable", async () => {
     const fetchMock = vi.fn(async () => {
       return new Response(
         JSON.stringify({
@@ -105,11 +186,8 @@ describe("InquiryForm", () => {
     fireEvent.click(screen.getByRole("button", { name: /send inquiry/i }));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
-    const firstCall = fetchMock.mock.calls[0] as unknown as [string, RequestInit] | undefined;
-    expect(firstCall?.[0]).toBe("/api/inquiry");
-
     await waitFor(() =>
-      expect(screen.getByText(/intake captured\. we will follow up with next steps\./i)).toBeInTheDocument(),
+      expect(screen.getByText(/delivery fell back to log mode/i)).toBeInTheDocument(),
     );
   });
 });

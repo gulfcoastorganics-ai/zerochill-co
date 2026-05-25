@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   deploymentInterestOptions,
   projectTypeOptions,
@@ -20,6 +20,19 @@ type InquiryValues = {
 };
 
 type InquiryErrors = Partial<Record<keyof InquiryValues, string>>;
+type StatusTone = "idle" | "info" | "success" | "error";
+type InquiryResponse = {
+  ok?: boolean;
+  message?: string;
+  delivered?: boolean;
+  deliveryMode?: string;
+  fieldErrors?: Partial<Record<keyof InquiryValues, string>>;
+};
+
+type InquiryStatus = {
+  tone: StatusTone;
+  message: string;
+};
 
 const initialValues: InquiryValues = {
   name: "",
@@ -31,6 +44,11 @@ const initialValues: InquiryValues = {
   timeline: "",
   message: "",
   honeypot: "",
+};
+
+const initialStatus: InquiryStatus = {
+  tone: "idle",
+  message: "",
 };
 
 function validate(values: InquiryValues) {
@@ -57,8 +75,9 @@ function validate(values: InquiryValues) {
 export default function InquiryForm() {
   const [values, setValues] = useState<InquiryValues>(initialValues);
   const [errors, setErrors] = useState<InquiryErrors>({});
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<InquiryStatus>(initialStatus);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitLockRef = useRef(false);
 
   function updateField(field: keyof InquiryValues, value: string) {
     setValues((current) => ({ ...current, [field]: value }));
@@ -67,15 +86,27 @@ export default function InquiryForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (submitLockRef.current) {
+      return;
+    }
+
     const nextErrors = validate(values);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
-      setStatus("Check the highlighted fields and submit again.");
+      setStatus({
+        tone: "error",
+        message: "Check the highlighted fields and submit again.",
+      });
       return;
     }
 
+    submitLockRef.current = true;
     setIsSubmitting(true);
+    setStatus({
+      tone: "info",
+      message: "Sending inquiry...",
+    });
 
     try {
       const response = await fetch("/api/inquiry", {
@@ -86,31 +117,50 @@ export default function InquiryForm() {
         body: JSON.stringify(values),
       });
 
-      const data = (await response.json().catch(() => null)) as
-        | { ok?: boolean; message?: string; fieldErrors?: Partial<Record<keyof InquiryValues, string>> }
-        | null;
+      const data = (await response.json().catch(() => null)) as InquiryResponse | null;
 
       if (!response.ok || !data?.ok) {
         if (data?.fieldErrors) {
           setErrors(data.fieldErrors);
         }
 
-        setStatus(data?.message ?? "Intake submission failed. Try again.");
+        setStatus({
+          tone: "error",
+          message: data?.message ?? "Intake submission failed. Try again.",
+        });
         return;
       }
 
-      setStatus(data.message ?? "Intake captured. We will follow up with next steps.");
+      const deliveryMessage =
+        data.deliveryMode === "email" && data.delivered
+          ? "Email delivery confirmed."
+          : "Delivery fell back to log mode, so the server recorded the intake locally.";
+
+      setStatus({
+        tone: "success",
+        message: `${data.message ?? "Intake captured. We will follow up with next steps."} ${deliveryMessage}`,
+      });
       setErrors({});
       setValues(initialValues);
     } catch {
-      setStatus("Intake submission is temporarily unavailable. Try again shortly.");
+      setStatus({
+        tone: "error",
+        message: "Intake submission is temporarily unavailable. Try again shortly.",
+      });
     } finally {
       setIsSubmitting(false);
+      submitLockRef.current = false;
     }
   }
 
   const fieldClass =
     "glass-field w-full rounded-2xl px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30";
+  const statusClass =
+    status.tone === "success"
+      ? "border-[rgba(34,197,94,0.24)] bg-[rgba(3,13,8,0.72)] text-white/80"
+      : status.tone === "error"
+        ? "border-[rgba(220,38,38,0.28)] bg-[rgba(18,6,8,0.72)] text-white/82"
+        : "border-[rgba(148,163,184,0.14)] bg-[rgba(2,6,12,0.66)] text-white/72";
 
   return (
     <form
@@ -287,19 +337,33 @@ export default function InquiryForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="zerochill-action inline-flex items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 sm:tracking-[0.22em]"
+          aria-busy={isSubmitting}
+          className="zerochill-button zerochill-action inline-flex w-full max-w-full items-center justify-center rounded-full border border-[color:var(--accent)] bg-[color:var(--accent)] px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] leading-tight text-white transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none sm:w-auto sm:min-w-[11.5rem] sm:tracking-[0.22em]"
         >
-          {isSubmitting ? "Sending..." : "Send Inquiry"}
+          <span className="inline-flex min-w-0 items-center justify-center gap-2 whitespace-nowrap">
+            {isSubmitting ? (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="h-3 w-3 animate-spin rounded-full border border-current border-r-transparent"
+                />
+                Sending...
+              </>
+            ) : (
+              "Send Inquiry"
+            )}
+          </span>
         </button>
       </div>
 
-      {status ? (
+      {status.message ? (
         <div
-          className="terminal-surface mt-4 rounded-2xl p-4 text-sm leading-7 text-white/70"
-          role="status"
+          className={`terminal-surface mt-4 rounded-2xl p-4 text-sm leading-7 ${statusClass}`}
+          role={status.tone === "error" ? "alert" : "status"}
+          aria-atomic="true"
           aria-live="polite"
         >
-          {status}
+          {status.message}
         </div>
       ) : null}
     </form>
