@@ -1,4 +1,4 @@
-import { createHash, randomUUID } from "node:crypto";
+import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getSupabaseAdminClient } from "@/lib/supabaseAdmin";
 
@@ -12,6 +12,7 @@ type NormalizedPayhipPurchase = {
   eventId: string;
   eventType: string;
   productName: string;
+  productKey: string;
   amount: number;
   currency: string;
   payload: PayhipWebhookPayload;
@@ -28,6 +29,10 @@ function jsonResponse(body: Record<string, unknown>, init?: ResponseInit) {
 
 function asObject(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
+}
+
+function firstObject(value: unknown): Record<string, unknown> {
+  return Array.isArray(value) && value.length > 0 ? asObject(value[0]) : {};
 }
 
 function toText(value: unknown): string {
@@ -76,15 +81,57 @@ function isTruthyEnv(name: string) {
   return ["1", "true", "yes", "on"].includes((process.env[name] ?? "").trim().toLowerCase());
 }
 
-function verifyPayhipSignature(_req: Request, _rawBody: string): PayhipSignatureResult {
-  // TODO: Implement Payhip signature verification once the supported signing header format is finalized.
-  void _req;
-  void _rawBody;
+function secureTextEqual(left: string, right: string) {
+  const leftBuffer = Buffer.from(left, "utf8");
+  const rightBuffer = Buffer.from(right, "utf8");
 
-  return {
-    verified: false,
-    reason: "PAYHIP_SIGNATURE_NOT_CONFIGURED",
-  };
+  return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function verifyPayhipSignature(_req: Request, rawBody: string): PayhipSignatureResult {
+  const apiKey = (process.env.PAYHIP_API_KEY ?? process.env.PAYHIP_WEBHOOK_SECRET ?? "").trim();
+
+  if (!apiKey) {
+    return {
+      verified: false,
+      reason: "PAYHIP_API_KEY_NOT_CONFIGURED",
+    };
+  }
+
+  let payload: Record<string, unknown>;
+
+  try {
+    payload = asObject(JSON.parse(rawBody));
+  } catch {
+    return {
+      verified: false,
+      reason: "PAYHIP_SIGNATURE_PAYLOAD_INVALID",
+    };
+  }
+
+  const providedSignature = toText(payload.signature).toLowerCase();
+
+  if (!providedSignature) {
+    return {
+      verified: false,
+      reason: "PAYHIP_SIGNATURE_MISSING",
+    };
+  }
+
+  const expectedSignature = createHash("sha256").update(apiKey).digest("hex").toLowerCase();
+
+  return secureTextEqual(providedSignature, expectedSignature)
+    ? { verified: true, reason: "PAYHIP_SIGNATURE_VERIFIED" }
+    : { verified: false, reason: "PAYHIP_SIGNATURE_MISMATCH" };
+}
+
+function configuredAcademyProductKeys() {
+  return new Set(
+    (process.env.PAYHIP_ACADEMY_PRODUCT_KEYS ?? "")
+      .split(",")
+      .map((value) => value.trim())
+      .filter(Boolean),
+  );
 }
 
 function buildWebhookMetadata(payload: unknown, headers: Headers) {
@@ -131,6 +178,7 @@ function normalizePayhipPayload(payload: unknown, headers: Headers): NormalizedP
   const order = asObject(source.order);
   const product = asObject(source.product);
   const payment = asObject(source.payment);
+  const item = firstObject(source.items);
   const metadata = buildWebhookMetadata(payload, headers);
 
   if (!metadata.email) {
@@ -139,14 +187,19 @@ function normalizePayhipPayload(payload: unknown, headers: Headers): NormalizedP
 
   const productName =
     pickFirstText(
-      { ...source, ...product, ...order },
+      { ...source, ...product, ...item, ...order },
       ["product_name", "productName", "item_name", "itemName", "name", "title"],
-    ) || "Zero-State Academy Master Toolkit";
+    ) || "Unknown Payhip product";
+
+  const productKey = pickFirstText(
+    { ...source, ...product, ...item, ...order },
+    ["product_key", "productKey", "product_id", "productId"],
+  );
 
   const amount = toAmount(
     pickFirstText(
       { ...source, ...payment, ...order },
-      ["amount", "total", "total_amount", "price", "gross_amount"],
+      ["amount", "price", "total", "total_amount", "gross_amount"],
     ) || source.amount,
   );
 
@@ -159,6 +212,7 @@ function normalizePayhipPayload(payload: unknown, headers: Headers): NormalizedP
     eventId: metadata.eventId,
     eventType: metadata.eventType,
     productName,
+    productKey,
     amount,
     currency,
     payload: source,
@@ -244,11 +298,40 @@ export async function POST(request: Request) {
       {
         ok: false,
         error: "signature_not_verified",
-        message: "Payhip webhook signature verification is not configured.",
+        message: "Payhip webhook signature verification failed.",
         reason: signature.reason,
       },
       { status: 401 },
     );
+  }
+
+  const eventType = webhookMetadata.eventType.trim().toLowerCase();
+
+  if (eventType !== "paid") {
+    const { error: ignoredEventUpdateError } = await supabase
+      .from("webhook_events")
+      .update({ processed: true, verified })
+      .eq("provider", "payhip")
+      .eq("event_id", webhookMetadata.eventId)
+      .eq("order_id", webhookMetadata.orderId);
+
+    if (ignoredEventUpdateError) {
+      console.error("[ZeroChill] payhip-webhook-ignore-log-failed", ignoredEventUpdateError);
+      return jsonResponse(
+        {
+          ok: false,
+          error: "event_update_failed",
+          message: "Unable to finalize ignored webhook event.",
+        },
+        { status: 500 },
+      );
+    }
+
+    return jsonResponse({
+      ok: true,
+      ignored: true,
+      eventType,
+    });
   }
 
   const normalized = normalizePayhipPayload(parsedBody, request.headers);
@@ -261,6 +344,30 @@ export async function POST(request: Request) {
         message: "Payhip webhook is missing a customer email.",
       },
       { status: 400 },
+    );
+  }
+
+  const academyProductKeys = configuredAcademyProductKeys();
+
+  if (academyProductKeys.size === 0) {
+    return jsonResponse(
+      {
+        ok: false,
+        error: "academy_product_allowlist_not_configured",
+        message: "Payhip Academy product allowlist is not configured.",
+      },
+      { status: 503 },
+    );
+  }
+
+  if (!normalized.productKey || !academyProductKeys.has(normalized.productKey)) {
+    return jsonResponse(
+      {
+        ok: false,
+        error: "product_not_authorized",
+        message: "This Payhip product is not authorized to provision Academy access.",
+      },
+      { status: 403 },
     );
   }
 
